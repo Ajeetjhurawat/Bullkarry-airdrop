@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Bullkarry — Web3 Airdrop Farming, Perp DEX & Alpha Hub</title>
+  <title>Bullkarry — Crypto Airdrops, Perp DEX & Alpha Hub</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts: Inter & Space Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -54,18 +54,18 @@
     }
     /* Bullkarry Hero Gradient */
     .bk-hero-gradient {
-      background: linear-gradient(135deg, #0f172a 0%, #092229 55%, #0a3d36 100%);
+      background: linear-gradient(135deg, #0f172a 0%, #092229 52%, #0a3d36 100%);
       position: relative;
       overflow: hidden;
     }
     .bk-hero-gradient::after {
       content: '';
       position: absolute;
-      right: -40px;
-      top: -40px;
-      width: 200px;
-      height: 200px;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.18) 0%, transparent 70%);
+      right: -50px;
+      top: -50px;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.20) 0%, transparent 70%);
       pointer-events: none;
     }
     /* Active Sidebar Item (Exact Bullkarry Style) */
@@ -103,6 +103,25 @@
       border-color: #f8fafc !important;
       box-shadow: 0 8px 20px -4px rgba(248, 250, 252, 0.22);
     }
+    /* Auto-Sliding Ticker / Marquee Animation */
+    @keyframes tickerSlide {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: tickerSlide 38s linear infinite;
+    }
+    .marquee-wrapper:hover .marquee-track,
+    .marquee-wrapper:active .marquee-track,
+    .marquee-paused .marquee-track {
+      animation-play-state: paused;
+    }
     /* Custom Scrollbar */
     ::-webkit-scrollbar {
       width: 5px;
@@ -129,21 +148,21 @@
 </head>
 <body class="min-h-screen flex flex-col lg:flex-row bg-bk-bg text-slate-100 selection:bg-emerald-500 selection:text-slate-950">
 
-  <!-- ==================== DESKTOP LEFT SIDEBAR (COMPACT 220px FOR 100% ZOOM FIT) ==================== -->
+  <!-- ==================== DESKTOP LEFT SIDEBAR (CLEAN MENU WITHOUT NUMBERS) ==================== -->
   <aside class="hidden lg:flex flex-col w-[220px] bg-bk-sidebar border-r border-slate-800/80 shrink-0 min-h-screen sticky top-0 h-screen justify-between p-3.5 select-none z-30">
     <div>
-      <!-- Brand Logo -->
-      <div class="flex items-center gap-2.5 px-1.5 py-1.5 mb-5 cursor-pointer" onclick="selectCategory('all', false)">
-        <div id="brand-logo-box" class="w-9 h-9 rounded-xl bg-emerald-950/90 border border-emerald-500/40 flex items-center justify-center shadow-md shadow-emerald-950/50 overflow-hidden shrink-0">
+      <!-- Brand Logo (Clicking always returns to Front Page "CRYPTO AIRDROPS") -->
+      <div class="flex items-center gap-2.5 px-1.5 py-1.5 mb-5 cursor-pointer group" onclick="goHomeFrontPage()">
+        <div id="brand-logo-box" class="w-9 h-9 rounded-xl bg-emerald-950/90 border border-emerald-500/40 group-hover:border-emerald-400 flex items-center justify-center shadow-md shadow-emerald-950/50 overflow-hidden shrink-0 transition">
           <span class="font-display font-bold text-base tracking-tighter text-emerald-400">BK</span>
         </div>
         <div class="min-w-0">
-          <span id="brand-name-text" class="font-display font-bold text-lg tracking-tight text-white block leading-none truncate">Bullkarry</span>
+          <span id="brand-name-text" class="font-display font-bold text-lg tracking-tight text-white group-hover:text-emerald-300 block leading-none truncate transition">Bullkarry</span>
           <span id="brand-tagline-text" class="text-[10px] text-emerald-400/90 font-semibold tracking-wider uppercase mt-0.5 block">AIRDROP ALPHA</span>
         </div>
       </div>
 
-      <!-- Dynamic Sidebar Menu -->
+      <!-- Dynamic Sidebar Menu (NO Numbers / Digits next to items) -->
       <nav class="space-y-1" id="desktop-sidebar-nav">
         <!-- Rendered dynamically from siteConfig.menus -->
       </nav>
@@ -153,21 +172,15 @@
     <div class="space-y-2">
       <div class="bg-bk-card/90 border border-slate-800/90 rounded-2xl p-3">
         <div class="flex items-center justify-between mb-2">
-          <span class="text-[10px] font-bold tracking-wider text-slate-400 uppercase">ALPHA RADAR</span>
+          <span class="text-[10px] font-bold tracking-wider text-slate-400 uppercase">NETWORK STATUS</span>
           <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-950 text-emerald-400 border border-emerald-500/30">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            LIVE
+            ONLINE
           </span>
         </div>
-        <div class="grid grid-cols-2 gap-1.5 text-[11px] bg-bk-bg/70 rounded-xl p-2 border border-slate-800/70">
-          <div>
-            <span class="text-slate-400 block text-[10px]">Active Drops</span>
-            <span id="sidebar-live-count" class="font-bold text-white">18 Projects</span>
-          </div>
-          <div class="border-l border-slate-800 pl-2">
-            <span class="text-slate-400 block text-[10px]">My Streak</span>
-            <span id="sidebar-streak-count" class="font-bold text-emerald-400">0 Tracked</span>
-          </div>
+        <div class="flex items-center justify-between text-[11px] bg-bk-bg/70 rounded-xl px-2.5 py-2 border border-slate-800/70">
+          <span class="text-slate-400 font-medium">My Tracked</span>
+          <span id="sidebar-streak-count" class="font-bold text-emerald-400">0 Projects</span>
         </div>
       </div>
 
@@ -178,45 +191,51 @@
         title="Owner Admin Control Panel"
       >
         <span class="flex items-center gap-2 font-medium">
-          <i data-lucide="lock" class="w-3.5 h-3.5" id="sidebar-lock-icon"></i>
-          <span id="sidebar-admin-label">Owner Admin</span>
+          <i data-lucide="lock" class="w-3.5 h-3.5"></i>
+          <span>Owner Admin</span>
         </span>
         <span id="admin-status-pill" class="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 font-semibold">LOCKED</span>
       </button>
     </div>
   </aside>
 
-  <!-- ==================== MAIN CONTENT AREA (OPTIMIZED FOR 100% DESKTOP ZOOM) ==================== -->
-  <div class="flex-1 flex flex-col min-w-0 pb-24 lg:pb-10">
+  <!-- ==================== MAIN CONTENT AREA ==================== -->
+  <div class="flex-1 flex flex-col min-w-0 pb-24 lg:pb-12">
 
-    <!-- TOP HEADER BAR (Compact & Crisp at 100% Zoom) -->
+    <!-- TOP HEADER BAR (NO TELEGRAM BUTTON ON DESKTOP, BIG SEARCH BAR + COMPACT NETWORK BUTTON) -->
     <header class="sticky top-0 z-20 bg-bk-bg/90 backdrop-blur-md border-b border-slate-800/60 px-3.5 sm:px-6 py-3">
       <div class="max-w-[1440px] mx-auto flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         
-        <!-- Left Greeting + Mobile Brand -->
+        <!-- Left Greeting + Mobile Brand Logo -->
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3">
-            <!-- Mobile Logo -->
-            <div onclick="selectCategory('all', false)" class="lg:hidden w-9 h-9 rounded-xl bg-emerald-950 border border-emerald-500/40 flex items-center justify-center shrink-0 cursor-pointer">
+            <!-- Mobile Logo (Clicking returns to Front Page) -->
+            <div onclick="goHomeFrontPage()" id="mobile-brand-logo-box" class="lg:hidden w-9 h-9 rounded-xl bg-emerald-950 border border-emerald-500/40 flex items-center justify-center shrink-0 cursor-pointer overflow-hidden shadow">
               <span class="font-display font-bold text-sm text-emerald-400">BK</span>
             </div>
             <!-- Bell Notification Button (Filters NEW Projects) -->
-            <button onclick="filterByTagAndScroll('NEW')" title="View Newly Added Projects" class="hidden lg:flex w-9 h-9 rounded-xl bg-bk-card border border-slate-800 items-center justify-center text-slate-300 hover:text-emerald-400 hover:border-emerald-500/40 transition relative shrink-0">
+            <button onclick="filterByTagAndScroll('NEW')" title="View Newly Added Airdrops" class="hidden lg:flex w-9 h-9 rounded-xl bg-bk-card border border-slate-800 items-center justify-center text-slate-300 hover:text-emerald-400 hover:border-emerald-500/40 transition relative shrink-0">
               <i data-lucide="bell" class="w-4 h-4"></i>
               <span class="w-2 h-2 rounded-full bg-emerald-400 absolute top-2 right-2 animate-ping"></span>
               <span class="w-2 h-2 rounded-full bg-emerald-400 absolute top-2 right-2"></span>
             </button>
-            <div>
-              <h1 id="header-greeting" class="text-lg sm:text-xl font-bold tracking-tight text-white leading-tight">Good evening</h1>
-              <p id="header-subtitle" class="text-[11px] sm:text-xs text-slate-400">Welcome back to your Bullkarry Multi-Chain Airdrop & Alpha dashboard.</p>
+            <div onclick="goHomeFrontPage()" class="cursor-pointer">
+              <h1 id="header-greeting" class="text-base sm:text-lg font-bold tracking-tight text-white leading-tight">Good evening</h1>
+              <p id="header-subtitle" class="text-[11px] text-slate-400 hidden sm:block">Welcome back to your Bullkarry Multi-Chain Airdrop & Alpha dashboard.</p>
             </div>
           </div>
 
-          <!-- Mobile Telegram + Admin Trigger -->
+          <!-- Mobile-Only Polished Telegram Button + Admin Gear (Hidden on Desktop lg:hidden) -->
           <div class="flex lg:hidden items-center gap-2">
-            <a id="mobile-tg-top-btn" href="https://t.me/bullkarry" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-[#229ED9]/20 border border-[#229ED9]/40 text-xs font-bold text-[#38bdf8]">
+            <a
+              id="mobile-tg-top-btn"
+              href="https://t.me/bullkarry"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#229ED9] to-[#1a8cd8] text-white text-xs font-bold shadow-md shadow-[#229ED9]/20 active:scale-95 transition"
+            >
               <i data-lucide="send" class="w-3.5 h-3.5"></i>
-              <span>Telegram</span>
+              <span>Join Telegram</span>
             </a>
             <button onclick="openAdminModal()" class="p-2 rounded-xl bg-bk-card border border-slate-800 text-slate-400 hover:text-emerald-400" title="Admin Login">
               <i data-lucide="settings" class="w-4 h-4"></i>
@@ -224,64 +243,51 @@
           </div>
         </div>
 
-        <!-- Right Controls: Search, Chain Filter, Telegram Button -->
-        <div class="flex flex-wrap items-center gap-2">
-          <!-- Search Input -->
-          <div class="relative flex-1 sm:flex-initial sm:w-56 md:w-64">
-            <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+        <!-- Right Controls: Prominent Wide Search Bar + Compact Network Selector + Admin Icon -->
+        <div class="flex items-center gap-2 flex-1 md:max-w-xl lg:max-w-2xl justify-end">
+          <!-- Wide Prominent Search Input -->
+          <div class="relative flex-1">
+            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
             <input
               id="search-input"
               type="text"
               oninput="handleSearch(this.value)"
-              placeholder="Search airdrops, perp, raise..."
-              class="w-full pl-8 pr-7 py-2 bg-bk-card border border-slate-800 focus:border-emerald-500/60 rounded-xl text-xs text-white placeholder-slate-400 focus:outline-none transition"
+              placeholder="Search crypto airdrops, perp DEX, chains, or VC backers..."
+              class="w-full pl-9 pr-8 py-2 bg-bk-card border border-slate-800 focus:border-emerald-500/60 rounded-xl text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none transition shadow-inner"
             />
             <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white">
-              <i data-lucide="x" class="w-3.5 h-3.5"></i>
+              <i data-lucide="x" class="w-4 h-4"></i>
             </button>
           </div>
 
-          <!-- Chain Filter Dropdown -->
-          <div class="relative">
+          <!-- Compact Chain Filter Button -->
+          <div class="relative shrink-0">
             <select
               id="chain-select"
               onchange="handleChainFilter(this.value)"
-              class="appearance-none bg-bk-card hover:bg-bk-cardHover border border-slate-800 rounded-xl pl-6 pr-7 py-2 text-xs font-medium text-slate-200 focus:outline-none focus:border-emerald-500/60 cursor-pointer"
+              title="Filter by Blockchain Network"
+              class="appearance-none bg-bk-card hover:bg-bk-cardHover border border-slate-800 rounded-xl pl-5 pr-6 py-2 text-xs font-semibold text-slate-200 focus:outline-none focus:border-emerald-500/60 cursor-pointer w-[112px] sm:w-[126px] truncate"
             >
-              <option value="ALL">All Networks</option>
+              <option value="ALL">Networks</option>
               <option value="Monad">Monad</option>
-              <option value="Hyperliquid">Hyperliquid L1</option>
+              <option value="Hyperliquid">Hyperliquid</option>
               <option value="Ethereum">Ethereum</option>
               <option value="Solana">Solana</option>
               <option value="Arbitrum">Arbitrum</option>
               <option value="Base">Base</option>
               <option value="Berachain">Berachain</option>
               <option value="Abstract">Abstract</option>
-              <option value="Bitcoin">Bitcoin / Babylon</option>
+              <option value="Bitcoin">Bitcoin</option>
             </select>
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 absolute left-2 top-1/2 -translate-y-1/2 pointer-events-none"></span>
             <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none"></i>
           </div>
 
-          <!-- Top-Right Join Telegram CTA (Desktop) -->
-          <a
-            id="header-tg-btn"
-            href="https://t.me/bullkarry"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 bg-bk-card hover:bg-bk-cardHover border border-slate-800 hover:border-[#229ED9]/50 rounded-xl text-xs font-semibold text-white transition shadow-sm"
-          >
-            <span class="w-5 h-5 rounded-lg bg-[#229ED9] text-white flex items-center justify-center">
-              <i data-lucide="send" class="w-3 h-3"></i>
-            </span>
-            <span id="header-tg-btn-label">Join Telegram</span>
-          </a>
-
-          <!-- Subtle Header Admin Gear -->
+          <!-- Subtle Header Admin Gear (Desktop Only) -->
           <button
             onclick="openAdminModal()"
             title="Owner Admin Panel"
-            class="hidden lg:flex w-9 h-9 rounded-xl bg-bk-card hover:bg-bk-cardHover border border-slate-800 items-center justify-center text-slate-400 hover:text-emerald-400 transition"
+            class="hidden lg:flex w-9 h-9 rounded-xl bg-bk-card hover:bg-bk-cardHover border border-slate-800 items-center justify-center text-slate-400 hover:text-emerald-400 transition shrink-0"
           >
             <i data-lucide="settings" class="w-4 h-4"></i>
           </button>
@@ -290,36 +296,30 @@
       </div>
     </header>
 
-    <!-- MAIN CONTENT CONTAINER -->
-    <main class="max-w-[1440px] w-full mx-auto px-3.5 sm:px-6 pt-5 space-y-5">
+    <!-- ==================== VIEW 1: FRONT PAGE DASHBOARD ("CRYPTO AIRDROPS" + SLIDING TRACKER + DIRECTORY + FAQ) ==================== -->
+    <main id="front-page-view" class="max-w-[1440px] w-full mx-auto px-3.5 sm:px-6 pt-5 space-y-5">
 
-      <!-- TOP DASHBOARD GRID (Fits 100% Zoom on 1280px+ Laptops without Zooming Out) -->
+      <!-- TOP DASHBOARD GRID (100% Desktop Zoom Fit) -->
       <div class="grid grid-cols-1 xl:grid-cols-12 gap-5 items-stretch">
 
-        <!-- LEFT 8 COLUMNS: HERO CARD + 5 QUICK ACTION TILES -->
+        <!-- LEFT 8 COLUMNS: ALPHADROPS-STYLE "CRYPTO AIRDROPS" HERO + 4 LIVE COUNTERS + 5 QUICK ACTIONS -->
         <div class="xl:col-span-8 flex flex-col justify-between space-y-5">
 
-          <!-- Hero Card (Bullkarry Style — Balanced proportions for 100% zoom) -->
+          <!-- Hero Card: CRYPTO AIRDROPS + 4 Live Counters (Active, Claimable, Ended, Community) -->
           <div class="bk-hero-gradient border border-emerald-500/25 rounded-2xl p-5 sm:p-6 shadow-xl">
             <div class="flex items-start justify-between gap-4">
               <div>
-                <div class="flex items-center gap-2 text-[11px] font-bold tracking-wider uppercase text-slate-300 mb-2">
-                  <span class="w-5 h-5 rounded-md bg-emerald-400/20 border border-emerald-400/40 flex items-center justify-center text-emerald-300">
-                    <i data-lucide="sparkles" class="w-3 h-3"></i>
-                  </span>
-                  <span id="hero-badge-label">VERIFIED AIRDROP & FUNDRAISING PIPELINE</span>
+                <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-lg bg-emerald-500/15 border border-emerald-400/30 text-[10px] sm:text-[11px] font-bold tracking-wider uppercase text-emerald-300 mb-2.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                  <span id="hero-badge-label">ALPHADROPS & AIRDROPS.IO VERIFIED HUB</span>
                 </div>
 
-                <div class="flex flex-wrap items-baseline gap-2.5">
-                  <span id="hero-active-count" class="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight">18</span>
-                  <span id="hero-highlight-suffix" class="text-base sm:text-lg font-bold text-emerald-400 flex items-center gap-1">
-                    LIVE OPPORTUNITIES
-                    <i data-lucide="chevron-down" class="w-4 h-4"></i>
-                  </span>
-                </div>
+                <h2 id="hero-main-heading" class="font-display text-2xl sm:text-4xl font-extrabold text-white tracking-tight uppercase leading-none">
+                  CRYPTO AIRDROPS
+                </h2>
 
-                <p id="hero-sub-value" class="text-xs text-slate-300/90 mt-1.5">
-                  ≈ Total Ecosystem Funding Tracked: <span class="text-white font-semibold">$1.42B+ Raised</span> • Alphadrops & Airdrops.io Verified
+                <p id="hero-sub-value" class="text-xs sm:text-sm text-slate-300/90 mt-2 max-w-2xl">
+                  Discover, track, and farm verified Web3 airdrops, Perp DEX points, and high-raise protocols before TGE.
                 </p>
               </div>
 
@@ -333,36 +333,51 @@
               </button>
             </div>
 
-            <!-- Hero Status Quick Pills -->
-            <div class="mt-4 pt-3.5 border-t border-white/10 flex flex-wrap items-center gap-2">
-              <button onclick="filterByTagAndScroll('NEW')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-slate-950/50 hover:bg-slate-950/80 border border-emerald-500/30 text-[11px] font-semibold text-emerald-300 transition">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
-                <span>New Added (<span id="stat-new-count">0</span>)</span>
-              </button>
+            <!-- 4 Live Counters Bar (Active Airdrops, Claimable, Ended, Community) -->
+            <div class="mt-5 pt-4 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
+              <!-- 1. Active Airdrops -->
+              <div onclick="selectCategory('all', true)" class="bg-slate-950/55 hover:bg-slate-950/80 border border-emerald-500/30 rounded-xl p-3 cursor-pointer transition group">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Active Airdrops</span>
+                  <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                </div>
+                <div id="stat-active-count" class="font-display text-xl sm:text-2xl font-bold text-white group-hover:text-emerald-300 mt-1">15</div>
+                <span class="text-[10px] text-emerald-400/90 font-medium">Ongoing Farming</span>
+              </div>
 
-              <button onclick="selectCategory('perp', true)" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-slate-950/50 hover:bg-slate-950/80 border border-slate-700 text-[11px] font-semibold text-slate-200 transition">
-                <i data-lucide="candlestick-chart" class="w-3 h-3 text-emerald-400"></i>
-                <span>Perp DEX (<span id="stat-perp-count">0</span>)</span>
-              </button>
+              <!-- 2. Claimable -->
+              <div onclick="selectCategory('claim', true)" class="bg-slate-950/55 hover:bg-slate-950/80 border border-slate-800 hover:border-amber-500/40 rounded-xl p-3 cursor-pointer transition group">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Claimable</span>
+                  <i data-lucide="gift" class="w-3.5 h-3.5 text-amber-400"></i>
+                </div>
+                <div id="stat-claim-count" class="font-display text-xl sm:text-2xl font-bold text-amber-300 mt-1">4</div>
+                <span class="text-[10px] text-slate-400 font-medium">Live Portals</span>
+              </div>
 
-              <button onclick="selectCategory('claim', true)" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-slate-950/50 hover:bg-slate-950/80 border border-slate-700 text-[11px] font-semibold text-slate-200 transition">
-                <i data-lucide="gift" class="w-3 h-3 text-amber-400"></i>
-                <span>Claim Live (<span id="stat-claim-count">0</span>)</span>
-              </button>
+              <!-- 3. Ended / Completed -->
+              <div onclick="selectCategory('completed', true)" class="bg-slate-950/55 hover:bg-slate-950/80 border border-slate-800 hover:border-slate-600 rounded-xl p-3 cursor-pointer transition group">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Ended</span>
+                  <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-slate-400"></i>
+                </div>
+                <div id="stat-completed-count" class="font-display text-xl sm:text-2xl font-bold text-slate-200 mt-1">1</div>
+                <span class="text-[10px] text-slate-400 font-medium">Completed Drops</span>
+              </div>
 
-              <button onclick="selectCategory('raise', true)" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-slate-950/50 hover:bg-slate-950/80 border border-slate-700 text-[11px] font-semibold text-slate-200 transition">
-                <i data-lucide="trending-up" class="w-3 h-3 text-sky-400"></i>
-                <span>VC Raises (<span id="stat-raise-count">0</span>)</span>
-              </button>
-
-              <button onclick="selectCategory('completed', true)" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-slate-950/50 hover:bg-slate-950/80 border border-slate-700/80 text-[11px] font-semibold text-slate-400 transition">
-                <i data-lucide="check-circle-2" class="w-3 h-3"></i>
-                <span>Completed (<span id="stat-completed-count">0</span>)</span>
-              </button>
+              <!-- 4. Community -->
+              <a id="stat-community-card" href="https://t.me/bullkarry" target="_blank" rel="noopener noreferrer" class="bg-slate-950/55 hover:bg-slate-950/80 border border-slate-800 hover:border-[#38bdf8]/40 rounded-xl p-3 cursor-pointer transition group block">
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Community</span>
+                  <i data-lucide="users" class="w-3.5 h-3.5 text-[#38bdf8]"></i>
+                </div>
+                <div id="stat-community-count" class="font-display text-xl sm:text-2xl font-bold text-[#38bdf8] mt-1">28.5K+</div>
+                <span class="text-[10px] text-slate-400 font-medium">Alpha Farmers</span>
+              </a>
             </div>
           </div>
 
-          <!-- QUICK ACTIONS (5 BUTTONS WITH CUSTOM AIRDROP BOX SVG & CORNER MICRO-TAGS) -->
+          <!-- QUICK ACTIONS (5 SIGNATURE BULLKARRY BUTTONS WITH MICRO-TAGS) -->
           <div>
             <div class="flex items-center justify-between mb-3">
               <h2 class="text-sm sm:text-base font-bold text-white tracking-tight">Quick Actions</h2>
@@ -376,7 +391,7 @@
 
         </div>
 
-        <!-- RIGHT 4 COLUMNS: TELEGRAM ALPHA CARD + DESKTOP RIGHT SIDEBAR SPONSOR CARD -->
+        <!-- RIGHT 4 COLUMNS: TELEGRAM ALPHA CARD + RIGHT SIDEBAR SPONSOR CARD -->
         <div class="xl:col-span-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-1 gap-4">
 
           <!-- 1. BULLKARRY TELEGRAM COMMUNITY WIDGET -->
@@ -429,6 +444,30 @@
 
       </div>
 
+      <!-- ==================== ALPHADROPS-STYLE LIVE AUTO-SLIDING PROJECT TRACKER CAROUSEL ==================== -->
+      <section class="bg-bk-card/70 border border-slate-800/90 rounded-2xl p-3.5 sm:p-4 shadow-lg overflow-hidden">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <h3 class="text-xs sm:text-sm font-bold text-white uppercase tracking-wider">Live Trending & Tracked Projects</h3>
+            <span class="hidden sm:inline-block text-[11px] text-slate-400">— Click any sliding card to open full farming post</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <button onclick="toggleMarqueePause()" id="marquee-pause-btn" class="px-2.5 py-1 rounded-lg bg-bk-bg hover:bg-slate-800 border border-slate-800 text-[11px] text-slate-300 font-semibold flex items-center gap-1 transition" title="Pause / Resume Auto-Slide">
+              <i data-lucide="pause" class="w-3 h-3"></i>
+              <span id="marquee-pause-text">Pause</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Auto-Scrolling Marquee Container (Pauses on Hover/Touch) -->
+        <div id="marquee-outer" class="marquee-wrapper overflow-hidden relative">
+          <div id="sliding-marquee-track" class="marquee-track gap-3">
+            <!-- Populated dynamically by renderSlidingMarquee() -->
+          </div>
+        </div>
+      </section>
+
       <!-- ==================== DEDICATED DESKTOP LEADERBOARD AD & MOBILE COMPACT SPONSOR STRIP ==================== -->
       <!-- Desktop Wide Leaderboard Sponsor Strip (Visible on Laptop/Desktop md+) -->
       <div id="desktop-leaderboard-ad-wrapper" class="hidden md:block"></div>
@@ -447,7 +486,7 @@
               <span id="directory-count-badge" class="text-xs font-bold px-2 py-0.5 rounded-md bg-slate-800 text-emerald-400 border border-slate-700">0</span>
             </div>
             <p id="directory-subheading" class="text-xs text-slate-400 mt-0.5">
-              Click any project card to open the step-by-step farming guide, funding details & official links.
+              Tap any project card to open its full Alphadrops-style step-by-step post, funding breakdown & links.
             </p>
           </div>
 
@@ -515,121 +554,184 @@
 
       </section>
 
+      <!-- ==================== ALPHADROPS-STYLE COMMON QUESTIONS (FAQ) SECTION ==================== -->
+      <section id="faq-section" class="bg-bk-card/50 border border-slate-800/80 rounded-2xl p-4 sm:p-6 shadow-xl">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-800/80">
+          <div>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400">KNOWLEDGE BASE</span>
+            <h2 class="text-base sm:text-xl font-display font-bold text-white mt-0.5">Common Questions About Crypto Airdrops</h2>
+          </div>
+          <span class="text-xs text-slate-400">Everything you need to know to farm safely</span>
+        </div>
+
+        <div id="faq-accordion-list" class="divide-y divide-slate-800/80 mt-2">
+          <!-- Populated dynamically by renderFaqSection() -->
+        </div>
+      </section>
+
     </main>
+
+    <!-- ==================== VIEW 2: ALPHADROPS-STYLE DEDICATED PROJECT POST PAGE (NO CLUNKY POPUP) ==================== -->
+    <section id="project-post-view" class="hidden max-w-[1320px] w-full mx-auto px-3.5 sm:px-6 pt-5 space-y-5">
+      
+      <!-- Top Back Navigation Bar -->
+      <div class="flex flex-wrap items-center justify-between gap-3 bg-bk-card/80 border border-slate-800 rounded-2xl px-4 py-3">
+        <button
+          onclick="closeProjectPostView()"
+          class="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-slate-200 hover:text-emerald-400 transition"
+        >
+          <span class="w-7 h-7 rounded-lg bg-slate-800 flex items-center justify-center">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          </span>
+          <span>Back to Crypto Airdrops</span>
+        </button>
+
+        <div class="flex items-center gap-2">
+          <span id="post-tag-badge" class="text-[10px] font-bold px-2.5 py-0.5 rounded-md badge-new">NEW</span>
+          <span id="post-status-badge" class="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-slate-800 text-slate-200 border border-slate-700">Ongoing</span>
+        </div>
+      </div>
+
+      <!-- Main Alphadrops Post Header Banner -->
+      <div class="bk-hero-gradient border border-emerald-500/30 rounded-2xl p-5 sm:p-6 shadow-xl">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+          <div class="flex items-start sm:items-center gap-4">
+            <img
+              id="post-logo-img"
+              src=""
+              alt="Project Logo"
+              class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-2 border-emerald-500/40 bg-slate-900 shrink-0 shadow-xl"
+            />
+            <div>
+              <div class="flex flex-wrap items-center gap-2.5">
+                <h1 id="post-title" class="font-display text-xl sm:text-3xl font-extrabold text-white">Project Name</h1>
+                <span id="post-ticker" class="text-xs font-bold px-2.5 py-0.5 rounded-lg bg-slate-900/90 text-emerald-400 border border-emerald-500/30 font-mono">$TOKEN</span>
+              </div>
+              <div id="post-categories-row" class="flex flex-wrap items-center gap-1.5 mt-2"></div>
+              <p id="post-short-backers" class="text-xs text-slate-300 mt-2"></p>
+            </div>
+          </div>
+
+          <!-- Top Primary Action Buttons -->
+          <div class="flex flex-wrap items-center gap-2.5">
+            <button
+              id="post-track-btn"
+              onclick="toggleTrackFromPostView()"
+              class="px-4 py-2.5 rounded-xl border border-slate-700 text-xs font-bold flex items-center gap-2 transition"
+            >
+              <i data-lucide="bookmark" class="w-4 h-4"></i>
+              <span>Save to Tracker</span>
+            </button>
+
+            <div id="post-primary-cta-wrap" class="flex flex-wrap items-center gap-2">
+              <!-- Populated dynamically with Join, Claim, Checker, X links -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Two-Column Alphadrops Post Content Layout -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+        
+        <!-- Left 8 Columns: About Project + Interactive Step-by-Step Guide -->
+        <div class="lg:col-span-8 space-y-5">
+          
+          <!-- About & Strategy Card -->
+          <div class="bg-bk-card border border-slate-800 rounded-2xl p-5 space-y-3">
+            <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+              <i data-lucide="info" class="w-4 h-4 text-emerald-400"></i>
+              <span>What is <span id="post-about-name">Project</span> & Airdrop Strategy</span>
+            </h3>
+            <p id="post-desc" class="text-xs sm:text-sm text-slate-300 leading-relaxed"></p>
+          </div>
+
+          <!-- Step-by-Step Farming Checklist Card -->
+          <div class="bg-bk-card border border-slate-800 rounded-2xl p-5 space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-800">
+              <div>
+                <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+                  <i data-lucide="list-checks" class="w-4 h-4 text-emerald-400"></i>
+                  <span>Step-by-Step Airdrop Farming Tasks</span>
+                </h3>
+                <p class="text-[11px] text-slate-400 mt-0.5">Click any step to mark it completed in your browser tracker</p>
+              </div>
+              <span id="post-steps-progress-pill" class="text-xs font-bold px-3 py-1 rounded-xl bg-emerald-950 text-emerald-400 border border-emerald-500/30 self-start sm:self-center">
+                0 / 0 Completed
+              </span>
+            </div>
+
+            <div id="post-steps-list" class="space-y-2.5">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <!-- Personal Wallet Notes Box -->
+          <div class="bg-bk-card border border-slate-800 rounded-2xl p-5">
+            <label class="block text-xs font-bold text-white mb-2 flex items-center gap-2">
+              <i data-lucide="notebook-pen" class="w-4 h-4 text-emerald-400"></i>
+              <span>My Personal Wallet & Farming Notes (Saved Locally)</span>
+            </label>
+            <div class="flex flex-col sm:flex-row gap-2.5">
+              <input
+                id="post-user-note"
+                type="text"
+                placeholder="e.g. Farmed with Wallet #1 & #2, completed weekly volume & discord role..."
+                class="flex-1 bg-bk-bg border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-emerald-500"
+              />
+              <button onclick="saveProjectNote()" class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-extrabold transition shrink-0">
+                Save Note
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right 4 Columns: Project Key Metrics + Sponsor Ad + Quick Share -->
+        <div class="lg:col-span-4 space-y-5">
+          
+          <!-- Alphadrops Key Metrics Box -->
+          <div class="bg-bk-card border border-slate-800 rounded-2xl p-5 space-y-3.5">
+            <h3 class="text-sm font-bold text-white border-b border-slate-800 pb-2.5">Project Key Metrics</h3>
+
+            <div class="space-y-2.5 text-xs">
+              <div class="flex items-center justify-between py-1.5 border-b border-slate-800/60">
+                <span class="text-slate-400">Network / Chain</span>
+                <span id="post-chain" class="font-bold text-white">Monad</span>
+              </div>
+              <div class="flex items-center justify-between py-1.5 border-b border-slate-800/60">
+                <span class="text-slate-400">Total Funds Raised</span>
+                <span id="post-raised" class="font-bold text-emerald-400">$225M</span>
+              </div>
+              <div class="flex items-center justify-between py-1.5 border-b border-slate-800/60">
+                <span class="text-slate-400">Lead Investors</span>
+                <span id="post-backers" class="font-semibold text-slate-200 text-right max-w-[190px] truncate">Paradigm, a16z</span>
+              </div>
+              <div class="flex items-center justify-between py-1.5 border-b border-slate-800/60">
+                <span class="text-slate-400">Cost to Farm</span>
+                <span id="post-cost" class="font-bold text-slate-200">Free Testnet</span>
+              </div>
+              <div class="flex items-center justify-between py-1.5">
+                <span class="text-slate-400">Reward Type</span>
+                <span id="post-reward" class="font-bold text-amber-300">Points / Token</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Post View Sponsored Ad Slot -->
+          <div id="post-ad-slot-container"></div>
+
+        </div>
+
+      </div>
+
+    </section>
+
   </div>
 
-  <!-- ==================== MOBILE BOTTOM NAVIGATION BAR (WITH CUSTOM AIRDROP BOX ICON) ==================== -->
+  <!-- ==================== MOBILE BOTTOM NAVIGATION BAR ==================== -->
   <nav id="mobile-bottom-nav" class="lg:hidden fixed bottom-0 inset-x-0 z-30 bg-bk-sidebar/95 backdrop-blur-lg border-t border-slate-800/90 px-2 py-1.5 flex items-center justify-around">
     <!-- Rendered dynamically -->
   </nav>
-
-  <!-- ==================== PROJECT DETAILS & FARMING GUIDE MODAL ==================== -->
-  <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-3 sm:p-5 overflow-y-auto" onclick="if(event.target === this) closeProjectModal()">
-    <div class="bg-bk-card border border-slate-700/90 rounded-2xl max-w-2xl w-full overflow-hidden shadow-2xl my-auto max-h-[90vh] flex flex-col">
-      
-      <!-- Modal Header with Circular Real Project Logo -->
-      <div class="p-4 sm:p-5 bg-gradient-to-r from-slate-900 via-bk-card to-emerald-950/30 border-b border-slate-800 flex items-start justify-between gap-4">
-        <div class="flex items-center gap-3.5">
-          <img
-            id="modal-logo-img"
-            src=""
-            alt="Project Logo"
-            class="w-13 h-13 sm:w-14 sm:h-14 rounded-full object-cover border-2 border-slate-700 bg-slate-900 shrink-0 shadow-md"
-          />
-          <div>
-            <div class="flex flex-wrap items-center gap-2">
-              <h3 id="modal-title" class="text-lg sm:text-xl font-bold text-white">Project Name</h3>
-              <span id="modal-ticker" class="text-xs font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">$TOKEN</span>
-              <span id="modal-tag-badge" class="text-[10px] font-bold px-2 py-0.5 rounded-md badge-new">NEW</span>
-              <span id="modal-status-badge" class="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-slate-800 text-slate-300 border border-slate-700">Ongoing</span>
-            </div>
-            <div id="modal-categories-row" class="flex flex-wrap items-center gap-1.5 mt-1.5"></div>
-          </div>
-        </div>
-        <button onclick="closeProjectModal()" class="w-8 h-8 rounded-xl bg-slate-800/80 hover:bg-slate-700 flex items-center justify-center text-slate-300 shrink-0">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
-      </div>
-
-      <!-- Modal Scrollable Content -->
-      <div class="p-4 sm:p-5 overflow-y-auto space-y-4 flex-1">
-        
-        <!-- Project Overview Description -->
-        <p id="modal-desc" class="text-xs sm:text-sm text-slate-200 leading-relaxed bg-bk-bg/60 border border-slate-800/80 rounded-xl p-3.5"></p>
-
-        <!-- Key Metrics 4-Box Grid (Including Raise / Funding & Backers) -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-          <div class="bg-bk-bg/90 border border-slate-800 rounded-xl p-2.5">
-            <div class="text-[10px] uppercase text-slate-400 font-semibold">Chain / Network</div>
-            <div id="modal-chain" class="text-xs font-bold text-white mt-0.5">Monad</div>
-          </div>
-          <div class="bg-bk-bg/90 border border-slate-800 rounded-xl p-2.5">
-            <div class="text-[10px] uppercase text-slate-400 font-semibold">Funds Raised</div>
-            <div id="modal-raised" class="text-xs font-bold text-emerald-400 mt-0.5">$225M</div>
-          </div>
-          <div class="bg-bk-bg/90 border border-slate-800 rounded-xl p-2.5">
-            <div class="text-[10px] uppercase text-slate-400 font-semibold">Lead Backers</div>
-            <div id="modal-backers" class="text-xs font-bold text-slate-200 truncate mt-0.5">Paradigm, a16z</div>
-          </div>
-          <div class="bg-bk-bg/90 border border-slate-800 rounded-xl p-2.5">
-            <div class="text-[10px] uppercase text-slate-400 font-semibold">Task Type / Reward</div>
-            <div id="modal-cost-reward" class="text-xs font-bold text-slate-200 truncate mt-0.5">Free • Points</div>
-          </div>
-        </div>
-
-        <!-- Step-by-Step Interactive Farming Guide with Direct Step Links -->
-        <div>
-          <div class="flex items-center justify-between mb-2.5">
-            <h4 class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
-              <i data-lucide="list-checks" class="w-4 h-4 text-emerald-400"></i>
-              <span>Step-by-Step Airdrop & Farming Guide</span>
-            </h4>
-            <span class="text-[11px] text-slate-400">Tap step to mark complete</span>
-          </div>
-          <div id="modal-steps-list" class="space-y-2">
-            <!-- Populated by JS -->
-          </div>
-        </div>
-
-        <!-- Optional Detail Modal Sponsored Banner Slot -->
-        <div id="modal-ad-slot-container"></div>
-
-        <!-- Personal Wallet Notes -->
-        <div class="bg-bk-bg/70 border border-slate-800 rounded-xl p-3">
-          <label class="block text-[11px] font-bold text-slate-300 mb-1.5">My Personal Farming Note (Saved in your browser):</label>
-          <div class="flex gap-2">
-            <input
-              id="modal-user-note"
-              type="text"
-              placeholder="e.g. Farmed with Rabby Wallet #1, completed daily check-in..."
-              class="flex-1 bg-bk-card border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-emerald-500"
-            />
-            <button onclick="saveProjectNote()" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-emerald-500 hover:text-slate-950 text-xs font-bold text-emerald-400 transition">
-              Save Note
-            </button>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Modal Bottom Action Redirect Buttons Bar -->
-      <div class="p-4 bg-bk-sidebar border-t border-slate-800 flex flex-wrap items-center justify-between gap-2.5">
-        <button
-          id="modal-track-btn"
-          onclick="toggleTrackFromModal()"
-          class="px-3 py-2 rounded-xl border border-slate-700 text-xs font-bold flex items-center gap-1.5 transition"
-        >
-          <i data-lucide="bookmark" class="w-3.5 h-3.5"></i>
-          <span>Save to Tracker</span>
-        </button>
-
-        <div class="flex flex-wrap items-center gap-2" id="modal-action-links">
-          <!-- Populated dynamically with Join, Claim, Checker, X links -->
-        </div>
-      </div>
-
-    </div>
-  </div>
 
   <!-- ==================== OWNER-ONLY MASTER FULL-WEBSITE ADMIN CMS MODAL ==================== -->
   <div id="admin-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-md p-2 sm:p-4 overflow-y-auto">
@@ -643,14 +745,14 @@
           </div>
           <div>
             <h3 class="text-sm sm:text-base font-bold text-white">Bullkarry Master Admin CMS</h3>
-            <p class="text-[11px] text-slate-400">Manage Projects, Circular Logos, Desktop & Mobile Ads, Password & Email Recovery.</p>
+            <p class="text-[11px] text-slate-400">Manage Projects, Circular Logos, BK Site Logo, Counters, FAQs, Ads & All-Device HTML Export.</p>
           </div>
         </div>
 
         <div class="flex items-center gap-2">
-          <button id="admin-export-top-btn" onclick="exportUpdatedHTML()" class="hidden px-3 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-extrabold items-center gap-1.5 shadow-md">
+          <button id="admin-export-top-btn" onclick="exportUpdatedHTML()" class="hidden px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-extrabold items-center gap-1.5 shadow-lg shadow-emerald-500/20">
             <i data-lucide="download" class="w-3.5 h-3.5"></i>
-            <span>Download HTML for Vercel</span>
+            <span>Publish / Download index.html (For All Devices)</span>
           </button>
           <button id="admin-logout-btn" onclick="adminLogout()" class="hidden px-3 py-1.5 rounded-xl bg-red-500/20 text-red-300 border border-red-500/30 text-xs font-semibold hover:bg-red-500/30">
             Lock Admin
@@ -671,7 +773,6 @@
           <p class="text-xs text-slate-400 mt-1">Enter your Owner Password to unlock full website controls.</p>
         </div>
 
-        <!-- Standard Password Login Form -->
         <form id="admin-pass-login-form" onsubmit="handleAdminLogin(event)" class="space-y-3 text-left">
           <div>
             <label class="block text-xs font-semibold text-slate-300 mb-1">Owner Password / PIN</label>
@@ -689,14 +790,12 @@
           </button>
         </form>
 
-        <!-- Forgot Password Trigger -->
         <div class="pt-1">
           <button type="button" onclick="toggleForgotPasswordBox()" class="text-xs font-semibold text-emerald-400 hover:underline">
             Forgot Password? Reset via Registered Email
           </button>
         </div>
 
-        <!-- Forgot Password / Email Recovery Box -->
         <div id="admin-forgot-box" class="hidden bg-bk-bg/90 border border-slate-800 rounded-2xl p-4 text-left space-y-3">
           <div class="flex items-center justify-between">
             <span class="text-xs font-bold text-white flex items-center gap-1.5">
@@ -706,7 +805,7 @@
             <button type="button" onclick="toggleForgotPasswordBox()" class="text-[11px] text-slate-400 hover:text-white">Cancel</button>
           </div>
           <p class="text-[11px] text-slate-400">
-            Enter your registered Admin Recovery Email (<span id="recovery-email-hint" class="text-emerald-400 font-mono"></span>) to verify ownership or send a recovery email:
+            Enter your registered Admin Recovery Email (<span id="recovery-email-hint" class="text-emerald-400 font-mono"></span>):
           </p>
           <div>
             <label class="block text-[11px] text-slate-300 mb-1">Registered Admin Email *</label>
@@ -729,30 +828,41 @@
         </div>
 
         <div class="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-[11px] text-slate-400">
-          Default Password: <code class="text-emerald-400 font-mono font-bold">admin123</code> • Changeable with your Email inside Tab 4
+          Default Password: <code class="text-emerald-400 font-mono font-bold">admin123</code>
         </div>
       </div>
 
       <!-- VIEW 2: UNLOCKED MASTER ADMIN TABS -->
       <div id="admin-dashboard-view" class="hidden flex-1 flex flex-col overflow-hidden">
         
+        <!-- Important Cross-Device Sync Notice -->
+        <div class="bg-emerald-950/50 border-b border-emerald-500/30 px-4 py-2 flex flex-wrap items-center justify-between gap-2 text-xs">
+          <span class="text-emerald-200">
+            <strong class="text-emerald-400">Important for All Devices:</strong> After uploading logos or adding projects, click <strong>"Publish / Download index.html"</strong> and upload that file to Vercel so every mobile & laptop sees your new logos!
+          </span>
+        </div>
+
         <!-- Admin Navigation Tabs -->
         <div class="bg-bk-bg border-b border-slate-800 px-4 pt-2.5 flex items-center gap-2 overflow-x-auto no-scrollbar">
           <button onclick="switchAdminTab('projects')" data-atab="projects" class="admin-tab-btn px-3.5 py-2 rounded-t-xl text-xs font-bold bg-bk-card text-emerald-400 border-t border-x border-slate-700 flex items-center gap-1.5 shrink-0">
             <i data-lucide="layers" class="w-3.5 h-3.5"></i>
             <span>1. Projects & Circular Logos</span>
           </button>
+          <button onclick="switchAdminTab('settings')" data-atab="settings" class="admin-tab-btn px-3.5 py-2 rounded-t-xl text-xs font-bold text-slate-400 hover:text-white flex items-center gap-1.5 shrink-0">
+            <i data-lucide="award" class="w-3.5 h-3.5"></i>
+            <span>2. BK Site Logo, Counters & Security</span>
+          </button>
+          <button onclick="switchAdminTab('faqs')" data-atab="faqs" class="admin-tab-btn px-3.5 py-2 rounded-t-xl text-xs font-bold text-slate-400 hover:text-white flex items-center gap-1.5 shrink-0">
+            <i data-lucide="help-circle" class="w-3.5 h-3.5"></i>
+            <span>3. Common Questions (FAQ)</span>
+          </button>
           <button onclick="switchAdminTab('ads')" data-atab="ads" class="admin-tab-btn px-3.5 py-2 rounded-t-xl text-xs font-bold text-slate-400 hover:text-white flex items-center gap-1.5 shrink-0">
             <i data-lucide="megaphone" class="w-3.5 h-3.5"></i>
-            <span>2. Desktop & Mobile Ads (5 Slots)</span>
+            <span>4. Desktop & Mobile Ads (5 Slots)</span>
           </button>
           <button onclick="switchAdminTab('menus')" data-atab="menus" class="admin-tab-btn px-3.5 py-2 rounded-t-xl text-xs font-bold text-slate-400 hover:text-white flex items-center gap-1.5 shrink-0">
             <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
-            <span>3. Menus & Quick Actions</span>
-          </button>
-          <button onclick="switchAdminTab('settings')" data-atab="settings" class="admin-tab-btn px-3.5 py-2 rounded-t-xl text-xs font-bold text-slate-400 hover:text-white flex items-center gap-1.5 shrink-0">
-            <i data-lucide="shield" class="w-3.5 h-3.5"></i>
-            <span>4. Password, Recovery Email & Branding</span>
+            <span>5. Menus & Quick Actions</span>
           </button>
         </div>
 
@@ -788,7 +898,7 @@
                     />
                     <div>
                       <div class="text-xs font-bold text-white">Circular Project Logo</div>
-                      <div class="text-[11px] text-slate-400">Auto-fits 1:1 circle</div>
+                      <div class="text-[11px] text-slate-400">Auto-compressed 1:1 circle</div>
                     </div>
                   </div>
 
@@ -836,11 +946,11 @@
                     </select>
                   </div>
                   <div>
-                    <label class="block text-[11px] font-semibold text-slate-400 mb-1">Status *</label>
+                    <label class="block text-[11px] font-semibold text-slate-400 mb-1">Status (Updates Counters Automatically) *</label>
                     <select id="form-status" class="w-full px-3 py-2 rounded-xl bg-bk-card border border-slate-700 text-xs text-white focus:border-emerald-500 focus:outline-none">
-                      <option value="Ongoing">Ongoing (Active Farming)</option>
-                      <option value="Claim Live">Claim Live</option>
-                      <option value="Completed">Completed (Moves to Completed)</option>
+                      <option value="Ongoing">Ongoing (Active Airdrops)</option>
+                      <option value="Claim Live">Claim Live (Claimable)</option>
+                      <option value="Completed">Completed (Ended)</option>
                     </select>
                   </div>
                 </div>
@@ -944,7 +1054,7 @@
             <div class="bg-bk-bg/90 border border-slate-800 rounded-2xl p-4">
               <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
                 <h4 class="text-sm font-bold text-white">Manage All Projects (1-Click NEW/OLD Tag & Status Switcher)</h4>
-                <span class="text-[11px] text-slate-400">Click any Tag or Status pill to switch it live</span>
+                <span class="text-[11px] text-slate-400">Switching Status to Completed automatically updates the Front Page "Ended" counter!</span>
               </div>
 
               <div class="overflow-x-auto">
@@ -966,12 +1076,178 @@
 
           </div>
 
-          <!-- ==================== ADMIN TAB 2: DESKTOP & MOBILE ADS MANAGER (5 PLACEMENTS) ==================== -->
+          <!-- ==================== ADMIN TAB 2: BK SITE LOGO, FRONT PAGE COUNTERS, BRANDING & SECURITY ==================== -->
+          <div id="admin-tab-settings" class="hidden space-y-5">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+              
+              <!-- Left Column: Main "BK" Brand Logo Upload + Hero & Live Counter Controls -->
+              <div class="bg-bk-bg/90 border border-slate-800 rounded-2xl p-4 space-y-4">
+                <h4 class="text-sm font-bold text-emerald-400 border-b border-slate-800 pb-2">1. Main Website Logo ("BK" Icon) & Hero Counters</h4>
+
+                <!-- Custom Site Brand Logo Upload -->
+                <div class="bg-bk-card border border-slate-800 rounded-xl p-3 flex items-center gap-3.5">
+                  <div id="admin-brand-logo-preview" class="w-12 h-12 rounded-xl bg-emerald-950 border border-emerald-500/40 flex items-center justify-center overflow-hidden shrink-0">
+                    <span class="font-display font-bold text-base text-emerald-400">BK</span>
+                  </div>
+                  <div class="flex-1 space-y-1.5">
+                    <label class="block text-[11px] font-bold text-white">Upload Custom Brand Logo (Replaces "BK" Icon)</label>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onchange="handleBrandLogoUpload(event)"
+                      class="w-full text-[11px] text-slate-300 file:mr-2 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:text-[11px] file:font-bold file:bg-emerald-500 file:text-slate-950 cursor-pointer"
+                    />
+                    <div class="flex gap-2">
+                      <input id="set-brand-logo-url" type="text" placeholder="Or paste logo image URL..." class="flex-1 px-2.5 py-1 rounded-lg bg-bk-bg border border-slate-700 text-xs text-white" />
+                      <button type="button" onclick="clearBrandLogo()" class="px-2.5 py-1 rounded-lg bg-slate-800 text-[11px] text-slate-300 hover:text-white">Reset BK</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Brand Name & Hero Headline -->
+                <div class="grid grid-cols-2 gap-2.5">
+                  <div>
+                    <label class="block text-[11px] text-slate-400 mb-1">Brand Name</label>
+                    <input id="set-brand-name" type="text" class="w-full px-3 py-1.5 rounded-xl bg-bk-card border border-slate-700 text-xs text-white" />
+                  </div>
+                  <div>
+                    <label class="block text-[11px] text-slate-400 mb-1">Brand Tagline</label>
+                    <input id="set-brand-tagline" type="text" class="w-full px-3 py-1.5 rounded-xl bg-bk-card border border-slate-700 text-xs text-white" />
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <div>
+                    <label class="block text-[11px] text-slate-400 mb-1">Big Front-Page Headline</label>
+                    <input id="set-hero-heading" type="text" placeholder="CRYPTO AIRDROPS" class="w-full px-3 py-1.5 rounded-xl bg-bk-card border border-slate-700 text-xs text-white font-bold" />
+                  </div>
+                  <div>
+                    <label class="block text-[11px] text-emerald-400 font-semibold mb-1">Community Size Counter</label>
+                    <input id="set-community-count" type="text" placeholder="e.g. 28.5K+" class="w-full px-3 py-1.5 rounded-xl bg-bk-card border border-slate-700 text-xs text-white font-bold" />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] text-slate-400 mb-1">Hero Subtitle Text</label>
+                  <input id="set-hero-sub" type="text" class="w-full px-3 py-1.5 rounded-xl bg-bk-card border border-slate-700 text-xs text-white" />
+                </div>
+
+                <!-- Auto vs Manual Counter Overrides -->
+                <div class="bg-bk-card border border-slate-800 rounded-xl p-3 space-y-2.5">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-white">Front-Page Counters (Active / Claimable / Ended)</span>
+                    <label class="inline-flex items-center gap-1.5 text-[11px] text-emerald-400 font-bold cursor-pointer">
+                      <input type="checkbox" id="set-auto-counts" checked class="rounded text-emerald-500" />
+                      <span>Auto-Count From Projects</span>
+                    </label>
+                  </div>
+                  <p class="text-[10px] text-slate-400">Leave "Auto-Count" checked so counters update automatically when you add/complete projects, or uncheck to type custom numbers below:</p>
+                  <div class="grid grid-cols-3 gap-2">
+                    <div>
+                      <label class="block text-[10px] text-slate-400 mb-0.5">Custom Active</label>
+                      <input id="set-manual-active" type="text" placeholder="e.g. 42" class="w-full px-2.5 py-1 rounded-lg bg-bk-bg border border-slate-700 text-xs text-white" />
+                    </div>
+                    <div>
+                      <label class="block text-[10px] text-slate-400 mb-0.5">Custom Claimable</label>
+                      <input id="set-manual-claim" type="text" placeholder="e.g. 12" class="w-full px-2.5 py-1 rounded-lg bg-bk-bg border border-slate-700 text-xs text-white" />
+                    </div>
+                    <div>
+                      <label class="block text-[10px] text-slate-400 mb-0.5">Custom Ended</label>
+                      <input id="set-manual-ended" type="text" placeholder="e.g. 85" class="w-full px-2.5 py-1 rounded-lg bg-bk-bg border border-slate-700 text-xs text-white" />
+                    </div>
+                  </div>
+                </div>
+
+                <button onclick="saveSiteSettingsFromAdmin()" class="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs shadow-lg">
+                  Save Logo, Branding & Counter Settings
+                </button>
+              </div>
+
+              <!-- Right Column: Admin Security, Email Recovery & Telegram -->
+              <div class="bg-bk-bg/90 border border-slate-800 rounded-2xl p-4 space-y-4 flex flex-col justify-between">
+                <div class="space-y-4">
+                  <h4 class="text-sm font-bold text-white border-b border-slate-800 pb-2">2. Admin Password, Recovery Email & Telegram</h4>
+
+                  <div>
+                    <label class="block text-[11px] font-semibold text-slate-300 mb-1">Admin Recovery Email (For Forgot Password Reset)</label>
+                    <div class="flex gap-2">
+                      <input id="set-admin-email" type="email" placeholder="e.g. yourname@gmail.com" class="flex-1 px-3 py-2 rounded-xl bg-bk-card border border-slate-700 text-xs text-white" />
+                      <button onclick="saveAdminEmail()" class="px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-extrabold">
+                        Save Email
+                      </button>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block text-[11px] font-semibold text-slate-300 mb-1">Change Owner Admin Password</label>
+                    <div class="flex gap-2">
+                      <input id="new-admin-pass" type="text" placeholder="Enter new password (min 4 chars)..." class="flex-1 px-3 py-2 rounded-xl bg-bk-card border border-slate-700 text-xs text-white" />
+                      <button onclick="updateAdminPassword()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-emerald-500 hover:text-slate-950 text-xs font-bold text-emerald-400">
+                        Update Password
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Telegram Community Card Settings -->
+                  <div class="pt-2 border-t border-slate-800 space-y-2.5">
+                    <h4 class="text-xs font-bold text-[#38bdf8] uppercase tracking-wider">Telegram Community Card</h4>
+                    <div>
+                      <label class="block text-[11px] text-slate-400 mb-1">Telegram Channel Name</label>
+                      <input id="set-tg-title" type="text" class="w-full px-3 py-1.5 rounded-xl bg-bk-card border border-slate-700 text-xs text-white" />
+                    </div>
+                    <div>
+                      <label class="block text-[11px] text-slate-400 mb-1">Telegram Description</label>
+                      <input id="set-tg-subtitle" type="text" class="w-full px-3 py-1.5 rounded-xl bg-bk-card border border-slate-700 text-xs text-white" />
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                      <div>
+                        <label class="block text-[11px] text-slate-400 mb-1">Telegram URL</label>
+                        <input id="set-tg-url" type="url" class="w-full px-3 py-1.5 rounded-xl bg-bk-card border border-slate-700 text-xs text-white" />
+                      </div>
+                      <div>
+                        <label class="block text-[11px] text-slate-400 mb-1">Badge Text</label>
+                        <input id="set-tg-badge" type="text" class="w-full px-3 py-1.5 rounded-xl bg-bk-card border border-slate-700 text-xs text-white" />
+                      </div>
+                    </div>
+                    <button onclick="saveSiteSettingsFromAdmin()" class="w-full py-2 rounded-xl bg-[#229ED9] hover:bg-[#1e8ec4] text-white font-extrabold text-xs">
+                      Save Telegram Card
+                    </button>
+                  </div>
+                </div>
+
+                <div class="pt-3 border-t border-slate-800 flex items-center justify-between">
+                  <span class="text-[11px] text-slate-400">Restore factory default projects & settings</span>
+                  <button onclick="resetToDefaultData()" class="px-3 py-1.5 rounded-lg bg-red-500/15 text-red-300 text-xs font-semibold hover:bg-red-500/25">
+                    Factory Reset
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ==================== ADMIN TAB 3: COMMON QUESTIONS (FAQ) MANAGER ==================== -->
+          <div id="admin-tab-faqs" class="hidden space-y-4">
+            <div class="bg-bk-bg/90 border border-slate-800 rounded-2xl p-4 space-y-3">
+              <h4 class="text-sm font-bold text-white">Add New Common Question (FAQ)</h4>
+              <div class="space-y-2.5">
+                <input id="faq-new-q" type="text" placeholder="Question (e.g. What are Crypto Airdrops and how do I qualify?)" class="w-full px-3 py-2 rounded-xl bg-bk-card border border-slate-700 text-xs text-white" />
+                <textarea id="faq-new-a" rows="2" placeholder="Answer explanation..." class="w-full px-3 py-2 rounded-xl bg-bk-card border border-slate-700 text-xs text-white"></textarea>
+                <button onclick="addNewFaqItem()" class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs">
+                  + Add FAQ Question
+                </button>
+              </div>
+            </div>
+
+            <div id="admin-faqs-list" class="space-y-2.5">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <!-- ==================== ADMIN TAB 4: DESKTOP & MOBILE ADS MANAGER (5 PLACEMENTS) ==================== -->
           <div id="admin-tab-ads" class="hidden space-y-5">
             <div class="bg-emerald-950/30 border border-emerald-500/30 rounded-xl p-3.5 text-xs text-slate-200">
-              <strong class="text-emerald-400">Desktop + Mobile Sponsor Ad Manager:</strong> Control all 5 sponsor placements separately:
-              <strong>1) Right Sidebar Sponsor Card</strong>, <strong>2) Desktop Wide Leaderboard Strip</strong>, <strong>3) Mobile Compact Sponsor Strip</strong>, <strong>4) Native In-Feed Grid Card</strong>, and <strong>5) Project Modal Banner</strong>.
-              Each slot supports either <strong>Image/Text + Click Redirect Link</strong> OR <strong>Custom HTML Ad Code</strong>!
+              <strong class="text-emerald-400">Desktop + Mobile Sponsor Ad Manager:</strong> Control all 5 sponsor placements separately. Each slot supports either <strong>Image/Text + Click Redirect Link</strong> OR <strong>Custom HTML Ad Code</strong>!
             </div>
 
             <div id="admin-ads-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -979,10 +1255,9 @@
             </div>
           </div>
 
-          <!-- ==================== ADMIN TAB 3: MENUS & 5 QUICK ACTIONS CUSTOMIZER ==================== -->
+          <!-- ==================== ADMIN TAB 5: MENUS & 5 QUICK ACTIONS CUSTOMIZER ==================== -->
           <div id="admin-tab-menus" class="hidden space-y-5">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-              <!-- Quick Actions Editor -->
               <div class="bg-bk-bg/90 border border-slate-800 rounded-2xl p-4 space-y-3.5">
                 <div>
                   <h4 class="text-sm font-bold text-white">Quick Action Buttons (5 Front-View Tiles)</h4>
@@ -994,7 +1269,6 @@
                 </button>
               </div>
 
-              <!-- Sidebar Menus Editor -->
               <div class="bg-bk-bg/90 border border-slate-800 rounded-2xl p-4 space-y-3.5">
                 <div>
                   <h4 class="text-sm font-bold text-white">Sidebar Navigation Menu Labels</h4>
@@ -1005,108 +1279,6 @@
                   Save Sidebar Menu Labels
                 </button>
               </div>
-            </div>
-          </div>
-
-          <!-- ==================== ADMIN TAB 4: PASSWORD, RECOVERY EMAIL, BRANDING & TELEGRAM ==================== -->
-          <div id="admin-tab-settings" class="hidden space-y-5">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-              
-              <!-- Admin Security: Password Change & Recovery Email Setup -->
-              <div class="bg-bk-bg/90 border border-emerald-500/30 rounded-2xl p-4 space-y-4">
-                <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
-                  <h4 class="text-sm font-bold text-emerald-400 flex items-center gap-2">
-                    <i data-lucide="key-round" class="w-4 h-4"></i>
-                    <span>Admin Security, Password & Recovery Email</span>
-                  </h4>
-                  <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 font-semibold">Protected</span>
-                </div>
-
-                <div>
-                  <label class="block text-[11px] font-semibold text-slate-300 mb-1">Admin Recovery Email (Used if you ever forget your password)</label>
-                  <div class="flex gap-2">
-                    <input id="set-admin-email" type="email" placeholder="e.g. yourname@gmail.com" class="flex-1 px-3 py-2 rounded-xl bg-bk-card border border-slate-700 text-xs text-white focus:border-emerald-500 focus:outline-none" />
-                    <button onclick="saveAdminEmail()" class="px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-extrabold transition">
-                      Save Email
-                    </button>
-                  </div>
-                  <p class="text-[11px] text-slate-400 mt-1"> If you forget your password on the login screen, you can enter this email to reset it.</p>
-                </div>
-
-                <div class="pt-2 border-t border-slate-800/80">
-                  <label class="block text-[11px] font-semibold text-slate-300 mb-1">Change Owner Admin Password</label>
-                  <div class="flex gap-2">
-                    <input id="new-admin-pass" type="text" placeholder="Enter new password (min 4 chars)..." class="flex-1 px-3 py-2 rounded-xl bg-bk-card border border-slate-700 text-xs text-white focus:border-emerald-500 focus:outline-none" />
-                    <button onclick="updateAdminPassword()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-emerald-500 hover:text-slate-950 text-xs font-bold text-emerald-400 transition">
-                      Update Password
-                    </button>
-                  </div>
-                </div>
-
-                <!-- Telegram Community Card Settings -->
-                <div class="pt-3 border-t border-slate-800 space-y-3">
-                  <h4 class="text-sm font-bold text-[#38bdf8]">Telegram Community Card Settings</h4>
-                  <div>
-                    <label class="block text-[11px] text-slate-400 mb-1">Telegram Channel Name</label>
-                    <input id="set-tg-title" type="text" class="w-full px-3 py-1.5 rounded-xl bg-bk-card border border-slate-700 text-xs text-white" />
-                  </div>
-                  <div>
-                    <label class="block text-[11px] text-slate-400 mb-1">Telegram Card Description</label>
-                    <input id="set-tg-subtitle" type="text" class="w-full px-3 py-1.5 rounded-xl bg-bk-card border border-slate-700 text-xs text-white" />
-                  </div>
-                  <div class="grid grid-cols-2 gap-2.5">
-                    <div>
-                      <label class="block text-[11px] text-slate-400 mb-1">Telegram Invite URL *</label>
-                      <input id="set-tg-url" type="url" class="w-full px-3 py-1.5 rounded-xl bg-bk-card border border-slate-700 text-xs text-white" />
-                    </div>
-                    <div>
-                      <label class="block text-[11px] text-slate-400 mb-1">Badge Text</label>
-                      <input id="set-tg-badge" type="text" class="w-full px-3 py-1.5 rounded-xl bg-bk-card border border-slate-700 text-xs text-white" />
-                    </div>
-                  </div>
-                  <button onclick="saveSiteSettingsFromAdmin()" class="w-full py-2 rounded-xl bg-[#229ED9] hover:bg-[#1e8ec4] text-white font-extrabold text-xs">
-                    Save Telegram Settings
-                  </button>
-                </div>
-              </div>
-
-              <!-- Branding & Hero Settings + Factory Reset -->
-              <div class="bg-bk-bg/90 border border-slate-800 rounded-2xl p-4 space-y-3 flex flex-col justify-between">
-                <div class="space-y-3">
-                  <h4 class="text-sm font-bold text-white border-b border-slate-800 pb-2">Website Branding & Hero Banner</h4>
-                  <div>
-                    <label class="block text-[11px] text-slate-400 mb-1">Website Brand Name</label>
-                    <input id="set-brand-name" type="text" class="w-full px-3 py-1.5 rounded-xl bg-bk-card border border-slate-700 text-xs text-white" />
-                  </div>
-                  <div>
-                    <label class="block text-[11px] text-slate-400 mb-1">Brand Subtitle Tagline</label>
-                    <input id="set-brand-tagline" type="text" class="w-full px-3 py-1.5 rounded-xl bg-bk-card border border-slate-700 text-xs text-white" />
-                  </div>
-                  <div>
-                    <label class="block text-[11px] text-slate-400 mb-1">Top Header Welcome Subtitle</label>
-                    <input id="set-header-subtitle" type="text" class="w-full px-3 py-1.5 rounded-xl bg-bk-card border border-slate-700 text-xs text-white" />
-                  </div>
-                  <div>
-                    <label class="block text-[11px] text-slate-400 mb-1">Hero Card Top Badge Label</label>
-                    <input id="set-hero-badge" type="text" class="w-full px-3 py-1.5 rounded-xl bg-bk-card border border-slate-700 text-xs text-white" />
-                  </div>
-                  <div>
-                    <label class="block text-[11px] text-slate-400 mb-1">Hero Bottom Funding Summary Line</label>
-                    <input id="set-hero-sub" type="text" class="w-full px-3 py-1.5 rounded-xl bg-bk-card border border-slate-700 text-xs text-white" />
-                  </div>
-                  <button onclick="saveSiteSettingsFromAdmin()" class="w-full py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs">
-                    Save Branding & Hero Text
-                  </button>
-                </div>
-
-                <div class="pt-3 border-t border-slate-800 flex items-center justify-between">
-                  <span class="text-[11px] text-slate-400">Restore factory default projects & settings</span>
-                  <button onclick="resetToDefaultData()" class="px-3 py-1.5 rounded-lg bg-red-500/15 text-red-300 text-xs font-semibold hover:bg-red-500/25">
-                    Factory Reset
-                  </button>
-                </div>
-              </div>
-
             </div>
           </div>
 
@@ -1123,9 +1295,8 @@
     <span id="toast-msg">Saved successfully!</span>
   </div>
 
-  <!-- ==================== DEFAULT EMBEDDED STATE (UPDATED ON VERCEL EXPORT) ==================== -->
+  <!-- ==================== DEFAULT EMBEDDED STATE (AUTO-UPDATED ON VERCEL EXPORT) ==================== -->
   <script id="app-data-script">
-    // Helper to create crisp circular SVG DataURL logos so every preloaded project has a 100% reliable circular brand emblem
     function makeCircularLogo(bg1, bg2, symbolText, accentColor = '#ffffff') {
       const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">
         <defs>
@@ -1141,12 +1312,20 @@
       return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
     }
 
+    /* __START_EMBEDDED_DATA__ */
     const DEFAULT_SITE_CONFIG = {
       brandName: 'Bullkarry',
       brandTagline: 'AIRDROP ALPHA',
+      brandLogoUrl: '',
       headerSubtitle: 'Welcome back to your Bullkarry Multi-Chain Airdrop & Alpha dashboard.',
-      heroBadge: 'VERIFIED AIRDROP & FUNDRAISING PIPELINE',
-      heroSubText: '≈ Total Ecosystem Funding Tracked: <span class="text-white font-semibold">$1.42B+ Raised</span> • Alphadrops & Airdrops.io Verified',
+      heroBadge: 'ALPHADROPS & AIRDROPS.IO VERIFIED HUB',
+      heroHeading: 'CRYPTO AIRDROPS',
+      heroSubText: 'Discover, track, and farm verified Web3 airdrops, Perp DEX points, and high-raise protocols before TGE.',
+      autoCalculateStats: true,
+      manualActiveCount: '15',
+      manualClaimCount: '5',
+      manualEndedCount: '1',
+      communityCount: '28.5K+',
       tgTitle: 'Bullkarry Airdrops',
       tgSubtitle: 'Daily hidden airdrops, Perp DEX setups, Fundraising alpha & instant claim links.',
       tgUrl: 'https://t.me/bullkarry',
@@ -1162,12 +1341,30 @@
       menus: [
         { id: 'all', label: 'Dashboard', icon: 'layout-grid', visible: true },
         { id: 'airdrop', label: 'Airdrops', icon: 'airdrop-box', visible: true, pill: 'NEW' },
-        { id: 'perp', label: 'Perp DEX', icon: 'candlestick-chart', visible: true, pill: 'PERP' },
+        { id: 'perp', label: 'Perp DEX', icon: 'candlestick-chart', visible: true },
         { id: 'tracker', label: 'My Tracker', icon: 'bookmark-check', visible: true },
-        { id: 'claim', label: 'Claim Portal', icon: 'gift', visible: true, pill: 'LIVE' },
+        { id: 'claim', label: 'Claim Portal', icon: 'gift', visible: true },
         { id: 'checker', label: 'Checkers', icon: 'scan-search', visible: true },
-        { id: 'raise', label: 'Raise (Funding)', icon: 'trending-up', visible: true, pill: 'VC' },
+        { id: 'raise', label: 'Raise (Funding)', icon: 'trending-up', visible: true },
         { id: 'completed', label: 'Completed', icon: 'archive', visible: true }
+      ],
+      faqs: [
+        {
+          q: 'What are Crypto Airdrops and how do they work?',
+          a: 'Crypto airdrops are token distributions where Web3 protocols reward early testnet users, liquidity providers, and active community members with free governance or utility tokens at Token Generation Event (TGE).'
+        },
+        {
+          q: 'How do I track my daily airdrop farming progress on Bullkarry?',
+          a: 'Click on any project card to open its full Project Post View, check off completed steps in the interactive task list, and click "Save to Tracker" to pin it to your personal My Tracker tab.'
+        },
+        {
+          q: 'What is Perp DEX points farming?',
+          a: 'Decentralized Perpetual Exchanges (like Hyperliquid, Lighter, Backpack, Ostium, and Variational) reward traders and vault depositors with weekly points that convert into token allocations.'
+        },
+        {
+          q: 'How can I avoid Sybil disqualification when farming?',
+          a: 'Maintain organic on-chain activity across distinct days, hold a small native gas balance on L1/L2s, avoid transferring funds directly between your own farming wallets, and complete humanity attestations.'
+        }
       ],
       ads: {
         sidebar: {
@@ -1228,9 +1425,7 @@
       }
     };
 
-    // Authentic Categorized Projects from Alphadrops.net & Airdrops.io
     const DEFAULT_PROJECTS = [
-      // ==================== 1. AIRDROPS (TESTNET / MAINNET / POINTS) ====================
       {
         id: 'monad-testnet',
         name: 'Monad',
@@ -1352,8 +1547,6 @@
           'Swap and provide liquidity on Orca Eclipse and Invariant DEX'
         ]
       },
-
-      // ==================== 2. PERP DEX (ALPHADROPS PERP SECTION) ====================
       {
         id: 'hyperliquid-s2',
         name: 'Hyperliquid Season 2',
@@ -1499,8 +1692,6 @@
           'Deposit into Gigavault for automated market-making yield + XP boost'
         ]
       },
-
-      // ==================== 3. CLAIM & 4. CHECKER PORTALS ====================
       {
         id: 'berachain-claim',
         name: 'Berachain Airdrop',
@@ -1645,19 +1836,20 @@
         ]
       }
     ];
+    /* __END_EMBEDDED_DATA__ */
   </script>
 
   <!-- ==================== MAIN APPLICATION LOGIC ==================== -->
   <script>
     const STORAGE_KEYS = {
-      CONFIG: 'bk_site_config_v3',
-      PROJECTS: 'bk_projects_v3',
-      TRACKED: 'bk_tracked_v3',
-      STEPS: 'bk_steps_v3',
-      NOTES: 'bk_notes_v3',
-      ADMIN_PASS: 'bk_admin_pass_v3',
-      ADMIN_EMAIL: 'bk_admin_email_v3',
-      ADMIN_SESSION: 'bk_admin_session_v3'
+      CONFIG: 'bk_site_config_v4',
+      PROJECTS: 'bk_projects_v4',
+      TRACKED: 'bk_tracked_v4',
+      STEPS: 'bk_steps_v4',
+      NOTES: 'bk_notes_v4',
+      ADMIN_PASS: 'bk_admin_pass_v4',
+      ADMIN_EMAIL: 'bk_admin_email_v4',
+      ADMIN_SESSION: 'bk_admin_session_v4'
     };
 
     let siteConfig = {};
@@ -1666,14 +1858,16 @@
     let completedSteps = {};
     let projectNotes = {};
 
-    let activeCategory = 'all'; // all, airdrop, perp, claim, checker, raise, tracker, completed
-    let activeTagFilter = 'ALL'; // ALL, NEW, HOT, OLD, Ongoing, Claim Live, Completed
+    let activeCategory = 'all';
+    let activeTagFilter = 'ALL';
     let activeChain = 'ALL';
     let searchQuery = '';
-    let currentModalProjectId = null;
+    let currentPostProjectId = null;
     let uploadedLogoDataUrl = '';
+    let uploadedBrandLogoDataUrl = '';
+    let isMarqueePaused = false;
+    let openFaqIndex = 0;
 
-    // Custom crisp SVG icon for Airdrop Crate/Parachute Box (distinct from Claim gift icon)
     function renderMenuOrActionIcon(iconName, sizeClass = 'w-5 h-5') {
       if (iconName === 'airdrop-box' || iconName === 'parachute') {
         return `
@@ -1690,16 +1884,17 @@
       return `<i data-lucide="${iconName || 'box'}" class="${sizeClass}"></i>`;
     }
 
-    // Initialize App
     function initApp() {
       try {
         const savedCfg = localStorage.getItem(STORAGE_KEYS.CONFIG);
-        siteConfig = savedCfg ? JSON.parse(savedCfg) : JSON.parse(JSON.stringify(DEFAULT_SITE_CONFIG));
-        // Ensure all 5 ad slots exist even if upgrading from older config
+        siteConfig = savedCfg ? Object.assign({}, JSON.parse(JSON.stringify(DEFAULT_SITE_CONFIG)), JSON.parse(savedCfg)) : JSON.parse(JSON.stringify(DEFAULT_SITE_CONFIG));
         if (!siteConfig.ads) siteConfig.ads = JSON.parse(JSON.stringify(DEFAULT_SITE_CONFIG.ads));
         ['sidebar', 'desktopLeaderboard', 'mobileBanner', 'infeed', 'modal'].forEach(k => {
           if (!siteConfig.ads[k]) siteConfig.ads[k] = JSON.parse(JSON.stringify(DEFAULT_SITE_CONFIG.ads[k]));
         });
+        if (!siteConfig.faqs || !siteConfig.faqs.length) {
+          siteConfig.faqs = JSON.parse(JSON.stringify(DEFAULT_SITE_CONFIG.faqs));
+        }
       } catch (e) {
         siteConfig = JSON.parse(JSON.stringify(DEFAULT_SITE_CONFIG));
       }
@@ -1759,18 +1954,37 @@
       applyBrandingAndTelegram();
       renderNavigationMenus();
       renderQuickActions();
+      renderSlidingMarquee();
       renderAdSlots();
       updateHeroAndStats();
       renderProjectsGrid();
+      renderFaqSection();
       updateAdminLockUI();
       lucide.createIcons();
     }
 
+    function renderBrandLogoBoxes() {
+      const logoUrl = (siteConfig.brandLogoUrl || '').trim();
+      const desktopBox = document.getElementById('brand-logo-box');
+      const mobileBox = document.getElementById('mobile-brand-logo-box');
+      const adminPreview = document.getElementById('admin-brand-logo-preview');
+
+      const contentHTML = logoUrl
+        ? `<img src="${logoUrl}" alt="Logo" class="w-full h-full object-cover" onerror="this.outerHTML='<span class=\\'font-display font-bold text-sm text-emerald-400\\'>BK</span>'" />`
+        : `<span class="font-display font-bold text-base tracking-tighter text-emerald-400">BK</span>`;
+
+      if (desktopBox) desktopBox.innerHTML = contentHTML;
+      if (mobileBox) mobileBox.innerHTML = contentHTML;
+      if (adminPreview) adminPreview.innerHTML = contentHTML;
+    }
+
     function applyBrandingAndTelegram() {
+      renderBrandLogoBoxes();
       document.getElementById('brand-name-text').textContent = siteConfig.brandName || 'Bullkarry';
       document.getElementById('brand-tagline-text').textContent = siteConfig.brandTagline || 'AIRDROP ALPHA';
       document.getElementById('header-subtitle').textContent = siteConfig.headerSubtitle || '';
-      document.getElementById('hero-badge-label').textContent = siteConfig.heroBadge || 'VERIFIED AIRDROP & FUNDRAISING PIPELINE';
+      document.getElementById('hero-badge-label').textContent = siteConfig.heroBadge || 'ALPHADROPS & AIRDROPS.IO VERIFIED HUB';
+      document.getElementById('hero-main-heading').textContent = siteConfig.heroHeading || 'CRYPTO AIRDROPS';
       document.getElementById('hero-sub-value').innerHTML = siteConfig.heroSubText || '';
 
       const tgUrl = siteConfig.tgUrl || 'https://t.me/bullkarry';
@@ -1778,11 +1992,12 @@
       document.getElementById('tg-card-subtitle').textContent = siteConfig.tgSubtitle || '';
       document.getElementById('tg-card-badge').textContent = siteConfig.tgBadge || '24/7 ALERTS';
       document.getElementById('tg-card-link').href = tgUrl;
-      document.getElementById('header-tg-btn').href = tgUrl;
       document.getElementById('mobile-tg-top-btn').href = tgUrl;
+      const commCard = document.getElementById('stat-community-card');
+      if (commCard) commCard.href = tgUrl;
     }
 
-    // Render Desktop Left Sidebar + Mobile Bottom Nav (With guaranteed Airdrop Box SVG icon)
+    // Left Sidebar Navigation (NO NUMBERS/DIGITS NEXT TO ITEMS)
     function renderNavigationMenus() {
       const desktopNav = document.getElementById('desktop-sidebar-nav');
       const mobileNav = document.getElementById('mobile-bottom-nav');
@@ -1790,12 +2005,10 @@
       const visibleMenus = (siteConfig.menus || DEFAULT_SITE_CONFIG.menus).filter(m => m.visible !== false);
 
       desktopNav.innerHTML = visibleMenus.map(m => {
-        const isActive = activeCategory === m.id;
-        const count = getCategoryCount(m.id);
-        let rightBadge = `<span class="text-[11px] px-1.5 py-0.5 rounded-md bg-slate-800/80 text-slate-400 font-semibold">${count}</span>`;
-        if (m.pill === 'NEW') {
-          rightBadge = `<span class="text-[9px] font-extrabold px-1.5 py-0.5 rounded badge-new">NEW</span>`;
-        }
+        const isActive = activeCategory === m.id && !currentPostProjectId;
+        const rightPill = m.pill === 'NEW'
+          ? `<span class="text-[9px] font-extrabold px-1.5 py-0.5 rounded badge-new">NEW</span>`
+          : '';
 
         const iconHTML = renderMenuOrActionIcon(m.icon === 'parachute' ? 'airdrop-box' : m.icon, 'w-4 h-4 shrink-0');
 
@@ -1810,12 +2023,11 @@
               ${iconHTML}
               <span class="truncate">${m.label}</span>
             </div>
-            ${rightBadge}
+            ${rightPill}
           </button>
         `;
       }).join('');
 
-      // Mobile Bottom Bar (5 main sections with custom Airdrop Box icon)
       const mobileItems = [
         { id: 'all', label: 'Home', icon: 'layout-grid' },
         { id: 'airdrop', label: 'Airdrops', icon: 'airdrop-box', dot: true },
@@ -1825,7 +2037,7 @@
       ];
 
       mobileNav.innerHTML = mobileItems.map(item => {
-        const isActive = activeCategory === item.id;
+        const isActive = activeCategory === item.id && !currentPostProjectId;
         return `
           <button
             onclick="selectCategory('${item.id}', true)"
@@ -1841,7 +2053,6 @@
       }).join('');
     }
 
-    // Render 5 Quick Action Buttons (Keeps beloved corner micro-tags NEW, PERP, LIVE, CHECK, FUNDING + Custom Airdrop Box Icon)
     function renderQuickActions() {
       const container = document.getElementById('quick-actions-container');
       const actions = siteConfig.quickActions || DEFAULT_SITE_CONFIG.quickActions;
@@ -1866,39 +2077,79 @@
       }).join('');
     }
 
-    function getCategoryCount(catId) {
-      if (catId === 'all') return projects.filter(p => p.status !== 'Completed').length;
-      if (catId === 'completed') return projects.filter(p => p.status === 'Completed').length;
-      if (catId === 'tracker') return trackedIds.length;
-      return projects.filter(p => p.status !== 'Completed' && (p.categories || []).includes(catId)).length;
-    }
+    // ==================== AUTO-SLIDING LIVE PROJECT TRACKER MARQUEE ====================
+    function renderSlidingMarquee() {
+      const track = document.getElementById('sliding-marquee-track');
+      if (!track) return;
 
-    function updateHeroAndStats() {
       const activeList = projects.filter(p => p.status !== 'Completed');
-      const newCount = activeList.filter(p => p.tag === 'NEW').length;
-      const perpCount = activeList.filter(p => (p.categories || []).includes('perp')).length;
-      const claimCount = activeList.filter(p => p.status === 'Claim Live' || (p.categories || []).includes('claim')).length;
-      const raiseCount = activeList.filter(p => (p.categories || []).includes('raise')).length;
-      const completedCount = projects.filter(p => p.status === 'Completed').length;
+      const sourceList = activeList.length > 0 ? activeList : projects;
+      // Duplicate list so CSS translateX(-50%) loops seamlessly
+      const loopList = [...sourceList, ...sourceList];
 
-      document.getElementById('hero-active-count').textContent = activeList.length;
-      document.getElementById('stat-new-count').textContent = newCount;
-      document.getElementById('stat-perp-count').textContent = perpCount;
-      document.getElementById('stat-claim-count').textContent = claimCount;
-      document.getElementById('stat-raise-count').textContent = raiseCount;
-      document.getElementById('stat-completed-count').textContent = completedCount;
-
-      const sbLive = document.getElementById('sidebar-live-count');
-      const sbStreak = document.getElementById('sidebar-streak-count');
-      if (sbLive) sbLive.textContent = `${activeList.length} Live`;
-      if (sbStreak) sbStreak.textContent = `${trackedIds.length} Tracked`;
+      track.innerHTML = loopList.map(p => {
+        const logoSrc = resolveLogoUrl(p);
+        const fallbackLogo = getFallbackCircularLogo(p.name);
+        return `
+          <div
+            onclick="openProjectPostView('${p.id}')"
+            class="w-[255px] sm:w-[275px] shrink-0 bg-bk-bg/90 hover:bg-bk-cardHover border border-slate-800 hover:border-emerald-500/40 rounded-xl p-3 cursor-pointer transition flex items-center justify-between gap-3 group shadow"
+          >
+            <div class="flex items-center gap-2.5 min-w-0">
+              <img
+                src="${logoSrc}"
+                onerror="this.onerror=null;this.src='${fallbackLogo}'"
+                alt="${p.name}"
+                class="w-10 h-10 rounded-full object-cover border border-slate-700 bg-slate-900 shrink-0"
+              />
+              <div class="min-w-0">
+                <div class="flex items-center gap-1.5">
+                  <span class="text-xs font-bold text-white group-hover:text-emerald-300 truncate transition">${p.name}</span>
+                  ${p.tag === 'NEW' ? `<span class="text-[9px] font-bold px-1.5 py-0.2 rounded badge-new">NEW</span>` : ''}
+                </div>
+                <div class="text-[10px] text-slate-400 truncate mt-0.5">${p.chain} • <span class="text-emerald-400 font-semibold">${p.raised || p.reward}</span></div>
+              </div>
+            </div>
+            <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500 group-hover:text-emerald-400 shrink-0 transition"></i>
+          </div>
+        `;
+      }).join('');
     }
 
-    // ==================== 5-PLACEMENT AD SLOTS RENDERING (DESKTOP & MOBILE OPTIMIZED) ====================
+    function toggleMarqueePause() {
+      isMarqueePaused = !isMarqueePaused;
+      const outer = document.getElementById('marquee-outer');
+      const btnText = document.getElementById('marquee-pause-text');
+      if (isMarqueePaused) {
+        outer.classList.add('marquee-paused');
+        btnText.textContent = 'Resume';
+      } else {
+        outer.classList.remove('marquee-paused');
+        btnText.textContent = 'Pause';
+      }
+    }
+
+    // ==================== 4 FRONT-PAGE LIVE COUNTERS (AUTO OR MANUAL) ====================
+    function updateHeroAndStats() {
+      const autoActive = projects.filter(p => p.status === 'Ongoing').length;
+      const autoClaim = projects.filter(p => p.status === 'Claim Live' || (p.status !== 'Completed' && (p.categories || []).includes('claim'))).length;
+      const autoEnded = projects.filter(p => p.status === 'Completed').length;
+
+      const useAuto = siteConfig.autoCalculateStats !== false;
+
+      document.getElementById('stat-active-count').textContent = useAuto ? autoActive : (siteConfig.manualActiveCount || autoActive);
+      document.getElementById('stat-claim-count').textContent = useAuto ? autoClaim : (siteConfig.manualClaimCount || autoClaim);
+      document.getElementById('stat-completed-count').textContent = useAuto ? autoEnded : (siteConfig.manualEndedCount || autoEnded);
+      document.getElementById('stat-community-count').textContent = siteConfig.communityCount || '28.5K+';
+
+      const sbStreak = document.getElementById('sidebar-streak-count');
+      if (sbStreak) sbStreak.textContent = `${trackedIds.length} Projects`;
+    }
+
+    // ==================== 5-PLACEMENT AD SLOTS RENDERING ====================
     function renderAdSlots() {
       const ads = siteConfig.ads || DEFAULT_SITE_CONFIG.ads;
 
-      // 1. Right Sidebar Ad Card
       const sidebarWrapper = document.getElementById('sidebar-ad-wrapper');
       const sideAd = ads.sidebar;
       if (!sideAd || !sideAd.enabled) {
@@ -1933,17 +2184,12 @@
         }
       }
 
-      // 2. Desktop Wide Leaderboard Ad Banner (Sleek Horizontal Bar on Laptop/Desktop)
       const deskWrapper = document.getElementById('desktop-leaderboard-ad-wrapper');
       const deskAd = ads.desktopLeaderboard;
       if (!deskAd || !deskAd.enabled) {
         deskWrapper.innerHTML = '';
       } else if (deskAd.mode === 'html' && deskAd.htmlCode && deskAd.htmlCode.trim() !== '') {
-        deskWrapper.innerHTML = `
-          <div class="bg-bk-card/90 border border-slate-800 rounded-2xl p-3 overflow-hidden">
-            ${deskAd.htmlCode}
-          </div>
-        `;
+        deskWrapper.innerHTML = `<div class="bg-bk-card/90 border border-slate-800 rounded-2xl p-3 overflow-hidden">${deskAd.htmlCode}</div>`;
       } else {
         deskWrapper.innerHTML = `
           <a href="${deskAd.targetUrl || '#'}" target="_blank" rel="noopener noreferrer" class="group bg-gradient-to-r from-[#111927] via-[#122230] to-[#0f292a] border border-slate-800 hover:border-emerald-500/40 rounded-2xl px-5 py-3.5 flex items-center justify-between gap-4 shadow-md transition">
@@ -1968,7 +2214,6 @@
         `;
       }
 
-      // 3. Mobile Compact Sponsor Strip (Visible only on Mobile < md)
       const mobWrapper = document.getElementById('mobile-banner-ad-wrapper');
       const mobAd = ads.mobileBanner;
       if (!mobAd || !mobAd.enabled) {
@@ -2102,7 +2347,6 @@
       });
     }
 
-    // Subtle, clean tag badges (Not overly flashy/rainbow)
     function getTagBadgeHTML(tag) {
       if (tag === 'NEW') {
         return `<span class="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-md badge-new">
@@ -2128,7 +2372,6 @@
       return `<span class="text-[10px] font-medium px-2 py-0.5 rounded-md bg-slate-800/80 text-slate-300 border border-slate-700/80">Ongoing</span>`;
     }
 
-    // Refined muted slate category pills (Alphadrops & Airdrops.io style)
     function getCategoryPillsHTML(categories) {
       const labelMap = {
         airdrop: 'AIRDROP',
@@ -2181,11 +2424,10 @@
 
         cardsHTML.push(`
           <div
-            onclick="openProjectModal('${p.id}')"
+            onclick="openProjectPostView('${p.id}')"
             class="group bg-bk-card hover:bg-bk-cardHover border border-slate-800/90 hover:border-slate-700 rounded-2xl p-4 flex flex-col justify-between transition-all duration-200 cursor-pointer shadow-md relative"
           >
             <div>
-              <!-- Top Row: Crisp Circular Logo + Name + Subtle NEW Green Tag -->
               <div class="flex items-start justify-between gap-2.5 mb-3">
                 <div class="flex items-center gap-3 min-w-0">
                   <img
@@ -2206,19 +2448,16 @@
                   </div>
                 </div>
 
-                <!-- Right Side Badges (NEW Green Tag + Status) -->
                 <div class="flex flex-col items-end gap-1 shrink-0">
                   ${getTagBadgeHTML(p.tag)}
                   ${getStatusBadgeHTML(p.status)}
                 </div>
               </div>
 
-              <!-- Description -->
               <p class="text-xs text-slate-300/90 line-clamp-2 mb-3.5 leading-relaxed">
                 ${p.desc}
               </p>
 
-              <!-- 3-Column Metrics Box (Funds Raised, Cost, Est. Reward) -->
               <div class="grid grid-cols-3 gap-2 bg-bk-bg/80 border border-slate-800/80 rounded-xl p-2.5 mb-3.5">
                 <div>
                   <div class="text-[10px] text-slate-400">Raise / Backers</div>
@@ -2235,7 +2474,6 @@
               </div>
             </div>
 
-            <!-- Card Footer: Track Button + Open Guide CTA -->
             <div class="pt-2.5 border-t border-slate-800/80 flex items-center justify-between gap-2">
               <button
                 onclick="event.stopPropagation(); toggleTrackProject('${p.id}')"
@@ -2251,7 +2489,7 @@
               </button>
 
               <span class="inline-flex items-center gap-1 text-xs font-bold text-emerald-400 group-hover:translate-x-0.5 transition">
-                <span>View Guide</span>
+                <span>Open Post</span>
                 <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
               </span>
             </div>
@@ -2263,8 +2501,298 @@
       lucide.createIcons();
     }
 
-    // ==================== CATEGORY & QUICK ACTION SLIDE HANDLER ====================
+    // ==================== ALPHADROPS-STYLE COMMON QUESTIONS (FAQ) RENDERER ====================
+    function renderFaqSection() {
+      const container = document.getElementById('faq-accordion-list');
+      if (!container) return;
+      const faqs = siteConfig.faqs || DEFAULT_SITE_CONFIG.faqs;
+
+      container.innerHTML = faqs.map((item, idx) => {
+        const isOpen = openFaqIndex === idx;
+        return `
+          <div class="py-3.5">
+            <button
+              onclick="toggleFaqAccordion(${idx})"
+              class="w-full flex items-center justify-between gap-4 text-left focus:outline-none group"
+            >
+              <span class="text-xs sm:text-sm font-bold text-white group-hover:text-emerald-300 transition">${item.q}</span>
+              <span class="w-7 h-7 rounded-lg bg-bk-bg border border-slate-800 flex items-center justify-center text-slate-400 shrink-0">
+                <i data-lucide="${isOpen ? 'minus' : 'plus'}" class="w-3.5 h-3.5"></i>
+              </span>
+            </button>
+            <div class="${isOpen ? 'block' : 'hidden'} mt-2.5 text-xs sm:text-sm text-slate-300/90 leading-relaxed bg-bk-bg/60 border border-slate-800/80 rounded-xl p-3.5">
+              ${item.a}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function toggleFaqAccordion(idx) {
+      openFaqIndex = (openFaqIndex === idx) ? -1 : idx;
+      renderFaqSection();
+      lucide.createIcons();
+    }
+
+    // ==================== DEDICATED PROJECT POST VIEW (OPENS IN-PAGE LIKE ALPHADROPS) ====================
+    function openProjectPostView(id) {
+      const p = projects.find(item => item.id === id);
+      if (!p) return;
+      currentPostProjectId = id;
+
+      document.getElementById('front-page-view').classList.add('hidden');
+      document.getElementById('project-post-view').classList.remove('hidden');
+
+      const logoEl = document.getElementById('post-logo-img');
+      logoEl.src = resolveLogoUrl(p);
+      logoEl.onerror = () => { logoEl.src = getFallbackCircularLogo(p.name); };
+
+      document.getElementById('post-title').textContent = p.name;
+      document.getElementById('post-about-name').textContent = p.name;
+
+      const tickerEl = document.getElementById('post-ticker');
+      if (p.ticker) {
+        tickerEl.textContent = p.ticker;
+        tickerEl.classList.remove('hidden');
+      } else {
+        tickerEl.classList.add('hidden');
+      }
+
+      const tagEl = document.getElementById('post-tag-badge');
+      if (p.tag && p.tag !== 'NONE') {
+        tagEl.classList.remove('hidden');
+        tagEl.textContent = p.tag;
+        tagEl.className = `text-[10px] font-bold px-2.5 py-0.5 rounded-md ${
+          p.tag === 'NEW' ? 'badge-new' : p.tag === 'HOT' ? 'badge-hot' : 'badge-old'
+        }`;
+      } else {
+        tagEl.classList.add('hidden');
+      }
+
+      document.getElementById('post-status-badge').textContent = p.status || 'Ongoing';
+      document.getElementById('post-categories-row').innerHTML = getCategoryPillsHTML(p.categories);
+      document.getElementById('post-short-backers').innerHTML = `Chain: <strong class="text-white">${p.chain}</strong> • Raised: <strong class="text-emerald-400">${p.raised || 'TBA'}</strong> • Backers: <strong class="text-slate-200">${p.backers || 'Tier-1 VCs'}</strong>`;
+
+      document.getElementById('post-desc').textContent = p.desc || '';
+      document.getElementById('post-chain').textContent = p.chain || 'Multi-Chain';
+      document.getElementById('post-raised').textContent = p.raised || 'TBA';
+      document.getElementById('post-backers').textContent = p.backers || 'Tier-1 VCs';
+      document.getElementById('post-cost').textContent = p.cost || 'Free';
+      document.getElementById('post-reward').textContent = p.reward || 'Points';
+
+      renderPostSteps(p);
+      renderPostAdBanner();
+
+      document.getElementById('post-user-note').value = projectNotes[id] || '';
+
+      const linksContainer = document.getElementById('post-primary-cta-wrap');
+      const btns = [];
+
+      if (p.checkerUrl) {
+        btns.push(`
+          <a href="${p.checkerUrl}" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700 text-sky-300 text-xs font-bold flex items-center gap-1.5 transition">
+            <i data-lucide="scan-search" class="w-4 h-4"></i>
+            <span>Eligibility Checker</span>
+          </a>
+        `);
+      }
+      if (p.claimUrl) {
+        btns.push(`
+          <a href="${p.claimUrl}" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700 text-amber-300 text-xs font-bold flex items-center gap-1.5 transition">
+            <i data-lucide="gift" class="w-4 h-4"></i>
+            <span>Claim Portal</span>
+          </a>
+        `);
+      }
+      if (p.twitterUrl) {
+        btns.push(`
+          <a href="${p.twitterUrl}" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700 text-slate-200 text-xs font-bold flex items-center gap-1.5 transition">
+            <i data-lucide="globe" class="w-4 h-4"></i>
+            <span>Official X</span>
+          </a>
+        `);
+      }
+      if (p.joinUrl) {
+        btns.push(`
+          <a href="${p.joinUrl}" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-extrabold flex items-center gap-1.5 shadow-lg shadow-emerald-500/20 transition">
+            <span>Start Farming / Join</span>
+            <i data-lucide="external-link" class="w-4 h-4"></i>
+          </a>
+        `);
+      }
+
+      linksContainer.innerHTML = btns.join('');
+      updatePostTrackBtn(id);
+      renderNavigationMenus();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
+    }
+
+    function closeProjectPostView() {
+      currentPostProjectId = null;
+      document.getElementById('project-post-view').classList.add('hidden');
+      document.getElementById('front-page-view').classList.remove('hidden');
+      renderNavigationMenus();
+      lucide.createIcons();
+    }
+
+    function goHomeFrontPage() {
+      currentPostProjectId = null;
+      document.getElementById('project-post-view').classList.add('hidden');
+      document.getElementById('front-page-view').classList.remove('hidden');
+      activeCategory = 'all';
+      activeTagFilter = 'ALL';
+      updateQuickTagButtonsUI();
+      renderNavigationMenus();
+      renderQuickActions();
+      renderProjectsGrid();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
+    }
+
+    function renderPostSteps(p) {
+      const listEl = document.getElementById('post-steps-list');
+      const doneArr = completedSteps[p.id] || [];
+      const steps = p.steps || [];
+
+      document.getElementById('post-steps-progress-pill').textContent = `${doneArr.length} / ${steps.length} Completed`;
+
+      listEl.innerHTML = steps.map((rawStep, index) => {
+        const isDone = doneArr.includes(index);
+        const parts = rawStep.split('|');
+        const stepText = parts[0].trim();
+        const stepLink = parts[1] ? parts[1].trim() : '';
+
+        return `
+          <div
+            onclick="toggleStepCompletion('${p.id}', ${index})"
+            class="flex items-center justify-between gap-3 p-3.5 rounded-xl border cursor-pointer transition ${
+              isDone
+                ? 'bg-emerald-950/30 border-emerald-500/40 text-emerald-200'
+                : 'bg-bk-bg/90 border-slate-800 hover:border-slate-700 text-slate-200'
+            }"
+          >
+            <div class="flex items-start gap-3 min-w-0">
+              <div class="w-5 h-5 rounded-md border flex items-center justify-center shrink-0 mt-0.5 ${
+                isDone ? 'bg-emerald-500 border-emerald-500 text-slate-950' : 'border-slate-600 bg-slate-900'
+              }">
+                ${isDone ? '<i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>' : `<span class="text-[10px] font-bold text-slate-300">${index + 1}</span>`}
+              </div>
+              <span class="text-xs sm:text-sm leading-relaxed ${isDone ? 'line-through opacity-75' : ''}">${stepText}</span>
+            </div>
+
+            ${stepLink ? `
+              <a
+                href="${stepLink}"
+                target="_blank"
+                rel="noopener noreferrer"
+                onclick="event.stopPropagation()"
+                class="shrink-0 px-3 py-1.5 rounded-lg bg-emerald-500/15 hover:bg-emerald-500 hover:text-slate-950 text-emerald-300 border border-emerald-500/30 text-xs font-bold flex items-center gap-1 transition"
+              >
+                <span>Open</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+              </a>
+            ` : ''}
+          </div>
+        `;
+      }).join('');
+      lucide.createIcons();
+    }
+
+    function renderPostAdBanner() {
+      const container = document.getElementById('post-ad-slot-container');
+      const ad = (siteConfig.ads && siteConfig.ads.modal) ? siteConfig.ads.modal : null;
+      if (!ad || !ad.enabled) {
+        container.innerHTML = '';
+        return;
+      }
+
+      if (ad.mode === 'html' && ad.htmlCode && ad.htmlCode.trim() !== '') {
+        container.innerHTML = `<div class="rounded-2xl overflow-hidden border border-slate-800 p-4 bg-bk-card">${ad.htmlCode}</div>`;
+      } else {
+        container.innerHTML = `
+          <a href="${ad.targetUrl || '#'}" target="_blank" rel="noopener noreferrer" class="block p-4 rounded-2xl bg-gradient-to-br from-slate-900 via-bk-card to-emerald-950/30 border border-slate-800 hover:border-emerald-500/40 transition space-y-2.5 shadow-lg">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400">${ad.sponsorName || 'SPONSORED TOOL'}</span>
+              <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">AD</span>
+            </div>
+            ${ad.imageUrl ? `<img src="${ad.imageUrl}" class="w-full h-24 rounded-xl object-cover border border-slate-800" />` : ''}
+            <div class="text-xs sm:text-sm font-bold text-white">${ad.title || ''}</div>
+            <div class="text-xs text-slate-400">${ad.subtitle || ''}</div>
+            <span class="inline-block px-3.5 py-1.5 rounded-xl bg-emerald-500 text-slate-950 font-extrabold text-xs">
+              ${ad.ctaText || 'Open ↗'}
+            </span>
+          </a>
+        `;
+      }
+    }
+
+    function toggleStepCompletion(projectId, stepIdx) {
+      if (!completedSteps[projectId]) completedSteps[projectId] = [];
+      const arr = completedSteps[projectId];
+      const idx = arr.indexOf(stepIdx);
+      if (idx > -1) arr.splice(idx, 1);
+      else {
+        arr.push(stepIdx);
+        if (!trackedIds.includes(projectId)) {
+          trackedIds.push(projectId);
+          localStorage.setItem(STORAGE_KEYS.TRACKED, JSON.stringify(trackedIds));
+        }
+      }
+      localStorage.setItem(STORAGE_KEYS.STEPS, JSON.stringify(completedSteps));
+      const p = projects.find(item => item.id === projectId);
+      if (p && currentPostProjectId === projectId) renderPostSteps(p);
+      updatePostTrackBtn(projectId);
+      renderEntireSite();
+    }
+
+    function toggleTrackProject(id) {
+      const idx = trackedIds.indexOf(id);
+      if (idx > -1) {
+        trackedIds.splice(idx, 1);
+        showToast('Removed from My Tracker');
+      } else {
+        trackedIds.push(id);
+        showToast('Saved to My Tracker!');
+      }
+      localStorage.setItem(STORAGE_KEYS.TRACKED, JSON.stringify(trackedIds));
+      renderEntireSite();
+      if (currentPostProjectId === id) updatePostTrackBtn(id);
+    }
+
+    function toggleTrackFromPostView() {
+      if (currentPostProjectId) toggleTrackProject(currentPostProjectId);
+    }
+
+    function updatePostTrackBtn(id) {
+      const btn = document.getElementById('post-track-btn');
+      if (!btn) return;
+      const isTracked = trackedIds.includes(id);
+      if (isTracked) {
+        btn.className = 'px-4 py-2.5 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold flex items-center gap-2 transition';
+        btn.innerHTML = `<i data-lucide="check-circle-2" class="w-4 h-4"></i><span>Tracking Project</span>`;
+      } else {
+        btn.className = 'px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 text-xs font-bold flex items-center gap-2 transition';
+        btn.innerHTML = `<i data-lucide="bookmark" class="w-4 h-4"></i><span>Save to Tracker</span>`;
+      }
+      lucide.createIcons();
+    }
+
+    function saveProjectNote() {
+      if (!currentPostProjectId) return;
+      projectNotes[currentPostProjectId] = document.getElementById('post-user-note').value.trim();
+      localStorage.setItem(STORAGE_KEYS.NOTES, JSON.stringify(projectNotes));
+      showToast('Personal farming note saved!');
+    }
+
+    // ==================== CATEGORY & FILTER HANDLERS ====================
     function selectCategory(catId, shouldScroll = true) {
+      if (currentPostProjectId) {
+        currentPostProjectId = null;
+        document.getElementById('project-post-view').classList.add('hidden');
+        document.getElementById('front-page-view').classList.remove('hidden');
+      }
+
       activeCategory = catId;
 
       if (catId === 'completed') {
@@ -2274,14 +2802,14 @@
       }
 
       const headingMap = {
-        all: ['All Active Airdrops, Perp DEX & Fundraising Alpha', 'Click any project card to open its step-by-step farming checklist, VC backing & official links.'],
+        all: ['All Active Airdrops, Perp DEX & Fundraising Alpha', 'Tap any project card to open its full Alphadrops-style step-by-step post, funding breakdown & links.'],
         airdrop: ['Ongoing Airdrop Farming Projects', 'Verified Layer-1, Layer-2, and Testnet/Mainnet airdrops with step-by-step task guides.'],
         perp: ['Perp DEX Points & Volume Farming', 'Decentralized perpetual exchanges (Hyperliquid, Lighter, Backpack, Ostium, Variational, Paradex) with active points.'],
         claim: ['Live Token Claim Portals', 'Projects with active token generation events (TGE) and open claim portals.'],
         checker: ['Live Airdrop Eligibility Checkers', 'Verify your wallet allocation on official project eligibility checkers.'],
         raise: ['Crypto Fundraising & Big VC Raises (Raise)', 'Detailed breakdown of projects with massive funding from Paradigm, a16z, Dragonfly & Binance Labs.'],
         tracker: ['My Tracked Airdrops & Daily Routine', 'Projects you have bookmarked or started farming with your personal progress checklist.'],
-        completed: ['Completed & Past Airdrops', 'Archive of completed token claims and past seasons.']
+        completed: ['Completed & Ended Airdrops', 'Archive of completed token claims and past seasons.']
       };
 
       const [title, sub] = headingMap[catId] || headingMap.all;
@@ -2296,13 +2824,12 @@
 
       if (shouldScroll) {
         const section = document.getElementById('airdrop-directory-section');
-        if (section) {
-          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+        if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
 
     function filterByTagAndScroll(tag) {
+      if (currentPostProjectId) closeProjectPostView();
       activeCategory = 'all';
       activeTagFilter = tag;
       updateQuickTagButtonsUI();
@@ -2336,11 +2863,13 @@
     }
 
     function handleChainFilter(chain) {
+      if (currentPostProjectId) closeProjectPostView();
       activeChain = chain;
       renderProjectsGrid();
     }
 
     function handleSearch(val) {
+      if (currentPostProjectId && val.trim().length > 0) closeProjectPostView();
       searchQuery = val;
       const clearBtn = document.getElementById('clear-search-btn');
       if (val.trim().length > 0) clearBtn.classList.remove('hidden');
@@ -2367,234 +2896,7 @@
       showToast('All filters reset!');
     }
 
-    // ==================== PROJECT DETAIL MODAL ====================
-    function openProjectModal(id) {
-      const p = projects.find(item => item.id === id);
-      if (!p) return;
-      currentModalProjectId = id;
-
-      const logoEl = document.getElementById('modal-logo-img');
-      logoEl.src = resolveLogoUrl(p);
-      logoEl.onerror = () => { logoEl.src = getFallbackCircularLogo(p.name); };
-
-      document.getElementById('modal-title').textContent = p.name;
-      const tickerEl = document.getElementById('modal-ticker');
-      if (p.ticker) {
-        tickerEl.textContent = p.ticker;
-        tickerEl.classList.remove('hidden');
-      } else {
-        tickerEl.classList.add('hidden');
-      }
-
-      const tagEl = document.getElementById('modal-tag-badge');
-      if (p.tag && p.tag !== 'NONE') {
-        tagEl.classList.remove('hidden');
-        tagEl.textContent = p.tag;
-        tagEl.className = `text-[10px] font-bold px-2 py-0.5 rounded-md ${
-          p.tag === 'NEW' ? 'badge-new' : p.tag === 'HOT' ? 'badge-hot' : 'badge-old'
-        }`;
-      } else {
-        tagEl.classList.add('hidden');
-      }
-
-      document.getElementById('modal-status-badge').textContent = p.status || 'Ongoing';
-      document.getElementById('modal-categories-row').innerHTML = getCategoryPillsHTML(p.categories);
-      document.getElementById('modal-desc').textContent = p.desc || '';
-      document.getElementById('modal-chain').textContent = p.chain || 'Multi-Chain';
-      document.getElementById('modal-raised').textContent = p.raised || 'TBA';
-      document.getElementById('modal-backers').textContent = p.backers || 'Tier-1 VCs';
-      document.getElementById('modal-cost-reward').textContent = `${p.cost || 'Free'} • ${p.reward || 'Points'}`;
-
-      renderModalSteps(p);
-      renderModalAdBanner();
-
-      document.getElementById('modal-user-note').value = projectNotes[id] || '';
-
-      const linksContainer = document.getElementById('modal-action-links');
-      const btns = [];
-
-      if (p.checkerUrl) {
-        btns.push(`
-          <a href="${p.checkerUrl}" target="_blank" rel="noopener noreferrer" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-sky-300 text-xs font-bold flex items-center gap-1.5 transition">
-            <i data-lucide="scan-search" class="w-3.5 h-3.5"></i>
-            <span>Eligibility Checker</span>
-          </a>
-        `);
-      }
-      if (p.claimUrl) {
-        btns.push(`
-          <a href="${p.claimUrl}" target="_blank" rel="noopener noreferrer" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-amber-300 text-xs font-bold flex items-center gap-1.5 transition">
-            <i data-lucide="gift" class="w-3.5 h-3.5"></i>
-            <span>Open Claim Portal</span>
-          </a>
-        `);
-      }
-      if (p.twitterUrl) {
-        btns.push(`
-          <a href="${p.twitterUrl}" target="_blank" rel="noopener noreferrer" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold flex items-center gap-1.5 transition">
-            <i data-lucide="globe" class="w-3.5 h-3.5"></i>
-            <span>Official X</span>
-          </a>
-        `);
-      }
-      if (p.joinUrl) {
-        btns.push(`
-          <a href="${p.joinUrl}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-extrabold flex items-center gap-1.5 shadow-lg shadow-emerald-500/20 transition">
-            <span>Start Farming / Join</span>
-            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-          </a>
-        `);
-      }
-
-      linksContainer.innerHTML = btns.join('');
-      updateModalTrackBtn(id);
-
-      const modal = document.getElementById('project-modal');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-      lucide.createIcons();
-    }
-
-    function renderModalSteps(p) {
-      const listEl = document.getElementById('modal-steps-list');
-      const doneArr = completedSteps[p.id] || [];
-      const steps = p.steps || [];
-
-      listEl.innerHTML = steps.map((rawStep, index) => {
-        const isDone = doneArr.includes(index);
-        const parts = rawStep.split('|');
-        const stepText = parts[0].trim();
-        const stepLink = parts[1] ? parts[1].trim() : '';
-
-        return `
-          <div
-            onclick="toggleStepCompletion('${p.id}', ${index})"
-            class="flex items-center justify-between gap-3 p-3 rounded-xl border cursor-pointer transition ${
-              isDone
-                ? 'bg-emerald-950/30 border-emerald-500/40 text-emerald-200'
-                : 'bg-bk-bg/90 border-slate-800 hover:border-slate-700 text-slate-200'
-            }"
-          >
-            <div class="flex items-start gap-2.5 min-w-0">
-              <div class="w-5 h-5 rounded-md border flex items-center justify-center shrink-0 mt-0.5 ${
-                isDone ? 'bg-emerald-500 border-emerald-500 text-slate-950' : 'border-slate-600 bg-slate-900'
-              }">
-                ${isDone ? '<i data-lucide="check" class="w-3 h-3 stroke-[3]"></i>' : `<span class="text-[10px] font-bold text-slate-300">${index + 1}</span>`}
-              </div>
-              <span class="text-xs leading-relaxed ${isDone ? 'line-through opacity-75' : ''}">${stepText}</span>
-            </div>
-
-            ${stepLink ? `
-              <a
-                href="${stepLink}"
-                target="_blank"
-                rel="noopener noreferrer"
-                onclick="event.stopPropagation()"
-                class="shrink-0 px-2.5 py-1 rounded-lg bg-emerald-500/15 hover:bg-emerald-500 hover:text-slate-950 text-emerald-300 border border-emerald-500/30 text-[11px] font-bold flex items-center gap-1 transition"
-              >
-                <span>Open</span>
-                <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
-              </a>
-            ` : ''}
-          </div>
-        `;
-      }).join('');
-      lucide.createIcons();
-    }
-
-    function renderModalAdBanner() {
-      const container = document.getElementById('modal-ad-slot-container');
-      const ad = (siteConfig.ads && siteConfig.ads.modal) ? siteConfig.ads.modal : null;
-      if (!ad || !ad.enabled) {
-        container.innerHTML = '';
-        return;
-      }
-
-      if (ad.mode === 'html' && ad.htmlCode && ad.htmlCode.trim() !== '') {
-        container.innerHTML = `<div class="rounded-xl overflow-hidden border border-slate-800 p-2.5 bg-bk-bg">${ad.htmlCode}</div>`;
-      } else {
-        container.innerHTML = `
-          <a href="${ad.targetUrl || '#'}" target="_blank" rel="noopener noreferrer" class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-xl bg-gradient-to-r from-slate-900 via-bk-bg to-emerald-950/30 border border-slate-800 hover:border-emerald-500/40 transition">
-            <div class="flex items-center gap-3">
-              ${ad.imageUrl ? `<img src="${ad.imageUrl}" class="w-9 h-9 rounded-lg object-cover shrink-0" />` : `<div class="w-8 h-8 rounded-lg bg-slate-800 text-emerald-400 flex items-center justify-center shrink-0 font-bold text-[10px]">AD</div>`}
-              <div>
-                <div class="text-xs font-bold text-white">${ad.title || ''}</div>
-                <div class="text-[11px] text-slate-400">${ad.subtitle || ''}</div>
-              </div>
-            </div>
-            <span class="px-3 py-1 rounded-lg bg-emerald-500 text-slate-950 font-extrabold text-[11px] shrink-0 self-start sm:self-center">
-              ${ad.ctaText || 'Open ↗'}
-            </span>
-          </a>
-        `;
-      }
-    }
-
-    function toggleStepCompletion(projectId, stepIdx) {
-      if (!completedSteps[projectId]) completedSteps[projectId] = [];
-      const arr = completedSteps[projectId];
-      const idx = arr.indexOf(stepIdx);
-      if (idx > -1) arr.splice(idx, 1);
-      else {
-        arr.push(stepIdx);
-        if (!trackedIds.includes(projectId)) {
-          trackedIds.push(projectId);
-          localStorage.setItem(STORAGE_KEYS.TRACKED, JSON.stringify(trackedIds));
-        }
-      }
-      localStorage.setItem(STORAGE_KEYS.STEPS, JSON.stringify(completedSteps));
-      const p = projects.find(item => item.id === projectId);
-      if (p) renderModalSteps(p);
-      updateModalTrackBtn(projectId);
-      renderEntireSite();
-    }
-
-    function toggleTrackProject(id) {
-      const idx = trackedIds.indexOf(id);
-      if (idx > -1) {
-        trackedIds.splice(idx, 1);
-        showToast('Removed from My Tracker');
-      } else {
-        trackedIds.push(id);
-        showToast('Saved to My Tracker!');
-      }
-      localStorage.setItem(STORAGE_KEYS.TRACKED, JSON.stringify(trackedIds));
-      renderEntireSite();
-      if (currentModalProjectId === id) updateModalTrackBtn(id);
-    }
-
-    function toggleTrackFromModal() {
-      if (currentModalProjectId) toggleTrackProject(currentModalProjectId);
-    }
-
-    function updateModalTrackBtn(id) {
-      const btn = document.getElementById('modal-track-btn');
-      const isTracked = trackedIds.includes(id);
-      if (isTracked) {
-        btn.className = 'px-3 py-2 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold flex items-center gap-1.5 transition';
-        btn.innerHTML = `<i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i><span>Tracking Project</span>`;
-      } else {
-        btn.className = 'px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs font-bold flex items-center gap-1.5 transition';
-        btn.innerHTML = `<i data-lucide="bookmark" class="w-3.5 h-3.5"></i><span>Save to Tracker</span>`;
-      }
-      lucide.createIcons();
-    }
-
-    function saveProjectNote() {
-      if (!currentModalProjectId) return;
-      projectNotes[currentModalProjectId] = document.getElementById('modal-user-note').value.trim();
-      localStorage.setItem(STORAGE_KEYS.NOTES, JSON.stringify(projectNotes));
-      showToast('Personal farming note saved!');
-    }
-
-    function closeProjectModal() {
-      const modal = document.getElementById('project-modal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-      currentModalProjectId = null;
-    }
-
-    // ==================== OWNER ADMIN PANEL, PASSWORD & EMAIL RECOVERY ====================
+    // ==================== OWNER ADMIN PANEL, PASSWORD, BK LOGO & ALL-DEVICE EXPORT ====================
     function isAdminUnlocked() {
       return sessionStorage.getItem(STORAGE_KEYS.ADMIN_SESSION) === 'true';
     }
@@ -2750,10 +3052,12 @@
     }
 
     function switchAdminTab(tabKey) {
-      ['projects', 'ads', 'menus', 'settings'].forEach(k => {
+      ['projects', 'settings', 'faqs', 'ads', 'menus'].forEach(k => {
         const el = document.getElementById(`admin-tab-${k}`);
-        if (k === tabKey) el.classList.remove('hidden');
-        else el.classList.add('hidden');
+        if (el) {
+          if (k === tabKey) el.classList.remove('hidden');
+          else el.classList.add('hidden');
+        }
       });
 
       document.querySelectorAll('.admin-tab-btn').forEach(btn => {
@@ -2770,11 +3074,11 @@
       renderAdminProjectsTable();
       renderAdminAdsEditor();
       renderAdminMenusEditor();
+      renderAdminFaqsEditor();
       populateAdminSettingsForm();
       lucide.createIcons();
     }
 
-    // Auto-crop & compress uploaded image into a 160x160 circular-ready PNG DataURL
     function handleProjectLogoUpload(event) {
       const file = event.target.files[0];
       if (!file) return;
@@ -2799,11 +3103,52 @@
           uploadedLogoDataUrl = canvas.toDataURL('image/png', 0.9);
           document.getElementById('form-logo-preview').src = uploadedLogoDataUrl;
           document.getElementById('form-logo-url').value = '';
-          showToast('Logo uploaded & auto-fitted to circle!');
+          showToast('Project logo uploaded & fitted to 1:1 circle!');
         };
         img.src = e.target.result;
       };
       reader.readAsDataURL(file);
+    }
+
+    // Upload Custom Brand Logo (Replaces "BK" Icon)
+    function handleBrandLogoUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          const size = 160;
+          canvas.width = size;
+          canvas.height = size;
+          const ctx = canvas.getContext('2d');
+          const minDim = Math.min(img.width, img.height);
+          const sx = (img.width - minDim) / 2;
+          const sy = (img.height - minDim) / 2;
+          ctx.clearRect(0, 0, size, size);
+          ctx.drawImage(img, sx, sy, minDim, minDim, 0, 0, size, size);
+
+          uploadedBrandLogoDataUrl = canvas.toDataURL('image/png', 0.9);
+          siteConfig.brandLogoUrl = uploadedBrandLogoDataUrl;
+          document.getElementById('set-brand-logo-url').value = '';
+          saveState();
+          renderBrandLogoBoxes();
+          showToast('Main Bullkarry Brand Logo updated!');
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function clearBrandLogo() {
+      uploadedBrandLogoDataUrl = '';
+      siteConfig.brandLogoUrl = '';
+      document.getElementById('set-brand-logo-url').value = '';
+      saveState();
+      renderBrandLogoBoxes();
+      showToast('Restored default BK icon');
     }
 
     function handleProjectLogoUrlInput(val) {
@@ -2883,10 +3228,10 @@
       if (editId) {
         const idx = projects.findIndex(p => p.id === editId);
         if (idx > -1) projects[idx] = projObj;
-        showToast(`Updated "${name}"!`);
+        showToast(`Updated "${name}"! Click "Publish / Download index.html" to update on all devices.`);
       } else {
         projects.unshift(projObj);
-        showToast(`Published new project "${name}"!`);
+        showToast(`Published "${name}"! Click "Publish / Download index.html" to update on all devices.`);
       }
 
       saveState();
@@ -2963,7 +3308,7 @@
       saveState();
       renderAdminProjectsTable();
       renderEntireSite();
-      showToast(`${p.name} status moved to ${p.status}`);
+      showToast(`${p.name} moved to ${p.status} (Counters updated!)`);
     }
 
     function deleteProjectInAdmin(id) {
@@ -3026,7 +3371,63 @@
       }).join('');
     }
 
-    // ==================== ADMIN TAB 2: 5-SLOT DESKTOP & MOBILE ADS EDITOR ====================
+    // ==================== ADMIN TAB 3: FAQ MANAGER ====================
+    function renderAdminFaqsEditor() {
+      const container = document.getElementById('admin-faqs-list');
+      if (!container) return;
+      const faqs = siteConfig.faqs || DEFAULT_SITE_CONFIG.faqs;
+
+      container.innerHTML = faqs.map((f, idx) => `
+        <div class="bg-bk-bg/90 border border-slate-800 rounded-xl p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="space-y-1 flex-1">
+            <input id="faq-edit-q-${idx}" type="text" value="${f.q}" class="w-full px-2.5 py-1.5 rounded-lg bg-bk-card border border-slate-700 text-xs font-bold text-white" />
+            <textarea id="faq-edit-a-${idx}" rows="2" class="w-full px-2.5 py-1.5 rounded-lg bg-bk-card border border-slate-700 text-xs text-slate-300">${f.a}</textarea>
+          </div>
+          <div class="flex sm:flex-col gap-1.5 shrink-0">
+            <button onclick="saveFaqItem(${idx})" class="px-3 py-1.5 rounded-lg bg-emerald-500 text-slate-950 font-bold text-xs">Save</button>
+            <button onclick="deleteFaqItem(${idx})" class="px-3 py-1.5 rounded-lg bg-red-500/15 text-red-300 font-semibold text-xs">Delete</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function addNewFaqItem() {
+      const q = document.getElementById('faq-new-q').value.trim();
+      const a = document.getElementById('faq-new-a').value.trim();
+      if (!q || !a) {
+        showToast('Please enter both Question and Answer');
+        return;
+      }
+      if (!siteConfig.faqs) siteConfig.faqs = [];
+      siteConfig.faqs.push({ q, a });
+      document.getElementById('faq-new-q').value = '';
+      document.getElementById('faq-new-a').value = '';
+      saveState();
+      renderAdminFaqsEditor();
+      renderFaqSection();
+      showToast('Added new FAQ question!');
+    }
+
+    function saveFaqItem(idx) {
+      const q = document.getElementById(`faq-edit-q-${idx}`).value.trim();
+      const a = document.getElementById(`faq-edit-a-${idx}`).value.trim();
+      if (q && a) {
+        siteConfig.faqs[idx] = { q, a };
+        saveState();
+        renderFaqSection();
+        showToast('Updated FAQ item!');
+      }
+    }
+
+    function deleteFaqItem(idx) {
+      siteConfig.faqs.splice(idx, 1);
+      saveState();
+      renderAdminFaqsEditor();
+      renderFaqSection();
+      showToast('Deleted FAQ item');
+    }
+
+    // ==================== ADMIN TAB 4: 5-SLOT DESKTOP & MOBILE ADS EDITOR ====================
     function renderAdminAdsEditor() {
       const container = document.getElementById('admin-ads-list');
       if (!container) return;
@@ -3036,7 +3437,7 @@
         { key: 'desktopLeaderboard', name: '2. Desktop Wide Leaderboard Strip', desc: 'Horizontal wide sponsor bar on Laptop/Desktop above the Airdrop directory.' },
         { key: 'mobileBanner', name: '3. Mobile Compact Sponsor Strip', desc: 'Dedicated mobile-only sponsor banner between Quick Actions and the Airdrop feed.' },
         { key: 'infeed', name: '4. Native In-Feed Grid Card', desc: 'Blends naturally inside the Airdrop cards grid (Position #3).' },
-        { key: 'modal', name: '5. Project Guide Popup Banner', desc: 'Displayed inside the step-by-step popup modal when users open a project.' }
+        { key: 'modal', name: '5. Project Post Sidebar Banner', desc: 'Displayed inside the dedicated Project Post page.' }
       ];
 
       container.innerHTML = slots.map(slot => {
@@ -3160,7 +3561,7 @@
       showToast(`Saved ${slotKey} Ad Slot!`);
     }
 
-    // ==================== ADMIN TAB 3: MENUS & QUICK ACTIONS EDITOR ====================
+    // ==================== ADMIN TAB 5: MENUS & QUICK ACTIONS EDITOR ====================
     function renderAdminMenusEditor() {
       const qaContainer = document.getElementById('admin-quick-actions-editor');
       const menuContainer = document.getElementById('admin-sidebar-menus-editor');
@@ -3207,27 +3608,41 @@
       showToast('Updated Menus & Quick Action buttons!');
     }
 
-    // ==================== ADMIN TAB 4: SECURITY, EMAIL, BRANDING & TELEGRAM ====================
+    // ==================== ADMIN TAB 2: BRAND LOGO, COUNTERS & SETTINGS ====================
     function populateAdminSettingsForm() {
       document.getElementById('set-admin-email').value = getAdminRecoveryEmail();
       document.getElementById('set-brand-name').value = siteConfig.brandName || 'Bullkarry';
       document.getElementById('set-brand-tagline').value = siteConfig.brandTagline || 'AIRDROP ALPHA';
-      document.getElementById('set-header-subtitle').value = siteConfig.headerSubtitle || '';
-      document.getElementById('set-hero-badge').value = siteConfig.heroBadge || '';
+      document.getElementById('set-brand-logo-url').value = (siteConfig.brandLogoUrl && !siteConfig.brandLogoUrl.startsWith('data:image')) ? siteConfig.brandLogoUrl : '';
+      document.getElementById('set-hero-heading').value = siteConfig.heroHeading || 'CRYPTO AIRDROPS';
       document.getElementById('set-hero-sub').value = siteConfig.heroSubText || '';
+      document.getElementById('set-community-count').value = siteConfig.communityCount || '28.5K+';
+      document.getElementById('set-auto-counts').checked = siteConfig.autoCalculateStats !== false;
+      document.getElementById('set-manual-active').value = siteConfig.manualActiveCount || '15';
+      document.getElementById('set-manual-claim').value = siteConfig.manualClaimCount || '5';
+      document.getElementById('set-manual-ended').value = siteConfig.manualEndedCount || '1';
 
       document.getElementById('set-tg-title').value = siteConfig.tgTitle || 'Bullkarry Airdrops';
       document.getElementById('set-tg-subtitle').value = siteConfig.tgSubtitle || '';
       document.getElementById('set-tg-url').value = siteConfig.tgUrl || 'https://t.me/bullkarry';
       document.getElementById('set-tg-badge').value = siteConfig.tgBadge || '24/7 ALERTS';
+      renderBrandLogoBoxes();
     }
 
     function saveSiteSettingsFromAdmin() {
       siteConfig.brandName = document.getElementById('set-brand-name').value.trim() || 'Bullkarry';
       siteConfig.brandTagline = document.getElementById('set-brand-tagline').value.trim() || 'AIRDROP ALPHA';
-      siteConfig.headerSubtitle = document.getElementById('set-header-subtitle').value.trim();
-      siteConfig.heroBadge = document.getElementById('set-hero-badge').value.trim();
+      const typedLogoUrl = document.getElementById('set-brand-logo-url').value.trim();
+      if (typedLogoUrl) {
+        siteConfig.brandLogoUrl = typedLogoUrl;
+      }
+      siteConfig.heroHeading = document.getElementById('set-hero-heading').value.trim() || 'CRYPTO AIRDROPS';
       siteConfig.heroSubText = document.getElementById('set-hero-sub').value.trim();
+      siteConfig.communityCount = document.getElementById('set-community-count').value.trim() || '28.5K+';
+      siteConfig.autoCalculateStats = document.getElementById('set-auto-counts').checked;
+      siteConfig.manualActiveCount = document.getElementById('set-manual-active').value.trim();
+      siteConfig.manualClaimCount = document.getElementById('set-manual-claim').value.trim();
+      siteConfig.manualEndedCount = document.getElementById('set-manual-ended').value.trim();
 
       siteConfig.tgTitle = document.getElementById('set-tg-title').value.trim() || 'Bullkarry Airdrops';
       siteConfig.tgSubtitle = document.getElementById('set-tg-subtitle').value.trim();
@@ -3236,7 +3651,7 @@
 
       saveState();
       renderEntireSite();
-      showToast('Saved Branding & Telegram settings!');
+      showToast('Saved Logo, Counters & Branding settings!');
     }
 
     function updateAdminPassword() {
@@ -3250,15 +3665,15 @@
       showToast('Owner Admin Password Updated!');
     }
 
-    // Export complete HTML with all projects, circular logos, ads, email & settings baked in for Vercel
+    // RELIABLE ALL-DEVICE HTML EXPORT: Serializes all uploaded Base64 logos, custom BK logo, projects, counters & FAQs directly into index.html
     function exportUpdatedHTML() {
       const currentHTML = document.documentElement.outerHTML;
-      const newConfigStr = `const DEFAULT_SITE_CONFIG = ${JSON.stringify(siteConfig, null, 2)};`;
-      const newProjectsStr = `const DEFAULT_PROJECTS = ${JSON.stringify(projects, null, 2)};`;
+      const replacementBlock = `/* __START_EMBEDDED_DATA__ */\n    const DEFAULT_SITE_CONFIG = ${JSON.stringify(siteConfig, null, 2)};\n\n    const DEFAULT_PROJECTS = ${JSON.stringify(projects, null, 2)};\n    /* __END_EMBEDDED_DATA__ */`;
 
-      let updatedHTML = currentHTML
-        .replace(/const DEFAULT_SITE_CONFIG = \{[\s\S]*?\};\n\n\s*\/\/ Authentic Categorized Projects[\s\S]*?const DEFAULT_PROJECTS/, `${newConfigStr}\n\n    // Authentic Categorized Projects from Alphadrops.net & Airdrops.io\n    const DEFAULT_PROJECTS`)
-        .replace(/const DEFAULT_PROJECTS = \[[\s\S]*?\];/, newProjectsStr);
+      const updatedHTML = currentHTML.replace(
+        /\/\* __START_EMBEDDED_DATA__ \*\/[\s\S]*?\/\* __END_EMBEDDED_DATA__ \*\//,
+        replacementBlock
+      );
 
       const blob = new Blob(['<!DOCTYPE html>\n' + updatedHTML], { type: 'text/html' });
       const url = URL.createObjectURL(blob);
@@ -3269,7 +3684,7 @@
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-      showToast('Downloaded updated index.html ready for Vercel!');
+      showToast('Downloaded index.html with all uploaded logos baked in for all devices!');
     }
 
     function resetToDefaultData() {
@@ -3291,7 +3706,7 @@
       window.__toastTimer = setTimeout(() => {
         toast.classList.add('hidden');
         toast.classList.remove('flex');
-      }, 3200);
+      }, 3400);
     }
 
     window.addEventListener('DOMContentLoaded', initApp);
