@@ -3,380 +3,402 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bullkarry | Crypto Airdrops & Alpha Hub</title>
+    <title>Crypto Airdrops & Tracker</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
-                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                        }
+                    }
                 }
             }
         }
     </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-thumb { background: rgba(100, 116, 139, 0.3); border-radius: 4px; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
     </style>
 </head>
-<body class="bg-[#f8fafc] text-slate-900 dark:bg-[#0b0f17] dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200">
+<body class="bg-gray-50 text-gray-900 dark:bg-zinc-950 dark:text-gray-100 min-h-screen flex flex-col transition-colors duration-200">
 
-    <!-- Top Header Bar -->
-    <header class="sticky top-0 z-40 bg-white/90 dark:bg-[#0b0f17]/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 lg:px-8 py-3 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-            <button onclick="toggleSidebar()" class="lg:hidden p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-            </button>
-            <div class="flex items-center gap-2.5">
-                <div id="headerLogoContainer" class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center text-white font-black text-lg shadow-md shadow-emerald-500/20">
-                    BK
-                </div>
-                <span class="font-extrabold text-xl tracking-tight bg-gradient-to-r from-emerald-500 to-teal-400 bg-clip-text text-transparent">Bullkarry</span>
+    <!-- Top Navigation Bar -->
+    <header class="h-16 border-b border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-6 flex items-center justify-between sticky top-0 z-40">
+        <div class="flex items-center space-x-3">
+            <div class="bg-black dark:bg-white text-white dark:text-black w-9 h-9 rounded-xl flex items-center justify-center font-bold text-lg shadow-sm">
+                <i class="fa-solid fa-bolt"></i>
             </div>
+            <span class="font-bold text-xl tracking-tight">Alpha Drops</span>
         </div>
-
-        <!-- Search Bar -->
-        <div class="flex-1 max-w-xl mx-4 hidden md:block">
-            <div class="relative">
-                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                </span>
-                <input type="text" id="globalSearchInput" oninput="handleSearch(this.value)" placeholder="Search airdrops, protocols, chains..." class="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:outline-none focus:border-emerald-500 transition-colors">
-            </div>
-        </div>
-
-        <!-- Actions -->
-        <div class="flex items-center gap-3">
-            <button onclick="toggleDarkMode()" class="p-2.5 rounded-xl bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" title="Toggle Light/Dark Theme">
-                <svg id="themeIconSun" class="w-5 h-5 hidden dark:block text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                <svg id="themeIconMoon" class="w-5 h-5 block dark:hidden text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+        
+        <div class="flex items-center space-x-4">
+            <!-- Theme Toggle -->
+            <button onclick="toggleDarkMode()" class="w-10 h-10 rounded-lg border border-gray-200 dark:border-zinc-800 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-zinc-800 transition">
+                <i id="themeIcon" class="fa-solid fa-moon text-gray-600 dark:text-yellow-400"></i>
             </button>
-            <button onclick="openAdminModal()" class="flex items-center gap-2 px-3.5 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-sm rounded-xl shadow-md shadow-emerald-500/20 transition-all">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path></svg>
-                <span class="hidden sm:inline">Admin CMS</span>
+            <!-- Admin Toggle Button -->
+            <button onclick="toggleAdminModal()" class="bg-brand-500 hover:bg-brand-600 text-white font-medium px-4 py-2 rounded-xl text-sm transition flex items-center space-x-2 shadow-sm">
+                <i class="fa-solid fa-gear"></i>
+                <span>Admin Panel</span>
             </button>
         </div>
     </header>
 
-    <div class="flex-1 flex">
+    <div class="flex flex-1 overflow-hidden">
         <!-- Sidebar Navigation -->
-        <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-[#131c2e] border-r border-slate-200 dark:border-slate-800 transform -translate-x-full lg:translate-x-0 lg:static transition-transform duration-200 flex flex-col pt-16 lg:pt-0">
-            <div class="p-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between lg:hidden">
-                <span class="font-bold text-lg">Menu</span>
-                <button onclick="toggleSidebar()" class="p-1 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-            </div>
-            
-            <div class="flex-1 overflow-y-auto p-4 space-y-1.5">
-                <a href="#home" onclick="filterCategory('all'); toggleSidebar();" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 transition-colors">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                    Airdrops
-                </a>
-                <a href="#perps" onclick="filterCategory('Perp DEX'); toggleSidebar();" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                    Perps
-                </a>
-                <a href="#tracker" onclick="filterCategory('Tracker'); toggleSidebar();" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
-                    Tracker
-                </a>
-                <a href="#claims" onclick="filterCategory('Claim'); toggleSidebar();" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    Claims
-                </a>
-                <a href="#checkers" onclick="filterCategory('Checker'); toggleSidebar();" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                    Checkers
-                </a>
-                <a href="#raises" onclick="filterCategory('Raise'); toggleSidebar();" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                    Raises
-                </a>
-            </div>
-
-            <!-- Telegram Community Box -->
-            <div class="p-4 m-3 rounded-2xl bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-500/20">
-                <div class="flex items-center gap-3 mb-2">
-                    <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm">TG</div>
-                    <div>
-                        <h4 class="font-bold text-xs">Bullkarry Airdrops</h4>
-                        <p class="text-[11px] text-slate-500 dark:text-slate-400">Join Community</p>
-                    </div>
-                </div>
-                <a href="https://t.me/ajeetjhurawat1" target="_blank" class="block w-full py-2 text-center bg-blue-500 hover:bg-blue-600 text-white font-bold text-xs rounded-xl shadow-md shadow-blue-500/20 transition-all">Join Telegram</a>
-            </div>
+        <aside class="w-64 border-r border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hidden md:flex flex-col p-4 space-y-2">
+            <a href="#" onclick="switchTab('airdrops')" id="nav-airdrops" class="flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm transition bg-brand-50 text-brand-700 dark:bg-zinc-800 dark:text-white">
+                <i class="fa-solid fa-parachute-box w-5"></i>
+                <span>Airdrops</span>
+            </a>
+            <a href="#" onclick="switchTab('perps')" id="nav-perps" class="flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-zinc-800 transition">
+                <i class="fa-solid fa-chart-line w-5"></i>
+                <span>Perps</span>
+            </a>
+            <a href="#" onclick="switchTab('tracker')" id="nav-tracker" class="flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-zinc-800 transition">
+                <i class="fa-solid fa-shield-halved w-5"></i>
+                <span>Tracker</span>
+            </a>
+            <a href="#" onclick="switchTab('claims')" id="nav-claims" class="flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-zinc-800 transition">
+                <i class="fa-solid fa-gift w-5"></i>
+                <span>Claims</span>
+            </a>
+            <a href="#" onclick="switchTab('checkers')" id="nav-checkers" class="flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-zinc-800 transition">
+                <i class="fa-solid fa-magnifying-glass w-5"></i>
+                <span>Checkers</span>
+            </a>
+            <a href="#" onclick="switchTab('raises')" id="nav-raises" class="flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-zinc-800 transition">
+                <i class="fa-solid fa-coins w-5"></i>
+                <span>Raises</span>
+            </a>
         </aside>
 
-        <!-- Main Content -->
-        <main class="flex-1 p-4 lg:p-8 max-w-7xl mx-auto w-full">
+        <!-- Main Content Viewport -->
+        <main class="flex-1 overflow-y-auto p-6 md:p-10" id="main-viewport">
             
-            <!-- Hero Title (Alphadrops Style) -->
-            <div class="mb-8">
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-                    <div>
-                        <h1 class="text-3xl lg:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-emerald-500 to-teal-400 bg-clip-text text-transparent">Crypto Airdrops</h1>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Find credible projects and track what matters.</p>
+            <!-- LIST VIEW -->
+            <div id="view-list">
+                <!-- Title & Subtitle -->
+                <div class="mb-8">
+                    <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-2">Crypto Airdrops</h1>
+                    <p class="text-gray-500 dark:text-gray-400 text-base">Find credible projects and track what matters.</p>
+                </div>
+
+                <!-- Custom Ad Banner Section -->
+                <div id="ad-banner-container" class="mb-8">
+                    <!-- Dynamic Ad Inserted Here -->
+                </div>
+
+                <!-- Filter & Search Bar -->
+                <div class="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 p-4 rounded-2xl mb-8 flex flex-wrap gap-4 items-center justify-between shadow-sm">
+                    <div class="flex items-center space-x-3 flex-1 min-w-[240px] bg-gray-50 dark:bg-zinc-800 px-4 py-2 rounded-xl border border-gray-200 dark:border-zinc-700">
+                        <i class="fa-solid fa-search text-gray-400"></i>
+                        <input type="text" id="searchInput" oninput="filterAirdrops()" placeholder="Search airdrops..." class="bg-transparent border-none outline-none w-full text-sm">
                     </div>
-                    <!-- Quick Stats -->
-                    <div class="grid grid-cols-3 gap-3">
-                        <div class="bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-center shadow-sm">
-                            <span id="statActive" class="block text-xl font-extrabold text-emerald-500">12</span>
-                            <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Active</span>
-                        </div>
-                        <div class="bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-center shadow-sm">
-                            <span id="statClaimable" class="block text-xl font-extrabold text-purple-500">5</span>
-                            <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Claimable</span>
-                        </div>
-                        <div class="bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-center shadow-sm">
-                            <span id="statCommunity" class="block text-xl font-extrabold text-blue-500">45K</span>
-                            <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Community</span>
-                        </div>
+                    <div class="flex flex-wrap gap-3">
+                        <select id="filterCategory" onchange="filterAirdrops()" class="bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 px-4 py-2 rounded-xl text-sm font-medium outline-none">
+                            <option value="All">All Categories</option>
+                            <option value="DeFi">DeFi</option>
+                            <option value="DEX">DEX</option>
+                            <option value="AI">AI</option>
+                            <option value="L1">L1 / Blockchain</option>
+                        </select>
+                        <select id="filterStatus" onchange="filterAirdrops()" class="bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 px-4 py-2 rounded-xl text-sm font-medium outline-none">
+                            <option value="All">All Status</option>
+                            <option value="Active">Active</option>
+                            <option value="Upcoming">Upcoming</option>
+                            <option value="Claimable">Claimable</option>
+                        </select>
                     </div>
+                </div>
+
+                <!-- Airdrops Grid -->
+                <div id="airdropsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Cards populated by JS -->
                 </div>
             </div>
 
-            <!-- Project Cards Grid -->
-            <div class="flex items-center justify-between mb-4">
-                <h2 id="currentCategoryTitle" class="text-xl font-bold">Featured Airdrop Projects</h2>
-                <span id="projectCountBadge" class="text-xs font-semibold px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Showing all</span>
+            <!-- DETAIL VIEW -->
+            <div id="view-detail" class="hidden max-w-4xl mx-auto">
+                <button onclick="backToList()" class="mb-6 flex items-center space-x-2 text-sm font-medium text-gray-500 hover:text-gray-900 dark:hover:text-white transition">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Back to Airdrops</span>
+                </button>
+                <div id="detailContent" class="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-3xl p-6 md:p-10 shadow-sm">
+                    <!-- Populated dynamically -->
+                </div>
             </div>
 
-            <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
-                <!-- Populated by JS -->
-            </div>
         </main>
     </div>
 
-    <!-- Project Guide Modal -->
-    <div id="projectModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-white dark:bg-[#0b0f17] border border-slate-200 dark:border-slate-800 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 sm:p-8 relative">
-            <button onclick="closeModal()" class="absolute top-6 right-6 p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-white">✕</button>
-            <div id="modalBody"></div>
-        </div>
-    </div>
+    <!-- Admin Modal -->
+    <div id="adminModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 w-full max-w-2xl rounded-3xl p-6 md:p-8 max-h-[90vh] overflow-y-auto shadow-2xl">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-xl font-bold">Platform Admin Panel</h3>
+                <button onclick="toggleAdminModal()" class="w-8 h-8 rounded-full bg-gray-100 dark:bg-zinc-800 flex items-center justify-center hover:bg-gray-200 transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
 
-    <!-- Master Admin Modal -->
-    <div id="adminModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-white dark:bg-[#0b0f17] border border-slate-200 dark:border-slate-800 rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 sm:p-8 relative">
-            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-200 dark:border-slate-800">
-                <h3 class="text-xl font-bold">Master Owner Admin Panel</h3>
-                <button onclick="closeAdminModal()" class="text-slate-400 hover:text-white">✕</button>
-            </div>
-            <div id="adminLogin" class="max-w-sm mx-auto text-center py-6">
-                <p class="text-xs text-slate-400 mb-4">Default password: <code class="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded text-emerald-500">admin123</code></p>
-                <input type="password" id="adminPass" placeholder="Enter password..." class="w-full px-4 py-2.5 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl mb-3 text-sm">
-                <button onclick="loginAdmin()" class="w-full py-2.5 bg-emerald-500 text-white font-bold rounded-xl text-sm shadow-md">Login</button>
-            </div>
-            <div id="adminDashboard" class="hidden space-y-4">
-                <div class="flex justify-between items-center">
-                    <h4 class="font-bold">Manage Projects</h4>
-                    <button onclick="openAddModal()" class="px-3 py-1.5 bg-emerald-500 text-white text-xs font-bold rounded-xl">+ Add Project</button>
+            <div class="space-y-8">
+                <!-- Manage Ad Banner -->
+                <div class="p-5 rounded-2xl bg-gray-50 dark:bg-zinc-800/50 border border-gray-200 dark:border-zinc-800">
+                    <h4 class="font-semibold mb-4 flex items-center space-x-2 text-brand-600">
+                        <i class="fa-solid fa-rectangle-ad"></i>
+                        <span>Configure Promotional Ad Banner</span>
+                    </h4>
+                    <div class="space-y-4 text-sm">
+                        <div>
+                            <label class="block font-medium mb-1">Ad Title</label>
+                            <input type="text" id="adminAdTitle" class="w-full bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 px-4 py-2 rounded-xl">
+                        </div>
+                        <div>
+                            <label class="block font-medium mb-1">Ad Description</label>
+                            <input type="text" id="adminAdDesc" class="w-full bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 px-4 py-2 rounded-xl">
+                        </div>
+                        <div>
+                            <label class="block font-medium mb-1">Target Link URL</label>
+                            <input type="text" id="adminAdLink" class="w-full bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 px-4 py-2 rounded-xl">
+                        </div>
+                        <button onclick="saveAdBanner()" class="bg-brand-500 hover:bg-brand-600 text-white font-medium px-4 py-2 rounded-xl transition">Update Ad Banner</button>
+                    </div>
                 </div>
-                <div id="adminProjectsList" class="space-y-2 max-h-[50vh] overflow-y-auto pr-1"></div>
+
+                <!-- Add / Manage Airdrops -->
+                <div>
+                    <h4 class="font-semibold mb-4 flex items-center space-x-2 text-brand-600">
+                        <i class="fa-solid fa-plus-circle"></i>
+                        <span>Add New Airdrop Project</span>
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm mb-4">
+                        <input type="text" id="newTitle" placeholder="Project Name (e.g. EtherFi)" class="bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 px-4 py-2 rounded-xl">
+                        <input type="text" id="newCategory" placeholder="Category (e.g. DeFi, DEX)" class="bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 px-4 py-2 rounded-xl">
+                        <input type="text" id="newChains" placeholder="Chains / Backing (e.g. Ethereum, Base)" class="bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 px-4 py-2 rounded-xl">
+                        <select id="newStatus" class="bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 px-4 py-2 rounded-xl">
+                            <option value="Active">Active</option>
+                            <option value="Upcoming">Upcoming</option>
+                            <option value="Claimable">Claimable</option>
+                        </select>
+                    </div>
+                    <textarea id="newDesc" placeholder="Project Description & Task Guide..." class="w-full bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 px-4 py-2 rounded-xl text-sm mb-4 h-24"></textarea>
+                    <button onclick="addNewAirdrop()" class="w-full bg-black dark:bg-white text-white dark:text-black font-semibold py-3 rounded-xl transition">Publish Airdrop</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Add/Edit Project Modal -->
-    <div id="editModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-[#0b0f17] border border-slate-200 dark:border-slate-800 rounded-3xl max-w-lg w-full p-6">
-            <h3 class="font-bold text-lg mb-4">Add / Edit Project</h3>
-            <input type="hidden" id="pId">
-            <div class="space-y-3">
-                <input type="text" id="pName" placeholder="Project Name (e.g. Monad)" class="w-full px-3 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm">
-                <select id="pCat" class="w-full px-3 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm">
-                    <option value="Airdrops">Airdrops</option>
-                    <option value="Perp DEX">Perp DEX</option>
-                    <option value="Tracker">Tracker</option>
-                    <option value="Claim">Claim</option>
-                    <option value="Checker">Checker</option>
-                    <option value="Raise">Raise</option>
-                </select>
-                <input type="text" id="pLogo" placeholder="Logo Image URL" class="w-full px-3 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm">
-                <input type="text" id="pTag" placeholder="Tag (Active, Upcoming, Claim Live)" class="w-full px-3 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm">
-                <input type="text" id="pDesc" placeholder="Description" class="w-full px-3 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm">
-                <input type="text" id="pLink" placeholder="Official App Link" class="w-full px-3 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm">
-                <textarea id="pSteps" placeholder="Farming steps (one per line)" rows="3" class="w-full p-3 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm"></textarea>
-            </div>
-            <div class="flex justify-end gap-2 mt-4">
-                <button onclick="closeEditModal()" class="px-4 py-2 bg-slate-200 dark:bg-slate-800 text-xs font-bold rounded-xl">Cancel</button>
-                <button onclick="saveProject()" class="px-4 py-2 bg-emerald-500 text-white text-xs font-bold rounded-xl">Save</button>
-            </div>
-        </div>
-    </div>
-
+    <!-- JavaScript Application Logic -->
     <script>
-        let appData = {
-            projects: [
-                { id: 1, name: "1K", category: "Airdrops", logo: "https://assets.coingecko.com/coins/images/325/large/Tether.png", tag: "Active", desc: "DeFi • Robinhood backed high performance platform.", link: "https://alphadrops.net", steps: "1. Connect Wallet\n2. Complete social tasks\n3. Bridge funds" },
-                { id: 2, name: "Metric", category: "Perp DEX", logo: "https://assets.coingecko.com/coins/images/279/large/ethereum.png", tag: "Active", desc: "DEX • Ethereum based high speed margin trading.", link: "https://alphadrops.net", steps: "1. Deposit USDC\n2. Open long/short position" },
-                { id: 3, name: "Catalyst", category: "Tracker", logo: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png", tag: "Upcoming", desc: "AI • Multichain interoperability protocol.", link: "https://alphadrops.net", steps: "1. Join testnet\n2. Faucet claim" },
-                { id: 4, name: "TxFlow", category: "Claim", logo: "https://assets.coingecko.com/coins/images/325/large/Tether.png", tag: "Claim Live", desc: "Perps • Arbitrum high frequency settlement.", link: "https://alphadrops.net", steps: "1. Check allocation\n2. Claim tokens" },
-                { id: 5, name: "PopDEX", category: "Checker", logo: "https://assets.coingecko.com/coins/images/279/large/ethereum.png", tag: "Active", desc: "L1 • Morph Tachyon ecosystem token distribution.", link: "https://alphadrops.net", steps: "1. Connect address\n2. Verify eligibility" },
-                { id: 6, name: "Monad", category: "Raise", logo: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png", tag: "Active", desc: "Parallel EVM layer 1 with $225M raised.", link: "https://monad.xyz", steps: "1. Interact with ecosystem\n2. Testnet activity" }
-            ]
+        // Initial Data mimicking Alpha Drops database
+        let airdropsData = [
+            { id: 1, title: "1K", category: "DeFi", chains: "Robinhood, Ethereum, Base", status: "Active", desc: "Best execution for tokenized stocks and crypto, on every chain, around the clock.", bg: "bg-indigo-100 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300", logoText: "1k" },
+            { id: 2, title: "Metric", category: "DEX", chains: "Ethereum, BNB Chain, Robinhood", status: "Active", desc: "Oracle-priced DEX for tokenized stocks and crypto, built by an ex-Uniswap engineering lead.", bg: "bg-cyan-100 dark:bg-cyan-950/40 text-cyan-700 dark:text-cyan-300", logoText: "Me" },
+            { id: 3, title: "Catalyst", category: "AI", chains: "Multichain", status: "Upcoming", desc: "AI agents that turn your trading ideas into automated strategies, backed by Sequoia.", bg: "bg-gray-200 dark:bg-zinc-800 text-gray-700 dark:text-gray-300", logoText: "Ca" },
+            { id: 4, title: "TxFlow", category: "L1", chains: "Arbitrum", status: "Active", desc: "TxFlow is an L1 blockchain with DAG architecture, 250K TPS, and shared liquidity across apps without bridges.", bg: "bg-emerald-100 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300", logoText: "Tx" },
+            { id: 5, title: "PopDEX", category: "DEX", chains: "Morph Tachyon", status: "Active", desc: "PopDEX - Funding and decentralized liquidity protocol for high-performance trading.", bg: "bg-blue-100 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300", logoText: "Po" },
+            { id: 6, title: "Arcus", category: "DeFi", chains: "Robinhood", status: "Active", desc: "24/7 stock token trading with zero fees today, join the waitlist to trade Perpetuals with leverage.", bg: "bg-purple-100 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300", logoText: "Ar" },
+            { id: 7, title: "Bulk", category: "DEX", chains: "Solana", status: "Active", desc: "BULK is a decentralized trading system designed to reduce the latency gap between centralized and decentralized markets.", bg: "bg-amber-100 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300", logoText: "Bu" },
+            { id: 8, title: "BaiBai", category: "DEX", chains: "Base", status: "Active", desc: "BaiBai is a Prop AMM, a new type of decentralized exchange that quotes prices in real-time.", bg: "bg-teal-100 dark:bg-teal-950/40 text-teal-700 dark:text-teal-300", logoText: "Bb" }
+        ];
+
+        let adConfig = {
+            title: "Taba - All-in-One Trading Terminal",
+            desc: "Perps across 12 venues with zero gas friction.",
+            link: "https://alphadrops.net/"
         };
 
-        if(localStorage.getItem('bullkarry_db')) {
-            try { appData = JSON.parse(localStorage.getItem('bullkarry_db')); } catch(e){}
+        function renderAdBanner() {
+            const container = document.getElementById('ad-banner-container');
+            container.innerHTML = `
+                <div class="bg-gradient-to-r from-emerald-900 to-zinc-900 text-white p-6 rounded-3xl flex flex-col md:flex-row items-center justify-between shadow-lg">
+                    <div class="mb-4 md:mb-0">
+                        <span class="bg-brand-500/20 text-brand-400 text-xs px-3 py-1 rounded-full font-semibold uppercase tracking-wider">Featured Sponsor</span>
+                        <h3 class="text-xl font-bold mt-2">${adConfig.title}</h3>
+                        <p class="text-gray-300 text-sm mt-1">${adConfig.desc}</p>
+                    </div>
+                    <a href="${adConfig.link}" target="_blank" class="bg-white text-black font-semibold px-6 py-2.5 rounded-xl text-sm hover:bg-gray-100 transition shadow-sm">
+                        Learn More <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-xs"></i>
+                    </a>
+                </div>
+            `;
         }
 
-        let currentFilter = 'all';
-
-        function init() {
-            renderProjects();
-            renderStats();
+        function renderAirdrops(items) {
+            const grid = document.getElementById('airdropsGrid');
+            grid.innerHTML = '';
+            items.forEach(item => {
+                const statusColor = item.status === 'Active' ? 'text-emerald-500' : (item.status === 'Upcoming' ? 'text-amber-500' : 'text-blue-500');
+                grid.innerHTML += `
+                    <div onclick="openDetail(${item.id})" class="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-3xl p-6 hover:shadow-xl transition cursor-pointer flex flex-col justify-between group">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-12 h-12 rounded-2xl ${item.bg} flex items-center justify-center font-bold text-lg shadow-inner">
+                                    ${item.logoText}
+                                </div>
+                                <span class="text-xs font-semibold px-3 py-1 rounded-full bg-gray-100 dark:bg-zinc-800 ${statusColor}">
+                                    ● ${item.status}
+                                </span>
+                            </div>
+                            <h3 class="font-bold text-lg group-hover:text-brand-500 transition mb-1">${item.title}</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 line-clamp-2 mb-4">${item.desc}</p>
+                        </div>
+                        <div class="pt-4 border-t border-gray-100 dark:border-zinc-800 flex items-center justify-between text-xs text-gray-400">
+                            <span>${item.chains}</span>
+                            <span class="font-medium text-brand-500 flex items-center space-x-1">
+                                <span>View tasks</span>
+                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </span>
+                        </div>
+                    </div>
+                `;
+            });
         }
 
-        function renderStats() {
-            document.getElementById('statActive').innerText = appData.projects.filter(p => p.tag === 'Active').length;
-            document.getElementById('statClaimable').innerText = appData.projects.filter(p => p.tag.includes('Claim') || p.category === 'Claim').length;
+        function filterAirdrops() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const category = document.getElementById('filterCategory').value;
+            const status = document.getElementById('filterStatus').value;
+
+            const filtered = airdropsData.filter(item => {
+                const matchesQuery = item.title.toLowerCase().includes(query) || item.desc.toLowerCase().includes(query);
+                const matchesCategory = category === 'All' || item.category === category;
+                const matchesStatus = status === 'All' || item.status === status;
+                return matchesQuery && matchesCategory && matchesStatus;
+            });
+            renderAirdrops(filtered);
         }
 
-        function filterCategory(cat) {
-            currentFilter = cat;
-            document.getElementById('currentCategoryTitle').innerText = cat === 'all' ? 'Featured Airdrop Projects' : `${cat} Projects`;
-            renderProjects();
+        function openDetail(id) {
+            const item = airdropsData.find(x => x.id === id);
+            if (!item) return;
+
+            document.getElementById('view-list').classList.add('hidden');
+            document.getElementById('view-detail').classList.remove('hidden');
+
+            const container = document.getElementById('detailContent');
+            container.innerHTML = `
+                <div class="flex items-center space-x-4 mb-6">
+                    <div class="w-16 h-16 rounded-2xl ${item.bg} flex items-center justify-center font-bold text-2xl shadow-inner">
+                        ${item.logoText}
+                    </div>
+                    <div>
+                        <div class="flex items-center space-x-3">
+                            <h1 class="text-2xl md:text-3xl font-extrabold">${item.title}</h1>
+                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-brand-50 text-brand-600 dark:bg-zinc-800 dark:text-brand-400">${item.status}</span>
+                        </div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Chains & Backing: ${item.chains}</p>
+                    </div>
+                </div>
+                <div class="space-y-6 text-sm text-gray-600 dark:text-gray-300">
+                    <div>
+                        <h3 class="font-bold text-base text-gray-900 dark:text-white mb-2">About Project</h3>
+                        <p class="leading-relaxed">${item.desc}</p>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-zinc-800/50 p-6 rounded-2xl border border-gray-200 dark:border-zinc-800">
+                        <h3 class="font-bold text-base text-gray-900 dark:text-white mb-3">Airdrop Tasks & Guide</h3>
+                        <ul class="space-y-2 list-disc list-inside">
+                            <li>Connect Web3 wallet and switch to supported network (${item.chains}).</li>
+                            <li>Interact with the core protocol contracts and execute testnet/mainnet volume.</li>
+                            <li>Verify your eligibility and claim rewards upon token generation event (TGE).</li>
+                        </ul>
+                    </div>
+                    <div class="flex items-center space-x-4 pt-4">
+                        <a href="https://alphadrops.net/" target="_blank" class="bg-brand-500 hover:bg-brand-600 text-white font-semibold px-6 py-3 rounded-xl transition shadow-sm">
+                            Open Official App <i class="fa-solid fa-external-link ml-1 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+            `;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function handleSearch(q) {
-            renderProjects(q);
+        function backToList() {
+            document.getElementById('view-detail').classList.add('hidden');
+            document.getElementById('view-list').classList.remove('hidden');
         }
 
-        function renderProjects(query = '') {
-            const grid = document.getElementById('projectsGrid');
-            let list = appData.projects;
-            if(currentFilter !== 'all') {
-                list = list.filter(p => p.category.toLowerCase() === currentFilter.toLowerCase());
+        function toggleAdminModal() {
+            const modal = document.getElementById('adminModal');
+            modal.classList.toggle('hidden');
+            if (!modal.classList.contains('hidden')) {
+                document.getElementById('adminAdTitle').value = adConfig.title;
+                document.getElementById('adminAdDesc').value = adConfig.desc;
+                document.getElementById('adminAdLink').value = adConfig.link;
             }
-            if(query.trim() !== '') {
-                const q = query.toLowerCase();
-                list = list.filter(p => p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
-            }
+        }
 
-            document.getElementById('projectCountBadge').innerText = `Showing ${list.length} projects`;
+        function saveAdBanner() {
+            adConfig.title = document.getElementById('adminAdTitle').value;
+            adConfig.desc = document.getElementById('adminAdDesc').value;
+            adConfig.link = document.getElementById('adminAdLink').value;
+            renderAdBanner();
+            toggleAdminModal();
+        }
 
-            if(list.length === 0) {
-                grid.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400">No projects found.</div>`;
+        function addNewAirdrop() {
+            const title = document.getElementById('newTitle').value;
+            const category = document.getElementById('newCategory').value;
+            const chains = document.getElementById('newChains').value;
+            const status = document.getElementById('newStatus').value;
+            const desc = document.getElementById('newDesc').value;
+
+            if (!title) {
+                alert('Please enter a project title');
                 return;
             }
 
-            grid.innerHTML = list.map(p => `
-                <div onclick="openModal(${p.id})" class="bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 hover:border-emerald-500/50 transition-all cursor-pointer shadow-sm flex flex-col justify-between group">
-                    <div>
-                        <div class="flex items-center justify-between mb-3">
-                            <div class="flex items-center gap-3">
-                                <img src="${p.logo}" class="w-12 h-12 rounded-full object-cover bg-slate-100 dark:bg-slate-800" onerror="this.src='https://via.placeholder.com/48'">
-                                <div>
-                                    <h3 class="font-extrabold text-base group-hover:text-emerald-500 transition-colors">${p.name}</h3>
-                                    <span class="text-xs text-slate-400">${p.category}</span>
-                                </div>
-                            </div>
-                            <span class="text-[10px] font-extrabold px-2.5 py-1 rounded-full ${p.tag === 'Active' ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' : 'bg-purple-500/10 text-purple-500 border border-purple-500/20'}">${p.tag}</span>
-                        </div>
-                        <p class="text-xs text-slate-600 dark:text-slate-300 line-clamp-2 mb-4">${p.desc}</p>
-                    </div>
-                    <div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800 text-xs font-bold text-emerald-500">
-                        <span>View Tasks</span>
-                        <span>→</span>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function openModal(id) {
-            const p = appData.projects.find(x => x.id === id);
-            if(!p) return;
-            const steps = p.steps ? p.steps.split('\n').map(s => `<li class="flex items-start gap-2 text-sm"><span class="text-emerald-500 font-bold">✓</span> <span>${s}</span></li>`).join('') : 'No steps';
-            document.getElementById('modalBody').innerHTML = `
-                <div class="flex items-center gap-4 mb-4">
-                    <img src="${p.logo}" class="w-14 h-14 rounded-full object-cover">
-                    <div>
-                        <h2 class="text-2xl font-extrabold">${p.name}</h2>
-                        <span class="text-xs text-slate-400">${p.category} • <span class="text-emerald-500">${p.tag}</span></span>
-                    </div>
-                </div>
-                <p class="text-sm text-slate-600 dark:text-slate-300 mb-4">${p.desc}</p>
-                <h4 class="font-bold text-sm mb-2">Farming Guide:</h4>
-                <ul class="space-y-2 mb-6">${steps}</ul>
-                <a href="${p.link}" target="_blank" class="block w-full py-3 text-center bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm rounded-xl shadow-lg shadow-emerald-500/20">Open Official App</a>
-            `;
-            document.getElementById('projectModal').classList.remove('hidden');
-        }
-
-        function closeModal() { document.getElementById('projectModal').classList.add('hidden'); }
-
-        function openAdminModal() { document.getElementById('adminModal').classList.remove('hidden'); }
-        function closeAdminModal() { document.getElementById('adminModal').classList.add('hidden'); }
-
-        function loginAdmin() {
-            if(document.getElementById('adminPass').value === 'admin123') {
-                document.getElementById('adminLogin').classList.add('hidden');
-                document.getElementById('adminDashboard').classList.remove('hidden');
-                renderAdminList();
-            } else { alert('Incorrect password'); }
-        }
-
-        function renderAdminList() {
-            document.getElementById('adminProjectsList').innerHTML = appData.projects.map(p => `
-                <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 text-xs">
-                    <div class="flex items-center gap-2">
-                        <img src="${p.logo}" class="w-8 h-8 rounded-full">
-                        <div><b>${p.name}</b> (${p.category})</div>
-                    </div>
-                    <button onclick="deleteProj(${p.id})" class="text-rose-500 font-bold px-2 py-1 bg-rose-500/10 rounded">Delete</button>
-                </div>
-            `).join('');
-        }
-
-        function openAddModal() {
-            document.getElementById('pId').value = '';
-            document.getElementById('pName').value = '';
-            document.getElementById('pDesc').value = '';
-            document.getElementById('pLink').value = '';
-            document.getElementById('pLogo').value = '';
-            document.getElementById('pSteps').value = '';
-            document.getElementById('editModal').classList.remove('hidden');
-        }
-
-        function closeEditModal() { document.getElementById('editModal').classList.add('hidden'); }
-
-        function saveProject() {
-            const p = {
-                id: Date.now(),
-                name: document.getElementById('pName').value,
-                category: document.getElementById('pCat').value,
-                logo: document.getElementById('pLogo').value || 'https://assets.coingecko.com/coins/images/325/large/Tether.png',
-                tag: document.getElementById('pTag').value || 'Active',
-                desc: document.getElementById('pDesc').value,
-                link: document.getElementById('pLink').value,
-                steps: document.getElementById('pSteps').value
+            const newItem = {
+                id: airdropsData.length + 1,
+                title,
+                category: category || 'DeFi',
+                chains: chains || 'Multi-Chain',
+                status,
+                desc: desc || 'Participate in community airdrop tasks.',
+                bg: 'bg-emerald-100 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300',
+                logoText: title.substring(0, 2).toUpperCase()
             };
-            appData.projects.push(p);
-            localStorage.setItem('bullkarry_db', JSON.stringify(appData));
-            closeEditModal();
-            renderAdminList();
-            init();
+
+            airdropsData.unshift(newItem);
+            renderAirdrops(airdropsData);
+            toggleAdminModal();
+            alert('Airdrop published successfully!');
         }
 
-        function deleteProj(id) {
-            appData.projects = appData.projects.filter(x => x.id !== id);
-            localStorage.setItem('bullkarry_db', JSON.stringify(appData));
-            renderAdminList();
-            init();
-        }
-
-        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('-translate-x-full'); }
-        
         function toggleDarkMode() {
             document.documentElement.classList.toggle('dark');
+            const icon = document.getElementById('themeIcon');
+            if (document.documentElement.classList.contains('dark')) {
+                icon.className = "fa-solid fa-sun text-yellow-400";
+            } else {
+                icon.className = "fa-solid fa-moon text-gray-600";
+            }
         }
 
-        window.onload = init;
+        function switchTab(tab) {
+            document.querySelectorAll('aside a').forEach(el => {
+                el.className = "flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-zinc-800 transition";
+            });
+            const activeEl = document.getElementById('nav-' + tab);
+            if (activeEl) {
+                activeEl.className = "flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm transition bg-brand-50 text-brand-700 dark:bg-zinc-800 dark:text-white";
+            }
+        }
+
+        // Initialize App on load
+        renderAdBanner();
+        renderAirdrops(airdropsData);
     </script>
 </body>
 </html>
