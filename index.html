@@ -1,1078 +1,869 @@
 <!DOCTYPE html>
-<html lang="en" id="html-root" class="light">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Bullkarry — Crypto Airdrops, Perp DEX &amp; Alpha Hub</title>
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Inter & Space Grotesk -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@600;700;800&amp;display=swap" rel="stylesheet">
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            display: ['Space Grotesk', 'sans-serif'],
-          },
-          colors: {
-            bk: {
-              lightBg: '#f8fafc',
-              lightSidebar: '#ffffff',
-              lightCard: '#ffffff',
-              lightCardHover: '#f1f5f9',
-              lightBorder: '#e2e8f0',
-              bg: '#0b0f17',
-              sidebar: '#0e131d',
-              card: '#131a29',
-              cardHover: '#172033',
-              border: '#1e293b',
-              emerald: '#10b981',
-              indigo: '#6366f1'
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bullkarry | Crypto Airdrops & Alpha Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        darkBg: '#0b0f17',
+                        darkCard: '#131c2e',
+                        darkBorder: '#1e293b',
+                    }
+                }
             }
-          }
         }
-      }
-    }
-  </script>
-
-  <style>
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
-    
-    /* Light Theme Defaults (Bullkarry & AlphaDrops Style) */
-    html.light body { background-color: #f8fafc; color: #0f172a; }
-    html.light .bk-sidebar-theme { background-color: #ffffff; border-color: #e2e8f0; }
-    html.light .bk-card-theme { background-color: #ffffff; border-color: #e2e8f0; color: #0f172a; }
-    html.light .bk-card-theme:hover { background-color: #f1f5f9; }
-    html.light .bk-bg-theme { background-color: #f1f5f9; color: #0f172a; }
-    html.light .bk-text-main { color: #0f172a; }
-    html.light .bk-text-sub { color: #64748b; }
-    html.light .bk-border-theme { border-color: #e2e8f0; }
-
-    /* Dark Theme Defaults */
-    html.dark body { background-color: #0b0f17; color: #f8fafc; }
-    html.dark .bk-sidebar-theme { background-color: #0e131d; border-color: #1e293b; }
-    html.dark .bk-card-theme { background-color: #131a29; border-color: #1e293b; color: #f8fafc; }
-    html.dark .bk-card-theme:hover { background-color: #172033; }
-    html.dark .bk-bg-theme { background-color: #0b0f17; color: #f8fafc; }
-    html.dark .bk-text-main { color: #ffffff; }
-    html.dark .bk-text-sub { color: #94a3b8; }
-    html.dark .bk-border-theme { border-color: #1e293b; }
-
-    /* Bullkarry Hero Gradient */
-    .bk-hero-gradient {
-      background: linear-gradient(135deg, #0f172a 0%, #092229 52%, #0a3d36 100%);
-      position: relative;
-      overflow: hidden;
-      color: #ffffff !important;
-    }
-    .bk-hero-gradient * { color: inherit; }
-    .bk-hero-gradient::after {
-      content: '';
-      position: absolute; right: -50px; top: -50px; width: 240px; height: 240px;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.20) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .nav-active {
-      background: linear-gradient(90deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.05) 100%);
-      color: #10b981 !important;
-      border: 1px solid rgba(16, 185, 129, 0.3);
-    }
-    /* Clean 2-Tag System */
-    .badge-new { background: rgba(16, 185, 129, 0.14); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.35); }
-    .badge-claim { background: rgba(245, 158, 11, 0.14); color: #d97706; border: 1px solid rgba(245, 158, 11, 0.35); }
-    html.dark .badge-claim { color: #fbbf24; }
-
-    .quick-action-btn { transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
-    .quick-action-btn:hover { transform: translateY(-2px); }
-    .quick-action-active .qa-box {
-      background-color: #10b981 !important; color: #ffffff !important; border-color: #10b981 !important;
-      box-shadow: 0 8px 20px -4px rgba(16, 185, 129, 0.3);
-    }
-    @keyframes tickerSlide {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-    .marquee-track { display: flex; width: max-content; animation: tickerSlide 38s linear infinite; }
-    .marquee-wrapper:hover .marquee-track, .marquee-paused .marquee-track { animation-play-state: paused; }
-    ::-webkit-scrollbar { width: 5px; height: 5px; }
-    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
-    html.dark ::-webkit-scrollbar-thumb { background: #1e293b; }
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-  </style>
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(100, 116, 139, 0.3); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(100, 116, 139, 0.5); }
+    </style>
 </head>
-<body class="min-h-screen flex flex-col lg:flex-row selection:bg-emerald-500 selection:text-slate-950">
+<body class="bg-[#f8fafc] text-slate-900 dark:bg-[#0b0f17] dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200">
 
-  <!-- DESKTOP LEFT SIDEBAR -->
-  <aside class="hidden lg:flex flex-col w-[230px] bk-sidebar-theme border-r shrink-0 min-h-screen sticky top-0 h-screen justify-between p-3.5 select-none z-30">
-    <div>
-      <div class="flex items-center gap-2.5 px-1.5 py-1.5 mb-5 cursor-pointer group" onclick="goHomeFrontPage()">
-        <div class="w-9 h-9 rounded-xl bg-emerald-500/15 border border-emerald-500/40 flex items-center justify-center shadow-md overflow-hidden shrink-0">
-          <span class="font-display font-bold text-base tracking-tighter text-emerald-500">BK</span>
-        </div>
-        <div class="min-w-0">
-          <span class="font-display font-bold text-lg tracking-tight bk-text-main group-hover:text-emerald-500 block leading-none truncate">Bullkarry</span>
-          <span class="text-[10px] text-emerald-500 font-semibold tracking-wider uppercase mt-0.5 block">AIRDROP ALPHA</span>
-        </div>
-      </div>
-      <nav class="space-y-1" id="desktop-sidebar-nav"></nav>
-    </div>
-
-    <div class="space-y-2">
-      <div class="bk-card-theme border rounded-2xl p-3">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-[10px] font-bold tracking-wider bk-text-sub uppercase">TRACKED PROJECTS</span>
-          <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/10 text-emerald-500 border border-emerald-500/30">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> ACTIVE
-          </span>
-        </div>
-        <div class="flex items-center justify-between text-[11px] bk-bg-theme rounded-xl px-2.5 py-2 border bk-border-theme">
-          <span class="bk-text-sub font-medium">My Saved</span>
-          <span id="sidebar-streak-count" class="font-bold text-emerald-500">0 Projects</span>
-        </div>
-      </div>
-
-      <button onclick="openAdminModal()" class="w-full flex items-center justify-between px-3 py-2 rounded-xl bk-bg-theme hover:opacity-80 border bk-border-theme text-xs bk-text-sub hover:text-emerald-500 transition">
-        <span class="flex items-center gap-2 font-medium">
-          <i data-lucide="lock" class="w-3.5 h-3.5"></i>
-          <span>Owner Admin</span>
-        </span>
-        <span id="admin-status-pill" class="text-[9px] px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800 bk-text-sub font-semibold">LOCKED</span>
-      </button>
-    </div>
-  </aside>
-
-  <!-- MAIN CONTENT AREA -->
-  <div class="flex-1 flex flex-col min-w-0 pb-24 lg:pb-12">
-
-    <!-- TOP HEADER BAR -->
-    <header class="sticky top-0 z-20 bk-sidebar-theme/90 backdrop-blur-md border-b px-3.5 sm:px-6 py-3">
-      <div class="max-w-[1360px] mx-auto flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-        
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <div onclick="goHomeFrontPage()" class="lg:hidden w-9 h-9 rounded-xl bg-emerald-500/15 border border-emerald-500/40 flex items-center justify-center shrink-0 cursor-pointer overflow-hidden shadow">
-              <span class="font-display font-bold text-sm text-emerald-500">BK</span>
+    <!-- Top Header Bar -->
+    <header class="sticky top-0 z-40 bg-white/90 dark:bg-[#0b0f17]/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 lg:px-8 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <button onclick="toggleSidebar()" class="lg:hidden p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+            <div class="flex items-center gap-2.5">
+                <div id="headerLogoContainer" class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center text-white font-black text-lg shadow-md shadow-emerald-500/20 overflow-hidden">
+                    BK
+                </div>
+                <span class="font-extrabold text-xl tracking-tight bg-gradient-to-r from-emerald-500 to-teal-400 bg-clip-text text-transparent">Bullkarry</span>
             </div>
-            <div onclick="goHomeFrontPage()" class="cursor-pointer">
-              <h1 id="header-greeting" class="text-base sm:text-lg font-bold tracking-tight bk-text-main leading-tight">Good evening, Ajeet</h1>
-              <p class="text-[11px] bk-text-sub hidden sm:block">Welcome back to your Bullkarry Multi-Chain Airdrop &amp; Alpha dashboard.</p>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="flex-1 max-w-xl mx-4 hidden md:block">
+            <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </span>
+                <input type="text" id="globalSearchInput" oninput="handleSearch(this.value)" placeholder="Search airdrops, chains, tags..." class="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:outline-none focus:border-emerald-500 transition-colors">
             </div>
-          </div>
-
-          <div class="flex lg:hidden items-center gap-2">
-            <button onclick="toggleTheme()" class="p-2 rounded-xl bk-card-theme border bk-border-theme bk-text-main">
-              <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
-              <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
-            </button>
-            <button onclick="openAdminModal()" class="p-2 rounded-xl bk-card-theme border bk-border-theme bk-text-sub hover:text-emerald-500">
-              <i data-lucide="settings" class="w-4 h-4"></i>
-            </button>
-          </div>
         </div>
 
-        <!-- Search Bar & Controls -->
-        <div class="flex items-center gap-3 flex-1 md:max-w-lg lg:max-w-xl justify-end">
-          <div class="relative flex-1">
-            <i data-lucide="search" class="w-4 h-4 bk-text-sub absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
-            <input id="search-input" type="text" oninput="handleSearch(this.value)" placeholder="Search crypto airdrops, perp DEX, chains..." class="w-full pl-9 pr-8 py-2 bk-card-theme border rounded-xl text-xs sm:text-sm bk-text-main placeholder:bk-text-sub focus:outline-none focus:border-emerald-500 transition shadow-inner">
-            <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 bk-text-sub">
-              <i data-lucide="x" class="w-4 h-4"></i>
+        <!-- Header Actions -->
+        <div class="flex items-center gap-3">
+            <!-- Theme Toggle -->
+            <button onclick="toggleDarkMode()" class="p-2.5 rounded-xl bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" title="Toggle Light/Dark Theme">
+                <svg id="themeIconSun" class="w-5 h-5 hidden dark:block text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                <svg id="themeIconMoon" class="w-5 h-5 block dark:hidden text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
             </button>
-          </div>
 
-          <button onclick="toggleTheme()" class="hidden lg:flex items-center gap-1.5 px-3 py-2 rounded-xl bk-card-theme border bk-border-theme bk-text-main text-xs font-semibold hover:border-emerald-500 transition shrink-0">
-            <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-amber-400"></i>
-            <i data-lucide="moon" class="w-4 h-4 block dark:hidden text-indigo-600"></i>
-            <span class="hidden xl:inline">Theme</span>
-          </button>
-
-          <button onclick="openAdminModal()" title="Owner Admin Panel" class="hidden lg:flex w-9 h-9 rounded-xl bk-card-theme border bk-border-theme items-center justify-center bk-text-sub hover:text-emerald-500 transition shrink-0">
-            <i data-lucide="settings" class="w-4 h-4"></i>
-          </button>
+            <!-- Admin Button -->
+            <button onclick="openAdminModal()" class="flex items-center gap-2 px-3.5 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-sm rounded-xl shadow-md shadow-emerald-500/20 transition-all">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                <span class="hidden sm:inline">Admin CMS</span>
+            </button>
         </div>
-
-      </div>
     </header>
 
-    <!-- FRONT PAGE DASHBOARD -->
-    <main id="front-page-view" class="max-w-[1360px] w-full mx-auto px-3.5 sm:px-6 pt-5 space-y-5">
-
-      <div class="grid grid-cols-1 xl:grid-cols-12 gap-5 items-stretch">
-        <div class="xl:col-span-8 flex flex-col justify-between space-y-5">
-          
-          <div class="bk-hero-gradient border border-emerald-500/30 rounded-2xl p-5 sm:p-6 shadow-xl">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-lg bg-emerald-500/20 border border-emerald-400/40 text-[10px] sm:text-[11px] font-bold tracking-wider uppercase text-emerald-300 mb-2.5">
-                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
-                  <span>ALPHADROPS &amp; AIRDROPS.IO VERIFIED HUB</span>
-                </div>
-                <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-white tracking-tight uppercase leading-none">CRYPTO AIRDROPS</h2>
-                <p class="text-xs sm:text-sm text-slate-200 mt-2 max-w-2xl">Discover, track, and farm verified Web3 airdrops, Perp DEX points, and high-raise protocols before TGE.</p>
-              </div>
-              <button onclick="resetAllFilters()" title="Reset Filters" class="w-9 h-9 rounded-full bg-slate-900/60 hover:bg-slate-900 border border-white/20 flex items-center justify-center text-white transition shrink-0">
-                <i data-lucide="refresh-cw" class="w-4 h-4"></i>
-              </button>
+    <div class="flex-1 flex">
+        <!-- Sidebar Navigation -->
+        <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-[#131c2e] border-r border-slate-200 dark:border-slate-800 transform -translate-x-full lg:translate-x-0 lg:static transition-transform duration-200 flex flex-col pt-16 lg:pt-0">
+            <div class="p-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between lg:hidden">
+                <span class="font-bold text-lg">Menu</span>
+                <button onclick="toggleSidebar()" class="p-1 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
             </div>
-
-            <div class="mt-5 pt-4 border-t border-white/15 grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
-              <div onclick="selectCategory('all', true)" class="bg-black/30 hover:bg-black/50 border border-white/10 rounded-xl p-3 cursor-pointer transition">
-                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-300">Active Airdrops</span>
-                <div id="stat-active-count" class="font-display text-xl sm:text-2xl font-bold text-white mt-1">15</div>
-                <span class="text-[10px] text-emerald-300 font-medium">Ongoing Farming</span>
-              </div>
-              <div onclick="selectCategory('claim', true)" class="bg-black/30 hover:bg-black/50 border border-white/10 rounded-xl p-3 cursor-pointer transition">
-                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-300">Claimable</span>
-                <div id="stat-claim-count" class="font-display text-xl sm:text-2xl font-bold text-amber-300 mt-1">4</div>
-                <span class="text-[10px] text-slate-300 font-medium">Live Portals</span>
-              </div>
-              <div onclick="selectCategory('completed', true)" class="bg-black/30 hover:bg-black/50 border border-white/10 rounded-xl p-3 cursor-pointer transition">
-                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-300">Ended</span>
-                <div id="stat-completed-count" class="font-display text-xl sm:text-2xl font-bold text-white mt-1">1</div>
-                <span class="text-[10px] text-slate-300 font-medium">Completed Drops</span>
-              </div>
-              <a href="https://t.me/bullkarry" target="_blank" rel="noopener noreferrer" class="bg-black/30 hover:bg-black/50 border border-white/10 rounded-xl p-3 cursor-pointer transition block">
-                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-300">Community</span>
-                <div class="font-display text-xl sm:text-2xl font-bold text-sky-300 mt-1">28.5K+</div>
-                <span class="text-[10px] text-slate-300 font-medium">Alpha Farmers</span>
-              </a>
-            </div>
-          </div>
-
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <h2 class="text-sm sm:text-base font-bold bk-text-main tracking-tight">Quick Actions</h2>
-              <span class="text-[11px] bk-text-sub">Tap any category to filter projects</span>
-            </div>
-            <div class="grid grid-cols-5 gap-2 sm:gap-3.5" id="quick-actions-container"></div>
-          </div>
-        </div>
-
-        <div class="xl:col-span-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-1 gap-4">
-          <div class="bk-card-theme border rounded-2xl p-4 shadow-lg flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between mb-2.5">
-                <div class="flex items-center gap-1.5">
-                  <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                  <span class="text-[11px] font-bold uppercase tracking-wider bk-text-main">Official Alpha Channel</span>
-                </div>
-                <span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-sky-500/15 text-sky-600 dark:text-sky-400 border border-sky-500/30">24/7 ALERTS</span>
-              </div>
-              <div class="bg-gradient-to-br from-sky-500/10 via-emerald-500/5 to-indigo-500/10 border border-sky-500/30 rounded-xl p-3.5">
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-xl bg-[#229ED9] text-white flex items-center justify-center shadow-md shrink-0">
-                    <i data-lucide="send" class="w-5 h-5"></i>
-                  </div>
-                  <div>
-                    <h3 class="text-sm font-bold bk-text-main">Bullkarry Airdrops</h3>
-                    <p class="text-[11px] bk-text-sub line-clamp-2 mt-0.5">Instant Claim links, Perp DEX setups &amp; early Testnet alpha.</p>
-                  </div>
-                </div>
-                <a href="https://t.me/bullkarry" target="_blank" rel="noopener noreferrer" class="mt-3 w-full py-2 px-3 rounded-xl bg-[#229ED9] hover:bg-[#1e8ec4] text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow transition">
-                  <i data-lucide="send" class="w-3.5 h-3.5"></i>
-                  <span>Join Telegram Channel</span>
-                  <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+            
+            <div id="sidebarMenuList" class="flex-1 overflow-y-auto p-4 space-y-1.5">
+                <a href="#home" onclick="filterCategory('all'); toggleSidebar();" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                    Dashboard
                 </a>
-              </div>
+                <a href="#airdrops" onclick="filterCategory('Airdrops'); toggleSidebar();" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                    Airdrops
+                </a>
+                <a href="#perpdex" onclick="filterCategory('Perp DEX'); toggleSidebar();" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                    Perp DEX
+                </a>
+                <a href="#tracker" onclick="filterCategory('Tracker'); toggleSidebar();" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                    My Tracker
+                </a>
+                <a href="#claims" onclick="filterCategory('Claim'); toggleSidebar();" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Claim Portal
+                </a>
+                <a href="#checker" onclick="filterCategory('Checker'); toggleSidebar();" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    Eligibility Checker
+                </a>
+                <a href="#raise" onclick="filterCategory('Raise'); toggleSidebar();" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                    Fundraise & VCs
+                </a>
             </div>
-          </div>
 
-          <div id="sidebar-ad-wrapper" class="bk-card-theme border rounded-2xl p-4 shadow-lg flex flex-col justify-between"></div>
-        </div>
-      </div>
-
-      <!-- AUTO-SLIDING TICKER -->
-      <section class="bk-card-theme border rounded-2xl p-3.5 sm:p-4 shadow-lg overflow-hidden">
-        <div class="flex items-center justify-between gap-2 mb-3">
-          <div class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-            <h3 class="text-xs sm:text-sm font-bold bk-text-main uppercase tracking-wider">Live Trending &amp; Tracked Projects</h3>
-          </div>
-          <button onclick="toggleMarqueePause()" id="marquee-pause-btn" class="px-2.5 py-1 rounded-lg bk-bg-theme border text-[11px] bk-text-main font-semibold flex items-center gap-1">
-            <i data-lucide="pause" class="w-3 h-3"></i>
-            <span id="marquee-pause-text">Pause</span>
-          </button>
-        </div>
-        <div id="marquee-outer" class="marquee-wrapper overflow-hidden relative">
-          <div id="sliding-marquee-track" class="marquee-track gap-3"></div>
-        </div>
-      </section>
-
-      <!-- DIRECTORY FEED WITH CLEAN 2-TAG FILTER -->
-      <section id="airdrop-directory-section" class="bk-card-theme border rounded-2xl p-4 sm:p-5 shadow-xl scroll-mt-16">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3.5 pb-4 border-b bk-border-theme">
-          <div>
-            <div class="flex items-center gap-2 flex-wrap">
-              <h2 class="text-base sm:text-lg font-bold bk-text-main">All Active Airdrops &amp; Alpha</h2>
-              <span id="directory-count-badge" class="text-xs font-bold px-2 py-0.5 rounded-md bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">0</span>
+            <!-- Telegram Widget in Sidebar -->
+            <div class="p-4 m-3 rounded-2xl bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-500/20">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.02-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.25.38-.51 1.08-.78 4.23-1.84 7.05-3.05 8.46-3.63 4.03-1.68 4.86-1.97 5.4-1.98.12 0 .39.03.56.17.15.12.19.28.21.4-.01.06.01.24-.01.38z"/></svg>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xs">Bullkarry Airdrops</h4>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400">Join our Alpha TG</p>
+                    </div>
+                </div>
+                <a href="https://t.me/ajeetjhurawat1" target="_blank" class="block w-full py-2 text-center bg-blue-500 hover:bg-blue-600 text-white font-bold text-xs rounded-xl shadow-md shadow-blue-500/20 transition-all">Join Telegram Group</a>
             </div>
-            <p class="text-xs bk-text-sub mt-0.5">Tap any project card to open its AlphaDrops-style step-by-step post and guidelines.</p>
-          </div>
+        </aside>
 
-          <!-- Clean 2-Tag Filter Pills -->
-          <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
-            <button onclick="setQuickTagFilter('ALL')" data-qtf="ALL" class="qtf-btn bg-emerald-500 text-white font-bold text-xs px-3 py-1.5 rounded-xl shrink-0 shadow">All</button>
-            <button onclick="setQuickTagFilter('NEW')" data-qtf="NEW" class="qtf-btn bk-bg-theme hover:opacity-80 bk-text-main border font-semibold text-xs px-2.5 py-1.5 rounded-xl shrink-0 flex items-center gap-1.5">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span><span>New</span>
-            </button>
-            <button onclick="setQuickTagFilter('CLAIM LIVE')" data-qtf="CLAIM LIVE" class="qtf-btn bk-bg-theme hover:opacity-80 bk-text-main border font-semibold text-xs px-2.5 py-1.5 rounded-xl shrink-0">Claim Live</button>
-            <button onclick="setQuickTagFilter('Completed')" data-qtf="Completed" class="qtf-btn bk-bg-theme hover:opacity-80 bk-text-main border font-semibold text-xs px-2.5 py-1.5 rounded-xl shrink-0">Completed</button>
-          </div>
-        </div>
-
-        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-4"></div>
-
-        <div id="empty-state" class="hidden py-12 text-center">
-          <div class="w-12 h-12 rounded-2xl bk-bg-theme border mx-auto flex items-center justify-center bk-text-sub mb-3">
-            <i data-lucide="search-x" class="w-5 h-5"></i>
-          </div>
-          <h3 class="text-sm font-bold bk-text-main">No projects match this filter</h3>
-          <button onclick="resetAllFilters()" class="mt-3.5 px-4 py-2 rounded-xl bg-emerald-500 text-white text-xs font-bold">Show All Projects</button>
-        </div>
-      </section>
-
-      <!-- FAQ SECTION -->
-      <section class="bk-card-theme border rounded-2xl p-4 sm:p-6 shadow-xl">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b bk-border-theme">
-          <div>
-            <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-500">KNOWLEDGE BASE</span>
-            <h2 class="text-base sm:text-xl font-display font-bold bk-text-main mt-0.5">Common Questions About Crypto Airdrops</h2>
-          </div>
-        </div>
-        <div id="faq-accordion-list" class="divide-y bk-border-theme mt-2"></div>
-      </section>
-
-    </main>
-
-    <!-- DEDICATED PROJECT POST VIEW -->
-    <section id="project-post-view" class="hidden max-w-[1240px] w-full mx-auto px-3.5 sm:px-6 pt-5 space-y-5">
-      <div class="flex flex-wrap items-center justify-between gap-3 bk-card-theme border rounded-2xl px-4 py-3">
-        <button onclick="closeProjectPostView()" class="inline-flex items-center gap-2 text-xs sm:text-sm font-bold bk-text-main hover:text-emerald-500 transition">
-          <span class="w-7 h-7 rounded-lg bk-bg-theme flex items-center justify-center"><i data-lucide="arrow-left" class="w-4 h-4"></i></span>
-          <span>Back to Crypto Airdrops</span>
-        </button>
-      </div>
-
-      <div class="bk-hero-gradient border border-emerald-500/30 rounded-2xl p-5 sm:p-6 shadow-xl">
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
-          <div class="flex items-start sm:items-center gap-4">
-            <img id="post-logo-img" src alt="Logo" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-2 border-emerald-400 bg-slate-900 shrink-0 shadow-xl">
-            <div>
-              <div class="flex flex-wrap items-center gap-2.5">
-                <h1 id="post-title" class="font-display text-xl sm:text-3xl font-extrabold text-white">Project Name</h1>
-                <span id="post-ticker" class="text-xs font-bold px-2.5 py-0.5 rounded-lg bg-black/40 text-emerald-300 border border-emerald-400/30 font-mono">$TOKEN</span>
-              </div>
-              <p id="post-short-backers" class="text-xs text-slate-200 mt-2"></p>
-            </div>
-          </div>
-          <div id="post-primary-cta-wrap" class="flex flex-wrap items-center gap-2"></div>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
-        <div class="lg:col-span-8 space-y-5">
-          <div class="bk-card-theme border rounded-2xl p-5 space-y-3">
-            <h3 class="text-sm sm:text-base font-bold bk-text-main flex items-center gap-2">
-              <i data-lucide="info" class="w-4 h-4 text-emerald-500"></i>
-              <span>What is <span id="post-about-name">Project</span> &amp; Airdrop Strategy</span>
-            </h3>
-            <p id="post-desc" class="text-xs sm:text-sm bk-text-sub leading-relaxed"></p>
-          </div>
-
-          <div class="bk-card-theme border rounded-2xl p-5 space-y-4">
-            <div class="flex items-center justify-between pb-3 border-b bk-border-theme">
-              <h3 class="text-sm sm:text-base font-bold bk-text-main flex items-center gap-2">
-                <i data-lucide="list-checks" class="w-4 h-4 text-emerald-500"></i>
-                <span>Step-by-Step Airdrop Tasks</span>
-              </h3>
-            </div>
-            <div id="post-steps-list" class="space-y-2.5"></div>
-          </div>
-        </div>
-
-        <div class="lg:col-span-4 space-y-5">
-          <div class="bk-card-theme border rounded-2xl p-5 space-y-3.5">
-            <h3 class="text-sm font-bold bk-text-main border-b bk-border-theme pb-2.5">Project Key Metrics</h3>
-            <div class="space-y-2.5 text-xs">
-              <div class="flex items-center justify-between py-1.5 border-b bk-border-theme/60">
-                <span class="bk-text-sub">Network / Chain</span>
-                <span id="post-chain" class="font-bold bk-text-main">Monad</span>
-              </div>
-              <div class="flex items-center justify-between py-1.5 border-b bk-border-theme/60">
-                <span class="bk-text-sub">Total Raised</span>
-                <span id="post-raised" class="font-bold text-emerald-500">$225M</span>
-              </div>
-              <div class="flex items-center justify-between py-1.5 border-b bk-border-theme/60">
-                <span class="bk-text-sub">Lead Investors</span>
-                <span id="post-backers" class="font-semibold bk-text-main">Paradigm</span>
-              </div>
-              <div class="flex items-center justify-between py-1.5">
-                <span class="bk-text-sub">Cost to Farm</span>
-                <span id="post-cost" class="font-bold bk-text-main">Free</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </div>
-
-  <!-- MOBILE BOTTOM NAVIGATION -->
-  <nav id="mobile-bottom-nav" class="lg:hidden fixed bottom-0 inset-x-0 z-30 bk-sidebar-theme/95 backdrop-blur-lg border-t px-2 py-1.5 flex items-center justify-around"></nav>
-
-  <!-- MASTER ADMIN CMS MODAL -->
-  <div id="admin-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-md p-2 sm:p-4 overflow-y-auto">
-    <div class="bk-card-theme border rounded-2xl max-w-6xl w-full overflow-hidden shadow-2xl my-auto max-h-[92vh] flex flex-col">
-
-      <div class="p-4 bk-sidebar-theme border-b flex flex-wrap items-center justify-between gap-3">
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-500">
-            <i data-lucide="shield-check" class="w-5 h-5"></i>
-          </div>
-          <div>
-            <h3 class="text-sm sm:text-base font-bold bk-text-main">Bullkarry Master Admin CMS</h3>
-            <p class="text-[11px] bk-text-sub">Manage Projects, Custom Menus &amp; Publish index.html</p>
-          </div>
-        </div>
-
-        <div class="flex items-center gap-2">
-          <button id="admin-export-top-btn" onclick="exportUpdatedHTML()" class="hidden px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-extrabold items-center gap-1.5 shadow-lg">
-            <i data-lucide="download" class="w-3.5 h-3.5"></i>
-            <span>Publish / Download index.html</span>
-          </button>
-          <button id="admin-logout-btn" onclick="adminLogout()" class="hidden px-3 py-1.5 rounded-xl bg-red-500/20 text-red-400 text-xs font-semibold">Lock Admin</button>
-          <button onclick="closeAdminModal()" class="w-8 h-8 rounded-xl bk-bg-theme flex items-center justify-center bk-text-sub"><i data-lucide="x" class="w-4 h-4"></i></button>
-        </div>
-      </div>
-
-      <!-- Admin Login View -->
-      <div id="admin-login-view" class="p-6 sm:p-8 max-w-md mx-auto w-full text-center space-y-4 my-auto">
-        <div class="w-14 h-14 rounded-2xl bg-emerald-500/15 border border-emerald-500/40 mx-auto flex items-center justify-center text-emerald-500">
-          <i data-lucide="key-round" class="w-6 h-6"></i>
-        </div>
-        <h4 class="text-lg font-bold bk-text-main">Owner CMS Login</h4>
-        <form onsubmit="handleAdminLogin(event)" class="space-y-3 text-left">
-          <input id="admin-password-input" type="password" placeholder="Enter password..." class="w-full px-3.5 py-2.5 rounded-xl bk-bg-theme border text-sm bk-text-main" required>
-          <p id="admin-login-error" class="hidden text-xs text-red-400">Incorrect password! Default is admin123</p>
-          <button type="submit" class="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs">Unlock Admin</button>
-        </form>
-      </div>
-
-      <!-- Admin Dashboard View -->
-      <div id="admin-dashboard-view" class="hidden flex-1 flex flex-col overflow-hidden">
-        <div class="bg-emerald-500/10 border-b border-emerald-500/30 px-4 py-2 text-xs bk-text-main">
-          <strong>Sync Notice:</strong> After adding projects or menus, click <strong>"Publish / Download index.html"</strong> to save permanent file.
-        </div>
-
-        <div class="bk-bg-theme border-b px-4 pt-2.5 flex items-center gap-2 overflow-x-auto no-scrollbar">
-          <button onclick="switchAdminTab('projects')" data-atab="projects" class="admin-tab-btn px-3.5 py-2 rounded-t-xl text-xs font-bold bk-card-theme text-emerald-500 border-t border-x">1. Projects &amp; Logos</button>
-          <button onclick="switchAdminTab('menus')" data-atab="menus" class="admin-tab-btn px-3.5 py-2 rounded-t-xl text-xs font-bold bk-text-sub">2. Custom Menus</button>
-        </div>
-
-        <div class="p-4 sm:p-5 overflow-y-auto flex-1 space-y-5">
-          <!-- TAB 1: PROJECTS -->
-          <div id="admin-tab-projects" class="space-y-5">
-            <div class="bk-bg-theme border rounded-2xl p-4">
-              <h4 class="text-sm font-bold bk-text-main mb-3">+ Add New Airdrop / Project</h4>
-              <form id="admin-project-form" onsubmit="saveProjectFromAdmin(event)" class="space-y-3.5">
-                <input type="hidden" id="form-id">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                  <div>
-                    <label class="block text-[11px] font-semibold bk-text-sub mb-1">Project Name *</label>
-                    <input id="form-name" type="text" required placeholder="Monad" class="w-full px-3 py-2 rounded-xl bk-card-theme border text-xs bk-text-main">
-                  </div>
-                  <div>
-                    <label class="block text-[11px] font-semibold bk-text-sub mb-1">Ticker</label>
-                    <input id="form-ticker" type="text" placeholder="$MON" class="w-full px-3 py-2 rounded-xl bk-card-theme border text-xs bk-text-main">
-                  </div>
-                  <div>
-                    <label class="block text-[11px] font-semibold bk-text-sub mb-1">Tag (NEW / CLAIM)</label>
-                    <select id="form-tag" class="w-full px-3 py-2 rounded-xl bk-card-theme border text-xs text-emerald-500 font-bold">
-                      <option value="NEW">🟢 NEW</option>
-                      <option value="CLAIM">⚡ CLAIM LIVE</option>
-                      <option value="NONE">No Tag</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label class="block text-[11px] font-semibold bk-text-sub mb-1">Status</label>
-                    <select id="form-status" class="w-full px-3 py-2 rounded-xl bk-card-theme border text-xs bk-text-main">
-                      <option value="Ongoing">Ongoing</option>
-                      <option value="Claim Live">Claim Live</option>
-                      <option value="Completed">Completed</option>
-                    </select>
-                  </div>
+        <!-- Main Content Area -->
+        <main class="flex-1 p-4 lg:p-8 max-w-7xl mx-auto w-full">
+            
+            <!-- Hero Title & Counters Section (Alphadrops Style) -->
+            <div class="mb-8">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h1 class="text-3xl lg:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-emerald-500 to-teal-400 bg-clip-text text-transparent">CRYPTO AIRDROPS</h1>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Discover, track, and farm verified high-yield Web3 crypto airdrops & alpha protocols.</p>
+                    </div>
+                    <!-- Quick Stats Counters -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                        <div class="bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-center shadow-sm">
+                            <span id="statActive" class="block text-xl font-extrabold text-emerald-500">14</span>
+                            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Active Drops</span>
+                        </div>
+                        <div class="bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-center shadow-sm">
+                            <span id="statClaimable" class="block text-xl font-extrabold text-blue-500">6</span>
+                            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Claimable</span>
+                        </div>
+                        <div class="bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-center shadow-sm">
+                            <span id="statEnded" class="block text-xl font-extrabold text-slate-400">8</span>
+                            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Ended</span>
+                        </div>
+                        <div class="bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-center shadow-sm">
+                            <span class="block text-xl font-extrabold text-purple-500">45K+</span>
+                            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Community</span>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  <div>
-                    <label class="block text-[11px] font-semibold bk-text-sub mb-1">Chain</label>
-                    <input id="form-chain" type="text" placeholder="Monad" class="w-full px-3 py-2 rounded-xl bk-card-theme border text-xs bk-text-main">
-                  </div>
-                  <div>
-                    <label class="block text-[11px] font-semibold bk-text-sub mb-1">Raised</label>
-                    <input id="form-raised" type="text" placeholder="$225M" class="w-full px-3 py-2 rounded-xl bk-card-theme border text-xs bk-text-main">
-                  </div>
-                  <div>
-                    <label class="block text-[11px] font-semibold text-emerald-500 mb-1">Join / Farm URL *</label>
-                    <input id="form-join-url" type="url" required placeholder="https://..." class="w-full px-3 py-2 rounded-xl bk-card-theme border text-xs bk-text-main">
-                  </div>
+                <!-- Auto-sliding Live Project Tracker Carousel -->
+                <div class="bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-sm mb-6 overflow-hidden">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                            <h3 class="font-bold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400">Live Trending Alpha Tracker</h3>
+                        </div>
+                        <span class="text-xs text-slate-400">Click any card to view complete guide</span>
+                    </div>
+                    <div id="trackerCarousel" class="flex gap-4 overflow-x-auto pb-2 scrollbar-none">
+                        <!-- Dynamically populated carousel cards -->
+                    </div>
                 </div>
-
-                <div>
-                  <label class="block text-[11px] font-semibold bk-text-sub mb-1">Description *</label>
-                  <textarea id="form-desc" rows="2" required placeholder="Overview..." class="w-full px-3 py-2 rounded-xl bk-card-theme border text-xs bk-text-main"></textarea>
-                </div>
-
-                <div>
-                  <label class="block text-[11px] font-semibold bk-text-sub mb-1">Steps (One per line | link)</label>
-                  <textarea id="form-steps" rows="2" required placeholder="Connect wallet | https://..." class="w-full px-3 py-2 rounded-xl bk-card-theme border text-xs bk-text-main font-mono"></textarea>
-                </div>
-
-                <button type="submit" class="px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs">Save &amp; Publish</button>
-              </form>
             </div>
 
-            <div class="bk-bg-theme border rounded-2xl p-4">
-              <h4 class="text-sm font-bold bk-text-main mb-3">Existing Projects</h4>
-              <div id="admin-projects-list" class="space-y-2"></div>
-            </div>
-          </div>
+            <!-- Quick Action Filter Buttons (Airdrops, Perp DEX, Claim, Checker, Raise) -->
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-8">
+                <button onclick="filterCategory('Airdrops')" class="flex items-center gap-3 p-4 rounded-2xl bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 hover:border-emerald-500/50 transition-all text-left shadow-sm group">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm">Airdrops</h4>
+                        <p class="text-[11px] text-slate-400">Active campaigns</p>
+                    </div>
+                </button>
 
-          <!-- TAB 2: CUSTOM MENUS -->
-          <div id="admin-tab-menus" class="hidden space-y-4">
-            <div class="bk-bg-theme border rounded-2xl p-4 space-y-3">
-              <h4 class="text-sm font-bold bk-text-main">Create New Custom Menu / Category Tab</h4>
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <input id="new-menu-id" type="text" placeholder="ID (e.g. events)" class="px-3 py-2 rounded-xl bk-card-theme border text-xs bk-text-main">
-                <input id="new-menu-label" type="text" placeholder="Label (e.g. Community Events)" class="px-3 py-2 rounded-xl bk-card-theme border text-xs bk-text-main">
-                <button onclick="createNewCustomMenu()" class="px-4 py-2 rounded-xl bg-emerald-500 text-white font-bold text-xs">+ Create Tab</button>
-              </div>
-            </div>
-            <div id="admin-menus-list" class="space-y-2"></div>
-          </div>
-        </div>
-      </div>
+                <button onclick="filterCategory('Perp DEX')" class="flex items-center gap-3 p-4 rounded-2xl bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 hover:border-blue-500/50 transition-all text-left shadow-sm group">
+                    <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm">Perp DEX</h4>
+                        <p class="text-[11px] text-slate-400">Trading volume</p>
+                    </div>
+                </button>
 
+                <button onclick="filterCategory('Claim')" class="flex items-center gap-3 p-4 rounded-2xl bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 hover:border-purple-500/50 transition-all text-left shadow-sm group">
+                    <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm">Claim Live</h4>
+                        <p class="text-[11px] text-slate-400">Tokens ready</p>
+                    </div>
+                </button>
+
+                <button onclick="filterCategory('Checker')" class="flex items-center gap-3 p-4 rounded-2xl bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all text-left shadow-sm group">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm">Checker</h4>
+                        <p class="text-[11px] text-slate-400">Eligibility check</p>
+                    </div>
+                </button>
+
+                <button onclick="filterCategory('Raise')" class="flex items-center gap-3 p-4 rounded-2xl bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 hover:border-rose-500/50 transition-all text-left shadow-sm group col-span-2 sm:col-span-1">
+                    <div class="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm">Fundraise</h4>
+                        <p class="text-[11px] text-slate-400">VC funding data</p>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Sponsor Banner Slot 1 -->
+            <div id="desktopSponsorBanner" class="mb-8 p-4 rounded-2xl bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between">
+                <!-- Populated dynamically -->
+            </div>
+
+            <!-- Project Cards Grid -->
+            <div class="flex items-center justify-between mb-4">
+                <h2 id="currentCategoryTitle" class="text-xl font-bold">All Verified Airdrops & Alpha</h2>
+                <span id="projectCountBadge" class="text-xs font-semibold px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Showing all</span>
+            </div>
+
+            <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
+                <!-- Populated dynamically via JS -->
+            </div>
+
+            <!-- FAQ Section -->
+            <section class="mb-12 bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+                <h3 class="text-xl font-bold mb-4">Frequently Asked Questions (FAQ)</h3>
+                <div id="faqContainer" class="space-y-4">
+                    <!-- Populated dynamically -->
+                </div>
+            </section>
+        </main>
     </div>
-  </div>
 
-  <div id="toast" class="fixed bottom-20 right-5 z-50 hidden items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-950 border border-emerald-500 text-emerald-200 text-xs font-semibold shadow-2xl">
-    <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
-    <span id="toast-msg">Saved!</span>
-  </div>
-
-  <!-- EMBEDDED DATA SCRIPT -->
-  <script id="app-data-script">
-    function makeCircularLogo(bg1, bg2, symbolText, accentColor = '#ffffff') {
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">
-        <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${bg1}"/><stop offset="100%" stop-color="${bg2}"/></linearGradient></defs>
-        <circle cx="80" cy="80" r="80" fill="url(#g)"/>
-        <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" fill="${accentColor}" font-family="Space Grotesk, Inter" font-weight="800" font-size="48">${symbolText}</text>
-      </svg>`;
-      return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
-    }
-
-    /* __START_EMBEDDED_DATA__ */
-    const DEFAULT_SITE_CONFIG = {
-      themeMode: 'light',
-      menus: [
-        { id: 'all', label: 'Dashboard', icon: 'layout-grid', visible: true },
-        { id: 'airdrop', label: 'Airdrops', icon: 'airdrop-box', visible: true, pill: 'NEW' },
-        { id: 'perp', label: 'Perp DEX', icon: 'candlestick-chart', visible: true },
-        { id: 'claim', label: 'Claim Portal', icon: 'gift', visible: true },
-        { id: 'completed', label: 'Completed', icon: 'archive', visible: true }
-      ],
-      quickActions: [
-        { id: 'airdrop', label: 'Airdrops', badge: 'NEW', icon: 'sparkles' },
-        { id: 'perp', label: 'Perp DEX', badge: 'PERP', icon: 'candlestick-chart' },
-        { id: 'claim', label: 'Claim', badge: 'LIVE', icon: 'gift' },
-        { id: 'checker', label: 'Checker', badge: 'CHECK', icon: 'scan-search' },
-        { id: 'raise', label: 'Raise', badge: 'FUNDING', icon: 'trending-up' }
-      ],
-      faqs: [
-        { q: 'What are Crypto Airdrops and how do they work?', a: 'Crypto airdrops reward early testnet users and community members with tokens at TGE.' },
-        { q: 'How do I track my progress on Bullkarry?', a: 'Click any project card to open its full post and check off completed tasks.' }
-      ],
-      ads: {
-        sidebar: { enabled: true, title: 'Hyperliquid Season 2', subtitle: 'Farm Perps & Points', targetUrl: 'https://app.hyperliquid.xyz' }
-      }
-    };
-
-    const DEFAULT_PROJECTS = [
-      {
-        id: 'monad-testnet',
-        name: 'Monad',
-        ticker: '$MON',
-        logoUrl: makeCircularLogo('#3b0764', '#7c3aed', 'M', '#f5f3ff'),
-        categories: ['airdrop', 'raise'],
-        tag: 'NEW',
-        status: 'Ongoing',
-        chain: 'Monad',
-        raised: '$225M Series A',
-        backers: 'Paradigm',
-        desc: '10,000 TPS parallel EVM Layer-1 blockchain backed by Paradigm.',
-        joinUrl: 'https://testnet.monad.xyz',
-        steps: ['Connect Rabby wallet to Monad Testnet | https://testnet.monad.xyz', 'Claim free MON testnet tokens']
-      },
-      {
-        id: 'berachain-claim',
-        name: 'Berachain Airdrop',
-        ticker: '$BERA',
-        logoUrl: makeCircularLogo('#78350f', '#f59e0b', '🐻', '#fffbeb'),
-        categories: ['claim'],
-        tag: 'CLAIM',
-        status: 'Claim Live',
-        chain: 'Berachain',
-        raised: '$142M',
-        backers: 'Polychain',
-        desc: 'Proof-of-Liquidity Layer-1 blockchain claim portal.',
-        joinUrl: 'https://checker.berachain.com',
-        steps: ['Open Berachain Eligibility Checker | https://checker.berachain.com', 'Claim $BERA tokens']
-      }
-    ];
-    /* __END_EMBEDDED_DATA__ */
-  </script>
-
-  <!-- MAIN APP SCRIPT -->
-  <script>
-    let siteConfig = {}, projects = [], trackedIds = [], completedSteps = {};
-    let activeCategory = 'all', activeTagFilter = 'ALL', searchQuery = '', currentPostProjectId = null, isMarqueePaused = false;
-
-    function initApp() {
-      try {
-        siteConfig = JSON.parse(localStorage.getItem('bk_cfg_v6')) || JSON.parse(JSON.stringify(DEFAULT_SITE_CONFIG));
-        projects = JSON.parse(localStorage.getItem('bk_proj_v6')) || JSON.parse(JSON.stringify(DEFAULT_PROJECTS));
-        trackedIds = JSON.parse(localStorage.getItem('bk_trk_v6')) || ['monad-testnet'];
-        completedSteps = JSON.parse(localStorage.getItem('bk_stp_v6')) || {};
-      } catch(e) {
-        siteConfig = JSON.parse(JSON.stringify(DEFAULT_SITE_CONFIG));
-        projects = JSON.parse(JSON.stringify(DEFAULT_PROJECTS));
-      }
-      applyThemeMode(siteConfig.themeMode || 'light');
-      renderEntireSite();
-    }
-
-    function saveState() {
-      localStorage.setItem('bk_cfg_v6', JSON.stringify(siteConfig));
-      localStorage.setItem('bk_proj_v6', JSON.stringify(projects));
-    }
-
-    function toggleTheme() {
-      siteConfig.themeMode = (siteConfig.themeMode === 'light') ? 'dark' : 'light';
-      saveState();
-      applyThemeMode(siteConfig.themeMode);
-    }
-
-    function applyThemeMode(mode) {
-      const root = document.getElementById('html-root');
-      if (mode === 'dark') { root.classList.remove('light'); root.classList.add('dark'); }
-      else { root.classList.remove('dark'); root.classList.add('light'); }
-    }
-
-    function resolveLogoUrl(p) {
-      if (p.logoUrl && p.logoUrl.trim() !== '') return p.logoUrl.trim();
-      return makeCircularLogo('#0f172a', '#10b981', (p.name || 'B').charAt(0));
-    }
-
-    function renderEntireSite() {
-      renderNavigationMenus();
-      renderQuickActions();
-      renderSlidingMarquee();
-      renderProjectsGrid();
-      renderFaqSection();
-      renderSidebarAd();
-      updateHeroStats();
-      updateAdminLockUI();
-      lucide.createIcons();
-    }
-
-    function renderNavigationMenus() {
-      const desktopNav = document.getElementById('desktop-sidebar-nav');
-      const mobileNav = document.getElementById('mobile-bottom-nav');
-      const menus = (siteConfig.menus || []).filter(m => m.visible !== false);
-
-      desktopNav.innerHTML = menus.map(m => {
-        const isActive = activeCategory === m.id && !currentPostProjectId;
-        return `
-          <button onclick="selectCategory('${m.id}', true)" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition ${isActive ? 'nav-active' : 'bk-text-sub hover:bk-text-main hover:bg-black/5 dark:hover:bg-white/5'}">
-            <div class="flex items-center gap-2.5 truncate">
-              <i data-lucide="${m.icon || 'box'}" class="w-4 h-4 shrink-0"></i>
-              <span class="truncate">${m.label}</span>
+    <!-- Project Detail Post View Modal / Page Overlay -->
+    <div id="projectPostModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+        <div class="bg-white dark:bg-[#0b0f17] border border-slate-200 dark:border-slate-800 rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 sm:p-8 relative">
+            <button onclick="closeProjectModal()" class="absolute top-6 right-6 p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div id="modalContentBody">
+                <!-- Dynamically populated post content -->
             </div>
-            ${m.pill ? `<span class="text-[9px] font-bold px-1.5 py-0.5 rounded badge-new">${m.pill}</span>` : ''}
-          </button>`;
-      }).join('');
-
-      mobileNav.innerHTML = menus.slice(0, 5).map(m => `
-        <button onclick="selectCategory('${m.id}', true)" class="flex flex-col items-center py-1 px-2.5 rounded-xl ${activeCategory === m.id ? 'text-emerald-500 font-bold' : 'bk-text-sub'}">
-          <i data-lucide="${m.icon || 'box'}" class="w-5 h-5"></i>
-          <span class="text-[10px] mt-1">${m.label}</span>
-        </button>`).join('');
-    }
-
-    function renderQuickActions() {
-      const container = document.getElementById('quick-actions-container');
-      container.innerHTML = (siteConfig.quickActions || []).map(qa => {
-        const isActive = activeCategory === qa.id;
-        return `
-          <button onclick="selectCategory('${qa.id}', true)" class="quick-action-btn ${isActive ? 'quick-action-active' : ''} group flex flex-col items-center p-1.5 rounded-2xl">
-            <div class="relative mb-1.5">
-              ${qa.badge ? `<span class="absolute -top-1.5 -right-2.5 z-10 text-[9px] font-extrabold px-1.5 py-0.5 rounded-md bg-emerald-500 text-white shadow">${qa.badge}</span>` : ''}
-              <div class="qa-box w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bk-card-theme border flex items-center justify-center bk-text-main group-hover:bg-emerald-500 group-hover:text-white transition shadow">
-                <i data-lucide="${qa.icon || 'sparkles'}" class="w-5 h-5 sm:w-6 sm:h-6"></i>
-              </div>
-            </div>
-            <span class="text-[11px] sm:text-xs font-semibold bk-text-main text-center">${qa.label}</span>
-          </button>`;
-      }).join('');
-    }
-
-    function renderSlidingMarquee() {
-      const track = document.getElementById('sliding-marquee-track');
-      if (!track) return;
-      const loop = [...projects, ...projects];
-      track.innerHTML = loop.map(p => `
-        <div onclick="openProjectPostView('${p.id}')" class="w-[260px] shrink-0 bk-card-theme border rounded-xl p-3 cursor-pointer hover:border-emerald-500 transition flex items-center justify-between gap-3 group shadow-sm">
-          <div class="flex items-center gap-2.5 min-w-0">
-            <img src="${resolveLogoUrl(p)}" class="w-10 h-10 rounded-full object-cover border shrink-0 bg-slate-900" />
-            <div class="min-w-0">
-              <div class="text-xs font-bold bk-text-main group-hover:text-emerald-500 truncate">${p.name}</div>
-              <div class="text-[10px] bk-text-sub truncate">${p.chain} • <span class="text-emerald-500 font-semibold">${p.raised || ''}</span></div>
-            </div>
-          </div>
-          <i data-lucide="chevron-right" class="w-4 h-4 bk-text-sub group-hover:text-emerald-500 shrink-0"></i>
-        </div>`).join('');
-    }
-
-    function toggleMarqueePause() {
-      isMarqueePaused = !isMarqueePaused;
-      document.getElementById('marquee-outer').classList.toggle('marquee-paused', isMarqueePaused);
-      document.getElementById('marquee-pause-text').textContent = isMarqueePaused ? 'Resume' : 'Pause';
-    }
-
-    function updateHeroStats() {
-      document.getElementById('stat-active-count').textContent = projects.filter(p => p.status === 'Ongoing').length;
-      document.getElementById('stat-claim-count').textContent = projects.filter(p => p.status === 'Claim Live').length;
-      document.getElementById('stat-completed-count').textContent = projects.filter(p => p.status === 'Completed').length;
-      document.getElementById('sidebar-streak-count').textContent = `${trackedIds.length} Projects`;
-    }
-
-    function renderSidebarAd() {
-      const ad = siteConfig.ads && siteConfig.ads.sidebar;
-      const wrap = document.getElementById('sidebar-ad-wrapper');
-      if (!ad || !ad.enabled) { wrap.classList.add('hidden'); return; }
-      wrap.classList.remove('hidden');
-      wrap.innerHTML = `
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-500">SPONSORED</span>
-          <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800 bk-text-sub">AD</span>
         </div>
-        <a href="${ad.targetUrl || '#'}" target="_blank" rel="noopener noreferrer" class="block group">
-          <h4 class="text-xs font-bold bk-text-main group-hover:text-emerald-500">${ad.title}</h4>
-          <p class="text-[11px] bk-text-sub mt-1">${ad.subtitle}</p>
-          <div class="mt-2 text-xs font-bold text-emerald-500">Explore ↗</div>
-        </a>`;
-    }
+    </div>
 
-    function getFilteredProjects() {
-      return projects.filter(p => {
-        if (activeCategory === 'completed' && p.status !== 'Completed') return false;
-        if (activeCategory !== 'all' && activeCategory !== 'completed') {
-          if (!(p.categories || []).includes(activeCategory) && activeCategory !== 'claim') return false;
-          if (activeCategory === 'claim' && !p.categories.includes('claim') && p.status !== 'Claim Live') return false;
-        }
-        if (activeTagFilter === 'NEW' && p.tag !== 'NEW') return false;
-        if (activeTagFilter === 'CLAIM LIVE' && p.tag !== 'CLAIM') return false;
-        if (activeTagFilter === 'Completed' && p.status !== 'Completed') return false;
-        if (searchQuery.trim() !== '') {
-          const q = searchQuery.toLowerCase();
-          if (!p.name.toLowerCase().includes(q) && !(p.chain || '').toLowerCase().includes(q)) return false;
-        }
-        return true;
-      });
-    }
-
-    function renderProjectsGrid() {
-      const grid = document.getElementById('projects-grid');
-      const empty = document.getElementById('empty-state');
-      const filtered = getFilteredProjects();
-      document.getElementById('directory-count-badge').textContent = filtered.length;
-
-      if (filtered.length === 0) { grid.innerHTML = ''; empty.classList.remove('hidden'); return; }
-      empty.classList.add('hidden');
-
-      grid.innerHTML = filtered.map(p => {
-        const isTracked = trackedIds.includes(p.id);
-        const tagBadge = p.tag === 'NEW' ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded badge-new">NEW</span>' : p.tag === 'CLAIM' ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded badge-claim">CLAIM LIVE</span>' : '';
-        return `
-          <div onclick="openProjectPostView('${p.id}')" class="bk-card-theme border rounded-2xl p-4 flex flex-col justify-between cursor-pointer hover:border-emerald-500 transition shadow-sm group">
-            <div>
-              <div class="flex items-start justify-between gap-2.5 mb-3">
-                <div class="flex items-center gap-3 min-w-0">
-                  <img src="${resolveLogoUrl(p)}" class="w-11 h-11 rounded-full object-cover border shrink-0 bg-slate-900" />
-                  <div class="min-w-0">
-                    <h3 class="text-sm sm:text-base font-bold bk-text-main group-hover:text-emerald-500 truncate">${p.name}</h3>
-                    <div class="text-[11px] bk-text-sub mt-0.5">${p.chain} • <span class="text-emerald-500 font-semibold">${p.raised || ''}</span></div>
-                  </div>
+    <!-- Master Admin CMS Modal -->
+    <div id="adminModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white dark:bg-[#0b0f17] border border-slate-200 dark:border-slate-800 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 sm:p-8 relative">
+            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-200 dark:border-slate-800">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center text-white font-bold">CMS</div>
+                    <div>
+                        <h3 class="text-xl font-bold">Master Owner Admin Panel</h3>
+                        <p class="text-xs text-slate-400">Complete control over airdrops, branding, ads, and menus</p>
+                    </div>
                 </div>
-                <div>${tagBadge}</div>
-              </div>
-              <p class="text-xs bk-text-sub line-clamp-2 mb-3.5">${p.desc}</p>
+                <button onclick="closeAdminModal()" class="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
             </div>
-            <div class="pt-2.5 border-t bk-border-theme flex items-center justify-between text-xs">
-              <button onclick="event.stopPropagation(); toggleTrackProject('${p.id}')" class="px-2.5 py-1 rounded-lg font-semibold flex items-center gap-1 ${isTracked ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400' : 'bk-bg-theme bk-text-sub'}">
-                <i data-lucide="${isTracked ? 'check-circle-2' : 'bookmark'}" class="w-3.5 h-3.5"></i>
-                <span>${isTracked ? 'Tracked' : 'Track'}</span>
-              </button>
-              <span class="font-bold text-emerald-500">Open ↗</span>
+
+            <!-- Admin Login or Dashboard -->
+            <div id="adminLoginSection">
+                <div class="max-w-md mx-auto py-8 text-center">
+                    <h4 class="text-lg font-bold mb-2">Enter Admin Password</h4>
+                    <p class="text-xs text-slate-400 mb-6">Default password is <code class="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded text-emerald-500">admin123</code></p>
+                    <input type="password" id="adminPasswordInput" placeholder="Enter password..." class="w-full px-4 py-3 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl mb-4 text-sm focus:outline-none focus:border-emerald-500">
+                    <button onclick="verifyAdminLogin()" class="w-full py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl shadow-lg shadow-emerald-500/20 transition-all">Access Admin Panel</button>
+                </div>
             </div>
-          </div>`;
-      }).join('');
-      lucide.createIcons();
-    }
 
-    function renderFaqSection() {
-      const container = document.getElementById('faq-accordion-list');
-      if (!container) return;
-      container.innerHTML = (siteConfig.faqs || []).map((f, idx) => `
-        <div class="py-3.5">
-          <div class="font-bold bk-text-main text-xs sm:text-sm">${f.q}</div>
-          <div class="mt-2 text-xs sm:text-sm bk-text-sub leading-relaxed bk-bg-theme p-3.5 rounded-xl border">${f.a}</div>
-        </div>`).join('');
-    }
+            <div id="adminDashboardSection" class="hidden">
+                <!-- Admin Tabs -->
+                <div class="flex flex-wrap gap-2 mb-6 border-b border-slate-200 dark:border-slate-800 pb-4">
+                    <button onclick="switchAdminTab('projects')" id="adminTabBtn-projects" class="px-4 py-2 rounded-xl text-sm font-bold bg-emerald-500 text-white">Manage Airdrops</button>
+                    <button onclick="switchAdminTab('branding')" id="adminTabBtn-branding" class="px-4 py-2 rounded-xl text-sm font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Branding & Logo</button>
+                    <button onclick="switchAdminTab('ads')" id="adminTabBtn-ads" class="px-4 py-2 rounded-xl text-sm font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Ads & Sponsors</button>
+                    <button onclick="switchAdminTab('menus')" id="adminTabBtn-menus" class="px-4 py-2 rounded-xl text-sm font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Custom Menus & FAQs</button>
+                </div>
 
-    function openProjectPostView(id) {
-      const p = projects.find(item => item.id === id);
-      if (!p) return;
-      currentPostProjectId = id;
-      document.getElementById('front-page-view').classList.add('hidden');
-      document.getElementById('project-post-view').classList.remove('hidden');
+                <!-- Tab 1: Manage Airdrops -->
+                <div id="adminTab-projects" class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h4 class="font-bold text-lg">All Projects & Airdrops</h4>
+                        <button onclick="openAddProjectModal()" class="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded-xl shadow-md">+ Add New Project</button>
+                    </div>
+                    <div id="adminProjectsList" class="space-y-3 max-h-[50vh] overflow-y-auto pr-2">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
 
-      document.getElementById('post-logo-img').src = resolveLogoUrl(p);
-      document.getElementById('post-title').textContent = p.name;
-      document.getElementById('post-about-name').textContent = p.name;
-      document.getElementById('post-desc').textContent = p.desc;
-      document.getElementById('post-chain').textContent = p.chain;
-      document.getElementById('post-raised').textContent = p.raised || 'TBA';
-      document.getElementById('post-backers').textContent = p.backers || 'Tier-1 VCs';
+                <!-- Tab 2: Branding -->
+                <div id="adminTab-branding" class="space-y-6 hidden">
+                    <h4 class="font-bold text-lg">Website Branding & BK Logo</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-2">Upload or Enter BK Logo Image URL</label>
+                            <input type="text" id="adminLogoUrlInput" placeholder="https://example.com/logo.png" class="w-full px-4 py-2.5 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm mb-3">
+                            <input type="file" id="adminLogoFileInput" accept="image/*" onchange="handleLogoUpload(event)" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-emerald-500 file:text-white hover:file:bg-emerald-600">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-2">Change Admin Password & Recovery Email</label>
+                            <input type="text" id="adminNewPassInput" placeholder="New Password" class="w-full px-4 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm mb-3">
+                            <input type="email" id="adminRecoveryEmailInput" placeholder="Recovery Email" class="w-full px-4 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm mb-3">
+                        </div>
+                    </div>
+                    <button onclick="saveBrandingSettings()" class="px-5 py-2.5 bg-emerald-500 text-white text-sm font-bold rounded-xl shadow-md">Save Branding Changes</button>
+                </div>
 
-      const stepsList = document.getElementById('post-steps-list');
-      const done = completedSteps[p.id] || [];
-      stepsList.innerHTML = (p.steps || []).map((s, idx) => {
-        const isDone = done.includes(idx);
-        const parts = s.split('|');
-        return `
-          <div onclick="toggleStepCompletion('${p.id}', ${idx})" class="flex items-center justify-between gap-3 p-3 rounded-xl border cursor-pointer ${isDone ? 'bg-emerald-500/10 border-emerald-500/30 line-through text-emerald-600 dark:text-emerald-400' : 'bk-bg-theme bk-text-main'}">
-            <div class="flex items-center gap-2.5">
-              <div class="w-5 h-5 rounded border flex items-center justify-center shrink-0 ${isDone ? 'bg-emerald-500 text-white border-emerald-500' : ''}">${isDone ? '✓' : idx + 1}</div>
-              <span class="text-xs sm:text-sm">${parts[0].trim()}</span>
+                <!-- Tab 3: Ads & Sponsors -->
+                <div id="adminTab-ads" class="space-y-6 hidden">
+                    <h4 class="font-bold text-lg">Sponsored Ad Slots Control</h4>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-2">Desktop Top Banner HTML / Image Link</label>
+                            <textarea id="adminAdHtmlInput" rows="3" class="w-full p-3 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm font-mono"></textarea>
+                        </div>
+                    </div>
+                    <button onclick="saveAdSettings()" class="px-5 py-2.5 bg-emerald-500 text-white text-sm font-bold rounded-xl shadow-md">Save Ad Slots</button>
+                </div>
+
+                <!-- Tab 4: Menus & FAQs -->
+                <div id="adminTab-menus" class="space-y-6 hidden">
+                    <h4 class="font-bold text-lg">Manage Custom Menus & FAQs</h4>
+                    <p class="text-xs text-slate-400">Add custom navigation links and edit FAQ questions directly from here.</p>
+                    <div id="adminFaqList" class="space-y-3">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
             </div>
-            ${parts[1] ? `<a href="${parts[1].trim()}" target="_blank" onclick="event.stopPropagation()" class="px-2.5 py-1 rounded bg-emerald-500 text-white text-[10px] font-bold">Open ↗</a>` : ''}
-          </div>`;
-      }).join('');
+        </div>
+    </div>
 
-      document.getElementById('post-primary-cta-wrap').innerHTML = `
-        <a href="${p.joinUrl}" target="_blank" class="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-extrabold flex items-center gap-1.5 shadow">
-          <span>Start Farming</span> <i data-lucide="external-link" class="w-4 h-4"></i>
-        </a>`;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      lucide.createIcons();
-    }
+    <!-- Add/Edit Project Modal (Admin) -->
+    <div id="editProjectModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white dark:bg-[#0b0f17] border border-slate-200 dark:border-slate-800 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 sm:p-8 relative">
+            <h3 id="editProjectModalTitle" class="text-xl font-bold mb-4">Add / Edit Project</h3>
+            <input type="hidden" id="editProjectId">
+            <div class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Project Name</label>
+                        <input type="text" id="epName" class="w-full px-3.5 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Category</label>
+                        <select id="epCategory" class="w-full px-3.5 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm">
+                            <option value="Airdrops">Airdrops</option>
+                            <option value="Perp DEX">Perp DEX</option>
+                            <option value="Tracker">Tracker</option>
+                            <option value="Claim">Claim</option>
+                            <option value="Checker">Checker</option>
+                            <option value="Raise">Raise</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Logo Image URL or Upload</label>
+                        <input type="text" id="epLogo" placeholder="https://..." class="w-full px-3.5 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm mb-2">
+                        <input type="file" accept="image/*" onchange="handleProjectLogoUpload(event)" class="w-full text-xs text-slate-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Status Tag</label>
+                        <select id="epTag" class="w-full px-3.5 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm">
+                            <option value="NEW">NEW</option>
+                            <option value="CLAIM LIVE">CLAIM LIVE</option>
+                            <option value="HOT">HOT</option>
+                            <option value="COMPLETED">COMPLETED</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">Short Description</label>
+                    <input type="text" id="epDesc" class="w-full px-3.5 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Fund Raised / Metrics</label>
+                        <input type="text" id="epRaise" placeholder="$225M Raised" class="w-full px-3.5 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">App Link / Redirect URL</label>
+                        <input type="text" id="epLink" placeholder="https://..." class="w-full px-3.5 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">Step-by-Step Farming Guide (Line by line)</label>
+                    <textarea id="epSteps" rows="4" placeholder="1. Connect Wallet\n2. Bridge funds\n3. Swap weekly" class="w-full p-3 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm font-mono"></textarea>
+                </div>
+            </div>
+            <div class="flex items-center justify-end gap-3 mt-6">
+                <button onclick="closeEditProjectModal()" class="px-4 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-sm font-bold">Cancel</button>
+                <button onclick="saveProjectFromModal()" class="px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-bold shadow-md">Save Project</button>
+            </div>
+        </div>
+    </div>
 
-    function closeProjectPostView() {
-      currentPostProjectId = null;
-      document.getElementById('project-post-view').classList.add('hidden');
-      document.getElementById('front-page-view').classList.remove('hidden');
-      lucide.createIcons();
-    }
+    <!-- Application Script -->
+    <script>
+        // Initial Database Store
+        let appData = {
+            logo: "BK",
+            logoImg: "",
+            adminPass: "admin123",
+            recoveryEmail: "ajeet@bullkarry.com",
+            adHtml: '<div class="flex items-center justify-between w-full p-4 rounded-xl bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-500/20"><div><span class="text-xs font-bold text-emerald-500 uppercase">Featured Sponsor</span><h4 class="font-bold text-sm">Trade Monad Perpetuals with 0% Slippage on Bullkarry DEX</h4></div><a href="https://monad.xyz" target="_blank" class="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs rounded-xl shadow-md">Explore Now</a></div>',
+            faqs: [
+                { q: "What is Bullkarry Airdrop Hub?", a: "Bullkarry is your ultimate multi-chain crypto airdrop aggregator and alpha tracking web platform, built to help you discover and farm verified high-yield crypto airdrops." },
+                { q: "How do I claim my airdrop tokens?", a: "Click on any project card to view the step-by-step guide and click the official claim or check eligibility button." },
+                { q: "Is Bullkarry free to use?", a: "Yes! 100% free community alpha platform created by Ajeet Jhurawat." }
+            ],
+            projects: [
+                {
+                    id: 1,
+                    name: "Monad Testnet",
+                    category: "Airdrops",
+                    logo: "https://assets.coingecko.com/coins/images/325/large/Tether.png",
+                    tag: "NEW",
+                    desc: "High-performance EVM parallel execution L1 blockchain with massive ecosystem backing.",
+                    raise: "$225M Raised",
+                    link: "https://monad.xyz",
+                    steps: "1. Add Monad Testnet to MetaMask\n2. Request testnet MON from official faucet\n3. Interact with testnet DEXs and lending protocols\n4. Complete weekly transaction streaks"
+                },
+                {
+                    id: 2,
+                    name: "Hyperliquid S2",
+                    category: "Perp DEX",
+                    logo: "https://assets.coingecko.com/coins/images/279/large/ethereum.png",
+                    tag: "CLAIM LIVE",
+                    desc: "Leading decentralized perpetual exchange with native L1 and Season 2 point rewards.",
+                    raise: "$180M Vol/Day",
+                    link: "https://hyperliquid.xyz",
+                    steps: "1. Deposit USDC on Arbitrum or Native\n2. Open perpetual positions on Hyperliquid DEX\n3. Maintain trading volume to accumulate S2 points\n4. Check eligibility on official claim portal"
+                },
+                {
+                    id: 3,
+                    name: "Abstract Chain",
+                    category: "Airdrops",
+                    logo: "https://assets.coingecko.com/coins/images/325/large/Tether.png",
+                    tag: "NEW",
+                    desc: "Consumer-focused ZK rollup built on Ethereum by Igloo Inc (Pudgy Penguins).",
+                    raise: "$110M Raised",
+                    link: "https://abstract.xyz",
+                    steps: "1. Bridge ETH to Abstract Testnet\n2. Mint official Pudgy Test badges\n3. Provide liquidity on native AMM pools"
+                },
+                {
+                    id: 4,
+                    name: "Berachain Artio",
+                    category: "Claim",
+                    logo: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png",
+                    tag: "CLAIM LIVE",
+                    desc: "EVM-equivalent L1 built on Proof-of-Liquidity consensus framework.",
+                    raise: "$142M Raised",
+                    link: "https://berachain.com",
+                    steps: "1. Claim BERA faucet tokens\n2. Stake BERA in validators to earn BGT\n3. Provide liquidity on Honey DEX"
+                },
+                {
+                    id: 5,
+                    name: "EigenLayer Restaking",
+                    category: "Tracker",
+                    logo: "https://assets.coingecko.com/coins/images/279/large/ethereum.png",
+                    tag: "HOT",
+                    desc: "Ethereum restaking protocol enabling pooled security for decentralized services.",
+                    raise: "$164M Raised",
+                    link: "https://eigenlayer.xyz",
+                    steps: "1. Restake LSTs (stETH, rETH) on EigenLayer\n2. Delegate to active operators\n3. Earn restaking points and ecosystem drops"
+                },
+                {
+                    id: 6,
+                    name: "Sahara AI",
+                    category: "Checker",
+                    logo: "https://assets.coingecko.com/coins/images/325/large/Tether.png",
+                    tag: "NEW",
+                    desc: "Decentralized AI network for sovereign data and knowledge contribution.",
+                    raise: "$43M Raised",
+                    link: "https://saharacloud.ai",
+                    steps: "1. Create Sahara account & connect wallet\n2. Complete daily AI data labeling tasks\n3. Check airdrop allocation score"
+                }
+            ]
+        };
 
-    function goHomeFrontPage() { closeProjectPostView(); selectCategory('all', false); }
+        // Load saved local data if available
+        if (localStorage.getItem('bullkarry_db')) {
+            try {
+                appData = JSON.parse(localStorage.getItem('bullkarry_db'));
+            } catch(e) {}
+        }
 
-    function selectCategory(catId, shouldScroll = true) {
-      if (currentPostProjectId) closeProjectPostView();
-      activeCategory = catId;
-      renderNavigationMenus();
-      renderQuickActions();
-      renderProjectsGrid();
-      if (shouldScroll) document.getElementById('airdrop-directory-section').scrollIntoView({ behavior: 'smooth' });
-    }
+        let currentFilter = 'all';
 
-    function setQuickTagFilter(qtf) { activeTagFilter = qtf; renderProjectsGrid(); }
+        // Initialize App UI
+        function initApp() {
+            renderHeaderLogo();
+            renderStats();
+            renderCarousel();
+            renderSponsors();
+            renderProjects();
+            renderFaqs();
+        }
 
-    function toggleTrackProject(id) {
-      const idx = trackedIds.indexOf(id);
-      if (idx > -1) trackedIds.splice(idx, 1);
-      else trackedIds.push(id);
-      localStorage.setItem('bk_trk_v6', JSON.stringify(trackedIds));
-      renderEntireSite();
-    }
+        function renderHeaderLogo() {
+            const container = document.getElementById('headerLogoContainer');
+            if (appData.logoImg) {
+                container.innerHTML = `<img src="${appData.logoImg}" class="w-full h-full object-cover rounded-xl">`;
+            } else {
+                container.innerText = appData.logo || "BK";
+            }
+        }
 
-    function toggleStepCompletion(pid, idx) {
-      if (!completedSteps[pid]) completedSteps[pid] = [];
-      const arr = completedSteps[pid];
-      const i = arr.indexOf(idx);
-      if (i > -1) arr.splice(i, 1);
-      else arr.push(idx);
-      localStorage.setItem('bk_stp_v6', JSON.stringify(completedSteps));
-      openProjectPostView(pid);
-    }
+        function renderStats() {
+            const active = appData.projects.filter(p => p.tag === 'NEW' || p.tag === 'HOT').length;
+            const claimable = appData.projects.filter(p => p.tag === 'CLAIM LIVE').length;
+            const ended = appData.projects.filter(p => p.tag === 'COMPLETED').length;
+            
+            document.getElementById('statActive').innerText = active;
+            document.getElementById('statClaimable').innerText = claimable;
+            document.getElementById('statEnded').innerText = ended;
+        }
 
-    function resetAllFilters() {
-      activeCategory = 'all'; activeTagFilter = 'ALL'; searchQuery = '';
-      document.getElementById('search-input').value = '';
-      selectCategory('all', false);
-    }
+        function renderCarousel() {
+            const container = document.getElementById('trackerCarousel');
+            container.innerHTML = appData.projects.map(p => `
+                <div onclick="openProjectModal(${p.id})" class="min-w-[220px] max-w-[220px] p-3 rounded-xl bg-slate-50 dark:bg-[#0b0f17] border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-emerald-500/50 transition-all flex items-center gap-3">
+                    <img src="${p.logo}" class="w-10 h-10 rounded-full object-cover bg-slate-200 dark:bg-slate-700" onerror="this.src='https://via.placeholder.com/40'">
+                    <div class="overflow-hidden">
+                        <h4 class="font-bold text-xs truncate">${p.name}</h4>
+                        <span class="text-[10px] text-emerald-500 font-semibold">${p.raise || 'Active'}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
 
-    function handleSearch(val) { searchQuery = val; renderProjectsGrid(); }
-    function clearSearch() { searchQuery = ''; document.getElementById('search-input').value = ''; renderProjectsGrid(); }
+        function renderSponsors() {
+            document.getElementById('desktopSponsorBanner').innerHTML = appData.adHtml;
+        }
 
-    // Admin CMS Functions
-    function isAdminUnlocked() { return sessionStorage.getItem('bk_adm_v6') === 'true'; }
-    function openAdminModal() {
-      const modal = document.getElementById('admin-modal');
-      modal.classList.remove('hidden'); modal.classList.add('flex');
-      if (isAdminUnlocked()) {
-        document.getElementById('admin-login-view').classList.add('hidden');
-        document.getElementById('admin-dashboard-view').classList.remove('hidden');
-        populateAdminCMS();
-      }
-    }
-    function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
+        function filterCategory(cat) {
+            currentFilter = cat;
+            document.getElementById('currentCategoryTitle').innerText = cat === 'all' ? 'All Verified Airdrops & Alpha' : `${cat} Projects`;
+            renderProjects();
+        }
 
-    function handleAdminLogin(e) {
-      e.preventDefault();
-      if (document.getElementById('admin-password-input').value === 'admin123') {
-        sessionStorage.setItem('bk_adm_v6', 'true');
-        document.getElementById('admin-login-view').classList.add('hidden');
-        document.getElementById('admin-dashboard-view').classList.remove('hidden');
-        updateAdminLockUI();
-        populateAdminCMS();
-      } else {
-        document.getElementById('admin-login-error').classList.remove('hidden');
-      }
-    }
+        function handleSearch(query) {
+            renderProjects(query);
+        }
 
-    function adminLogout() { sessionStorage.removeItem('bk_adm_v6'); updateAdminLockUI(); closeAdminModal(); }
-    function updateAdminLockUI() {
-      const unlocked = isAdminUnlocked();
-      document.getElementById('admin-status-pill').textContent = unlocked ? 'UNLOCKED' : 'LOCKED';
-      document.getElementById('admin-logout-btn').classList.toggle('hidden', !unlocked);
-      document.getElementById('admin-export-top-btn').classList.toggle('hidden', !unlocked);
-    }
+        function renderProjects(searchQuery = '') {
+            const grid = document.getElementById('projectsGrid');
+            let filtered = appData.projects;
 
-    function switchAdminTab(tab) {
-      ['projects', 'menus'].forEach(t => { document.getElementById(`admin-tab-${t}`).classList.toggle('hidden', t !== tab); });
-    }
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(p => p.category.toLowerCase() === currentFilter.toLowerCase());
+            }
 
-    function populateAdminCMS() {
-      renderAdminProjectsTable();
-      renderAdminMenusList();
-    }
+            if (searchQuery.trim() !== '') {
+                const q = searchQuery.toLowerCase();
+                filtered = filtered.filter(p => p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q) || p.category.toLowerCase().includes(q));
+            }
 
-    function saveProjectFromAdmin(e) {
-      e.preventDefault();
-      const name = document.getElementById('form-name').value;
-      const pObj = {
-        id: 'proj-' + Date.now(),
-        name,
-        ticker: document.getElementById('form-ticker').value,
-        logoUrl: makeCircularLogo('#0f172a', '#10b981', name.charAt(0)),
-        categories: ['airdrop'],
-        tag: document.getElementById('form-tag').value,
-        status: document.getElementById('form-status').value,
-        chain: document.getElementById('form-chain').value,
-        raised: document.getElementById('form-raised').value,
-        desc: document.getElementById('form-desc').value,
-        joinUrl: document.getElementById('form-join-url').value,
-        steps: document.getElementById('form-steps').value.split('\n').map(s => s.trim()).filter(Boolean)
-      };
-      projects.unshift(pObj);
-      saveState();
-      document.getElementById('admin-project-form').reset();
-      renderAdminProjectsTable();
-      renderEntireSite();
-      showToast('Project saved & published!');
-    }
+            document.getElementById('projectCountBadge').innerText = `Showing ${filtered.length} projects`;
 
-    function renderAdminProjectsTable() {
-      document.getElementById('admin-projects-list').innerHTML = projects.map(p => `
-        <div class="flex items-center justify-between p-2.5 rounded-xl bk-card-theme border text-xs">
-          <span class="font-bold bk-text-main">${p.name} (${p.chain})</span>
-          <button onclick="deleteProject('${p.id}')" class="px-2 py-1 bg-red-500/15 text-red-400 rounded">Delete</button>
-        </div>`).join('');
-    }
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400">No projects found matching your criteria.</div>`;
+                return;
+            }
 
-    function deleteProject(id) {
-      projects = projects.filter(x => x.id !== id);
-      saveState();
-      renderAdminProjectsTable();
-      renderEntireSite();
-    }
+            grid.innerHTML = filtered.map(p => `
+                <div onclick="openProjectModal(${p.id})" class="bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 hover:border-emerald-500/50 transition-all cursor-pointer shadow-sm flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center gap-3">
+                                <img src="${p.logo}" class="w-12 h-12 rounded-full object-cover bg-slate-200 dark:bg-slate-700 shadow-sm" onerror="this.src='https://via.placeholder.com/48'">
+                                <div>
+                                    <h3 class="font-extrabold text-base group-hover:text-emerald-500 transition-colors">${p.name}</h3>
+                                    <span class="text-xs text-slate-400">${p.category}</span>
+                                </div>
+                            </div>
+                            <span class="text-[10px] font-extrabold px-2.5 py-1 rounded-full ${p.tag === 'NEW' ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' : p.tag === 'CLAIM LIVE' ? 'bg-purple-500/10 text-purple-500 border border-purple-500/20' : 'bg-slate-500/10 text-slate-400'}">${p.tag}</span>
+                        </div>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 line-clamp-2 mb-4">${p.desc}</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800 text-xs">
+                        <span class="font-semibold text-emerald-500">${p.raise || 'Verified Alpha'}</span>
+                        <span class="font-bold text-slate-400 group-hover:text-emerald-500 flex items-center gap-1">View Guide →</span>
+                    </div>
+                </div>
+            `).join('');
+        }
 
-    function createNewCustomMenu() {
-      const id = document.getElementById('new-menu-id').value.trim().toLowerCase();
-      const label = document.getElementById('new-menu-label').value.trim();
-      if (!id || !label) { alert('Enter ID and Label'); return; }
-      if (!siteConfig.menus) siteConfig.menus = [];
-      siteConfig.menus.push({ id, label, icon: 'folder-kanban', visible: true });
-      saveState();
-      renderAdminMenusList();
-      renderNavigationMenus();
-      document.getElementById('new-menu-id').value = '';
-      document.getElementById('new-menu-label').value = '';
-      showToast('Custom Menu Tab created!');
-    }
+        function renderFaqs() {
+            document.getElementById('faqContainer').innerHTML = appData.faqs.map(f => `
+                <div class="p-4 rounded-xl bg-slate-50 dark:bg-[#0b0f17] border border-slate-200 dark:border-slate-800">
+                    <h4 class="font-bold text-sm mb-1">${f.q}</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">${f.a}</p>
+                </div>
+            `).join('');
+        }
 
-    function renderAdminMenusList() {
-      document.getElementById('admin-menus-list').innerHTML = (siteConfig.menus || []).map(m => `
-        <div class="flex items-center justify-between p-2.5 rounded-xl bk-card-theme border text-xs">
-          <span class="font-bold bk-text-main">${m.label} (${m.id})</span>
-          <button onclick="deleteMenuTab('${m.id}')" class="px-2 py-1 bg-red-500/15 text-red-400 rounded">Remove</button>
-        </div>`).join('');
-    }
+        // Project Post Modal View
+        function openProjectModal(id) {
+            const p = appData.projects.find(item => item.id === id);
+            if (!p) return;
 
-    function deleteMenuTab(mid) {
-      siteConfig.menus = siteConfig.menus.filter(m => m.id !== mid);
-      saveState();
-      renderAdminMenusList();
-      renderNavigationMenus();
-    }
+            const stepsHtml = p.steps ? p.steps.split('\n').map(s => `<li class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded-full bg-emerald-500/10 text-emerald-500 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">✓</span> <span>${s}</span></li>`).join('') : '<p class="text-sm text-slate-400">No steps provided.</p>';
 
-    function exportUpdatedHTML() {
-      const fullHTML = '<!DOCTYPE html>\n' + document.documentElement.outerHTML.replace(
-        /\/\* __START_EMBEDDED_DATA__ \*\/[\s\S]*?\/\* __END_EMBEDDED_DATA__ \*\//,
-        `/* __START_EMBEDDED_DATA__ */\n    const DEFAULT_SITE_CONFIG = ${JSON.stringify(siteConfig, null, 2)};\n\n    const DEFAULT_PROJECTS = ${JSON.stringify(projects, null, 2)};\n    /* __END_EMBEDDED_DATA__ */`
-      );
-      const blob = new Blob([fullHTML], { type: 'text/html' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'index.html';
-      a.click();
-      URL.revokeObjectURL(url);
-      showToast('index.html downloaded successfully!');
-    }
+            document.getElementById('modalContentBody').innerHTML = `
+                <div class="flex items-center gap-4 mb-6">
+                    <img src="${p.logo}" class="w-16 h-16 rounded-full object-cover shadow-md bg-slate-200 dark:bg-slate-700" onerror="this.src='https://via.placeholder.com/64'">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <h2 class="text-2xl font-extrabold">${p.name}</h2>
+                            <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500">${p.tag}</span>
+                        </div>
+                        <p class="text-xs text-slate-400">Category: <span class="text-emerald-500 font-semibold">${p.category}</span> | Fundraise: <span class="font-semibold">${p.raise || 'N/A'}</span></p>
+                    </div>
+                </div>
 
-    function showToast(msg) {
-      const t = document.getElementById('toast');
-      document.getElementById('toast-msg').textContent = msg;
-      t.classList.remove('hidden'); t.classList.add('flex');
-      setTimeout(() => { t.classList.add('hidden'); t.classList.remove('flex'); }, 3000);
-    }
+                <div class="mb-6 p-4 rounded-2xl bg-slate-50 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800">
+                    <h4 class="font-bold text-sm mb-2">About Protocol</h4>
+                    <p class="text-sm text-slate-600 dark:text-slate-300">${p.desc}</p>
+                </div>
 
-    window.addEventListener('DOMContentLoaded', initApp);
-  </script>
+                <div class="mb-6">
+                    <h4 class="font-bold text-sm mb-3">Step-by-Step Farming Guide</h4>
+                    <ul class="space-y-2.5">${stepsHtml}</ul>
+                </div>
+
+                <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
+                    <button onclick="closeProjectModal()" class="px-5 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-800 text-sm font-bold">Close</button>
+                    <a href="${p.link}" target="_blank" class="px-6 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-bold shadow-lg shadow-emerald-500/20">Open Official App →</a>
+                </div>
+            `;
+            document.getElementById('projectPostModal').classList.remove('hidden');
+        }
+
+        function closeProjectModal() {
+            document.getElementById('projectPostModal').classList.add('hidden');
+        }
+
+        // Admin CMS Functions
+        function openAdminModal() {
+            document.getElementById('adminModal').classList.remove('hidden');
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminModal').classList.add('hidden');
+        }
+
+        function verifyAdminLogin() {
+            const pass = document.getElementById('adminPasswordInput').value;
+            if (pass === appData.adminPass) {
+                document.getElementById('adminLoginSection').classList.add('hidden');
+                document.getElementById('adminDashboardSection').classList.remove('hidden');
+                renderAdminProjectsList();
+                renderAdminFaqList();
+                document.getElementById('adminLogoUrlInput').value = appData.logoImg || '';
+                document.getElementById('adminNewPassInput').value = appData.adminPass;
+                document.getElementById('adminRecoveryEmailInput').value = appData.recoveryEmail;
+                document.getElementById('adminAdHtmlInput').value = appData.adHtml;
+            } else {
+                alert('Incorrect password! Default is admin123');
+            }
+        }
+
+        function switchAdminTab(tab) {
+            ['projects', 'branding', 'ads', 'menus'].forEach(t => {
+                document.getElementById(`adminTab-${t}`).classList.add('hidden');
+                document.getElementById(`adminTabBtn-${t}`).className = 'px-4 py-2 rounded-xl text-sm font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300';
+            });
+            document.getElementById(`adminTab-${tab}`).classList.remove('hidden');
+            document.getElementById(`adminTabBtn-${tab}`).className = 'px-4 py-2 rounded-xl text-sm font-bold bg-emerald-500 text-white';
+        }
+
+        function renderAdminProjectsList() {
+            const list = document.getElementById('adminProjectsList');
+            list.innerHTML = appData.projects.map(p => `
+                <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800">
+                    <div class="flex items-center gap-3">
+                        <img src="${p.logo}" class="w-10 h-10 rounded-full object-cover">
+                        <div>
+                            <h4 class="font-bold text-sm">${p.name}</h4>
+                            <span class="text-[11px] text-slate-400">${p.category} | ${p.tag}</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="openEditProjectModal(${p.id})" class="px-3 py-1.5 bg-slate-200 dark:bg-slate-700 rounded-lg text-xs font-bold">Edit</button>
+                        <button onclick="deleteProject(${p.id})" class="px-3 py-1.5 bg-rose-500/10 text-rose-500 rounded-lg text-xs font-bold">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openAddProjectModal() {
+            document.getElementById('editProjectModalTitle').innerText = 'Add New Project';
+            document.getElementById('editProjectId').value = '';
+            document.getElementById('epName').value = '';
+            document.getElementById('epCategory').value = 'Airdrops';
+            document.getElementById('epLogo').value = '';
+            document.getElementById('epTag').value = 'NEW';
+            document.getElementById('epDesc').value = '';
+            document.getElementById('epRaise').value = '';
+            document.getElementById('epLink').value = '';
+            document.getElementById('epSteps').value = '';
+            document.getElementById('editProjectModal').classList.remove('hidden');
+        }
+
+        function openEditProjectModal(id) {
+            const p = appData.projects.find(item => item.id === id);
+            if (!p) return;
+            document.getElementById('editProjectModalTitle').innerText = 'Edit Project';
+            document.getElementById('editProjectId').value = p.id;
+            document.getElementById('epName').value = p.name;
+            document.getElementById('epCategory').value = p.category;
+            document.getElementById('epLogo').value = p.logo;
+            document.getElementById('epTag').value = p.tag;
+            document.getElementById('epDesc').value = p.desc;
+            document.getElementById('epRaise').value = p.raise;
+            document.getElementById('epLink').value = p.link;
+            document.getElementById('epSteps').value = p.steps || '';
+            document.getElementById('editProjectModal').classList.remove('hidden');
+        }
+
+        function closeEditProjectModal() {
+            document.getElementById('editProjectModal').classList.add('hidden');
+        }
+
+        function saveProjectFromModal() {
+            const id = document.getElementById('editProjectId').value;
+            const projData = {
+                id: id ? parseInt(id) : Date.now(),
+                name: document.getElementById('epName').value,
+                category: document.getElementById('epCategory').value,
+                logo: document.getElementById('epLogo').value || 'https://assets.coingecko.com/coins/images/325/large/Tether.png',
+                tag: document.getElementById('epTag').value,
+                desc: document.getElementById('epDesc').value,
+                raise: document.getElementById('epRaise').value,
+                link: document.getElementById('epLink').value,
+                steps: document.getElementById('epSteps').value
+            };
+
+            if (id) {
+                const idx = appData.projects.findIndex(p => p.id == id);
+                if (idx !== -1) appData.projects[idx] = projData;
+            } else {
+                appData.projects.push(projData);
+            }
+
+            saveDb();
+            closeEditProjectModal();
+            renderAdminProjectsList();
+            initApp();
+        }
+
+        function deleteProject(id) {
+            if (confirm('Are you sure you want to delete this project?')) {
+                appData.projects = appData.projects.filter(p => p.id !== id);
+                saveDb();
+                renderAdminProjectsList();
+                initApp();
+            }
+        }
+
+        function handleLogoUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    appData.logoImg = e.target.result;
+                    document.getElementById('adminLogoUrlInput').value = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function handleProjectLogoUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('epLogo').value = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function saveBrandingSettings() {
+            appData.logoImg = document.getElementById('adminLogoUrlInput').value;
+            appData.adminPass = document.getElementById('adminNewPassInput').value || appData.adminPass;
+            appData.recoveryEmail = document.getElementById('adminRecoveryEmailInput').value || appData.recoveryEmail;
+            saveDb();
+            initApp();
+            alert('Branding settings saved successfully!');
+        }
+
+        function saveAdSettings() {
+            appData.adHtml = document.getElementById('adminAdHtmlInput').value;
+            saveDb();
+            initApp();
+            alert('Ad slots updated successfully!');
+        }
+
+        function renderAdminFaqList() {
+            const list = document.getElementById('adminFaqList');
+            list.innerHTML = appData.faqs.map((f, i) => `
+                <div class="p-3 rounded-xl bg-slate-50 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800">
+                    <input type="text" value="${f.q}" id="faqQ_${i}" class="w-full px-3 py-1.5 bg-white dark:bg-[#0b0f17] border border-slate-200 dark:border-slate-800 rounded-lg text-xs font-bold mb-2">
+                    <textarea id="faqA_${i}" rows="2" class="w-full px-3 py-1.5 bg-white dark:bg-[#0b0f17] border border-slate-200 dark:border-slate-800 rounded-lg text-xs">${f.a}</textarea>
+                </div>
+            `).join('') + `<button onclick="saveFaqs()" class="px-4 py-2 bg-emerald-500 text-white font-bold text-xs rounded-xl mt-2">Save FAQs</button>`;
+        }
+
+        function saveFaqs() {
+            appData.faqs = appData.faqs.map((f, i) => ({
+                q: document.getElementById(`faqQ_${i}`).value,
+                a: document.getElementById(`faqA_${i}`).value
+            }));
+            saveDb();
+            renderFaqs();
+            alert('FAQs updated!');
+        }
+
+        function saveDb() {
+            localStorage.setItem('bullkarry_db', JSON.stringify(appData));
+        }
+
+        // Toggle Sidebar for Mobile
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('-translate-x-full');
+        }
+
+        // Light / Dark Mode Toggle
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', document.documentElement.classList.2026 ? 'dark' : 'light');
+        }
+
+        // Check saved theme
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+
+        window.onload = initApp;
+    </script>
 </body>
 </html>
