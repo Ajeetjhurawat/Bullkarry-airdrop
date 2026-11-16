@@ -225,6 +225,10 @@
         ],
         sidebarAds: [
           { id: 'sad-1', title: 'Taba', headline: 'All-in-One Trading Terminal', subtitle: 'Perps across 12 venues', ctaText: 'Learn more', imageUrl: '', url: 'https://alphadrops.net/perps', active: true }
+        ],
+        sidebarPromoCards: [
+          { id: 'spc-1', title: 'Polymarket Checker', desc: 'Polymarket estimated airdrop and activity...', imageUrl: '', bg: '#2563eb', initials: 'PM', url: 'https://alphadrops.net/checker', active: true },
+          { id: 'spc-2', title: 'Base Score', desc: 'Unofficial Base wallet activity checker...', imageUrl: '', bg: '#1d4ed8', initials: 'BS', url: 'https://alphadrops.net/checker', active: true }
         ]
       },
       airdrops: [
@@ -521,8 +525,10 @@
       currentRoute = route;
       selectedAirdropId = airdropId;
       toggleMobileSidebar(false);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
       renderAll();
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
     }
 
     function handleJoinNow(e) {
@@ -581,15 +587,24 @@
       document.getElementById('headerPageTitle').textContent = t;
       document.getElementById('headerPageSubtitle').textContent = sub;
 
-      // Mobile Bottom Nav (Airdrops, Perps, Tracker, Claims, Checkers)
+      // Mobile Bottom Nav (Bullkarry style: 2 left, 1 raised circular center button, 2 right)
       const mobileIds = ['airdrops', 'perps', 'tracker', 'claims', 'checkers'];
       const mbNav = document.getElementById('mobileBottomNav');
       if (mbNav) {
-        mbNav.innerHTML = mobileIds.map(id => {
+        mbNav.innerHTML = mobileIds.map((id, idx) => {
           const m = state.menus.find(x => x.id === id) || { id, label: id.charAt(0).toUpperCase() + id.slice(1), icon: 'star' };
           const active = currentRoute === id || (currentRoute === 'detail' && id === 'airdrops');
+          if (idx === 2) {
+            return `
+              <button onclick="navigateTo('${m.id}')" class="relative -mt-6 flex flex-col items-center justify-center group" aria-label="${escapeAttr(m.label)}">
+                <span class="w-13 h-13 w-[52px] h-[52px] rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-600/35 ring-4 ring-[#f7f9fc] dark:ring-zinc-950 flex items-center justify-center transition-transform group-active:scale-95">
+                  ${getMenuIcon(m.icon)}
+                </span>
+              </button>
+            `;
+          }
           return `
-            <button onclick="navigateTo('${m.id}')" class="flex flex-col items-center justify-center gap-0.5 px-2.5 py-1 rounded-xl transition-colors ${active ? 'text-blue-600 dark:text-blue-400 font-bold' : 'text-slate-500 dark:text-zinc-400 font-medium'}">
+            <button onclick="navigateTo('${m.id}')" class="flex flex-col items-center justify-center gap-1 px-2.5 py-1 rounded-xl transition-colors ${active ? 'text-blue-600 dark:text-blue-400 font-bold' : 'text-slate-500 dark:text-zinc-400 font-semibold'}">
               ${getMenuIcon(m.icon)}
               <span class="text-[10px] leading-tight">${escapeHtml(m.label)}</span>
             </button>
@@ -685,27 +700,26 @@
         `;
       }).join('');
 
-      const quickCheckers = state.checkers.slice(0, 3).map(c => `
-        <button onclick="navigateTo('checkers')" class="w-full flex items-center justify-between p-3 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800/60 border border-slate-200/60 dark:border-zinc-700/60 hover:border-blue-300 dark:hover:border-blue-500/40 transition-colors text-left">
-          <div class="min-w-0 pr-2">
-            <div class="text-xs font-bold text-slate-900 dark:text-white truncate">${escapeHtml(c.title)}</div>
-            <div class="text-[11px] text-slate-500 dark:text-zinc-400 truncate">${escapeHtml(c.desc)}</div>
+      const promoCardsHtml = (state.ads.sidebarPromoCards || []).filter(c => c.active !== false).map(c => `
+        <a href="${escapeAttr(c.url || '#')}" target="_blank" rel="noopener" class="flex items-center justify-between gap-3 p-3.5 rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/80 dark:border-zinc-800 hover:border-blue-300 dark:hover:border-blue-500/40 shadow-bk hover:shadow-bk-hover transition-all group">
+          <div class="flex items-center gap-3 min-w-0">
+            ${c.imageUrl
+              ? `<img src="${escapeAttr(c.imageUrl)}" alt="${escapeAttr(c.title)}" class="w-10 h-10 rounded-xl object-cover shrink-0 border border-slate-200/60 dark:border-zinc-700" />`
+              : `<div class="w-10 h-10 rounded-xl flex items-center justify-center text-white font-extrabold text-xs shrink-0" style="background:${escapeAttr(c.bg || '#2563eb')}">${escapeHtml(c.initials || c.title.slice(0,2).toUpperCase())}</div>`}
+            <div class="min-w-0">
+              <div class="text-xs font-bold text-slate-900 dark:text-white truncate group-hover:text-blue-600 dark:group-hover:text-blue-400">${escapeHtml(c.title)}</div>
+              <div class="text-[11px] text-slate-500 dark:text-zinc-400 truncate">${escapeHtml(c.desc)}</div>
+            </div>
           </div>
-          <span class="w-7 h-7 rounded-lg bg-white dark:bg-zinc-900 border border-slate-200/70 dark:border-zinc-700 flex items-center justify-center text-slate-500 shrink-0">${SVG.arrowUpRight}</span>
-        </button>
+          <span class="w-7 h-7 rounded-lg bg-[#f7f9fc] dark:bg-zinc-800 border border-slate-200/70 dark:border-zinc-700 flex items-center justify-center text-slate-500 shrink-0 group-hover:bg-slate-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-slate-900 transition-colors">${SVG.arrowUpRight}</span>
+        </a>
       `).join('');
 
       const comm = state.settings.communityCard;
       return `
         <aside class="space-y-4 lg:sticky lg:top-20 lg:self-start">
           ${adsHtml}
-          <div class="rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/70 dark:border-zinc-800 p-4 shadow-bk space-y-2.5">
-            <div class="flex items-center justify-between">
-              <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-zinc-500">Quick Checkers</span>
-              <button onclick="navigateTo('checkers')" class="text-[11px] font-semibold text-blue-600 dark:text-blue-400 hover:underline">View all</button>
-            </div>
-            ${quickCheckers}
-          </div>
+          <div class="space-y-2.5">${promoCardsHtml}</div>
           ${extraDetailWidgets}
           <div class="rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/70 dark:border-zinc-800 p-4 shadow-bk">
             <div class="text-sm font-bold text-slate-900 dark:text-white mb-1">${escapeHtml(comm.title)}</div>
@@ -749,7 +763,7 @@
     // =========================================================================
     function renderProjectCard(item) {
       return `
-        <div onclick="navigateTo('detail', '${item.id}')" class="group cursor-pointer rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/70 dark:border-zinc-800 p-4 shadow-bk hover:shadow-bk-hover hover:border-blue-300/80 dark:hover:border-blue-500/40 transition-all flex flex-col justify-between min-w-0">
+        <div onclick="navigateTo('detail', '${item.id}')" class="group cursor-pointer rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/70 dark:border-zinc-800 p-4 shadow-bk hover:-translate-y-1 hover:shadow-bk-hover hover:border-blue-300/80 dark:hover:border-blue-500/40 transition-all duration-200 flex flex-col justify-between min-w-0">
           <div class="min-w-0">
             <div class="flex items-start justify-between gap-2 mb-3">
               <div class="flex items-center gap-3 min-w-0">
@@ -1182,7 +1196,10 @@
         <div class="space-y-4 animate-fade-up">
           <div>
             <div id="airdropListSection" class="flex flex-wrap items-center justify-between gap-3 mb-4">
-              <h2 class="text-lg font-extrabold text-slate-900 dark:text-white">${perpsOnly ? 'Showing ' + list.length + ' perps airdrops' : 'Crypto Airdrops List'}</h2>
+              <h2 class="text-lg font-extrabold text-slate-900 dark:text-white flex items-center gap-2.5">
+                <span class="w-8 h-8 rounded-xl bg-white dark:bg-zinc-900 border border-slate-200/80 dark:border-zinc-800 shadow-xs flex items-center justify-center text-blue-600 dark:text-blue-400">${getMenuIcon(perpsOnly ? 'chart' : 'parachute')}</span>
+                <span>${perpsOnly ? 'Showing ' + list.length + ' perps airdrops' : 'Crypto Airdrops List'}</span>
+              </h2>
               <div class="flex items-center gap-1 bg-white dark:bg-zinc-900 border border-slate-200/80 dark:border-zinc-800 p-1 rounded-xl">
                 <button onclick="filters.viewMode='cards'; renderMain();" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${filters.viewMode==='cards' ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900' : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'}">${SVG.gridCards} Cards</button>
                 <button onclick="filters.viewMode='table'; renderMain();" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${filters.viewMode==='table' ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900' : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'}">${SVG.tableRows} Table</button>
@@ -1444,17 +1461,42 @@
       `;
     }
 
+    const PERP_PROTOCOLS = [
+      { id: 'popdex', name: 'PopDEX', feeBps: 4.5, ptsPer1k: 12, ptVal: 0.18 },
+      { id: 'txflow', name: 'TxFlow', feeBps: 5.0, ptsPer1k: 15, ptVal: 0.14 },
+      { id: 'bulk', name: 'BULK', feeBps: 3.5, ptsPer1k: 10, ptVal: 0.22 },
+      { id: 'n1', name: 'N1', feeBps: 4.0, ptsPer1k: 11, ptVal: 0.16 },
+      { id: 'qfe', name: 'QFE', feeBps: 5.5, ptsPer1k: 14, ptVal: 0.15 },
+      { id: 'ondo', name: 'Ondo Perps', feeBps: 4.5, ptsPer1k: 9, ptVal: 0.25 }
+    ];
+
     function renderPerpCalculatorCard() {
       return `
-        <div class="rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/70 dark:border-zinc-800 p-6 shadow-bk">
-          <h3 class="text-base font-extrabold mb-1">Perp Points & Fee Estimator</h3>
-          <p class="text-xs text-slate-500 dark:text-zinc-400 mb-4">Estimate weekly trading volume, taker fees, and projected airdrop points.</p>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
-            <div><label class="block text-xs font-semibold mb-1">Capital (USDC)</label><input id="pcCap" type="number" value="2500" oninput="calcPerp()" class="w-full px-3 py-2 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 text-sm font-bold" /></div>
-            <div><label class="block text-xs font-semibold mb-1">Leverage (x)</label><input id="pcLev" type="number" value="10" oninput="calcPerp()" class="w-full px-3 py-2 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 text-sm font-bold" /></div>
-            <div><label class="block text-xs font-semibold mb-1">Trades / Week</label><input id="pcTrades" type="number" value="15" oninput="calcPerp()" class="w-full px-3 py-2 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 text-sm font-bold" /></div>
+        <div class="rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/70 dark:border-zinc-800 p-6 shadow-bk space-y-5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <h3 class="text-lg font-extrabold">Perp DEX Points Calculator</h3>
+              <p class="text-xs text-slate-500 dark:text-zinc-400">Model trading volume, protocol fees, earned points & estimated airdrop value across 6 protocols.</p>
+            </div>
+            <select id="pcProto" onchange="calcPerp()" class="px-3.5 py-2 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 text-xs font-bold">
+              ${PERP_PROTOCOLS.map(pr => `<option value="${pr.id}">${pr.name} (${pr.feeBps} bps)</option>`).join('')}
+            </select>
           </div>
-          <div id="pcOutput" class="grid grid-cols-3 gap-3 p-4 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800/70 border border-slate-200/60 dark:border-zinc-700 text-center"></div>
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-3.5">
+            <div><label class="block text-xs font-semibold mb-1">Margin (USDC)</label><input id="pcCap" type="number" value="2500" oninput="calcPerp()" class="w-full px-3 py-2 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 text-sm font-bold" /></div>
+            <div><label class="block text-xs font-semibold mb-1">Leverage (<span id="pcLevLabel">10</span>x)</label><input id="pcLev" type="range" min="1" max="50" value="10" oninput="document.getElementById('pcLevLabel').textContent=this.value; calcPerp();" class="w-full mt-2 accent-blue-600" /></div>
+            <div><label class="block text-xs font-semibold mb-1">Trades / Week</label><input id="pcTrades" type="number" value="15" oninput="calcPerp()" class="w-full px-3 py-2 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 text-sm font-bold" /></div>
+            <div><label class="block text-xs font-semibold mb-1">Weeks Farming</label><input id="pcWeeks" type="number" value="8" oninput="calcPerp()" class="w-full px-3 py-2 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 text-sm font-bold" /></div>
+          </div>
+          <div id="pcOutput" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
+          <div class="overflow-x-auto border border-slate-200/70 dark:border-zinc-800 rounded-xl">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead class="bg-[#f7f9fc] dark:bg-zinc-800/60 text-slate-400 uppercase text-[10px]">
+                <tr><th class="p-3">Protocol</th><th class="p-3">Fee Rate</th><th class="p-3">Est. Points</th><th class="p-3">Est. Fees</th><th class="p-3 text-right">Est. Reward</th></tr>
+              </thead>
+              <tbody id="pcCompareBody" class="divide-y divide-slate-100 dark:divide-zinc-800"></tbody>
+            </table>
+          </div>
         </div>
       `;
     }
@@ -1463,16 +1505,31 @@
       const cap = Math.max(0, Number(document.getElementById('pcCap')?.value || 0));
       const lev = Math.max(1, Number(document.getElementById('pcLev')?.value || 1));
       const tr = Math.max(0, Number(document.getElementById('pcTrades')?.value || 0));
-      const vol = cap * lev * tr;
-      const fee = vol * 0.0005;
-      const pts = Math.round(vol / 100);
+      const wks = Math.max(1, Number(document.getElementById('pcWeeks')?.value || 1));
+      const pid = document.getElementById('pcProto')?.value || 'popdex';
+      const pr = PERP_PROTOCOLS.find(x => x.id === pid) || PERP_PROTOCOLS[0];
+      const totalVol = cap * lev * tr * wks;
+      const estFee = totalVol * (pr.feeBps / 10000);
+      const estPts = Math.round((totalVol / 1000) * pr.ptsPer1k);
+      const estVal = estPts * pr.ptVal;
+
       const out = document.getElementById('pcOutput');
       if (out) {
         out.innerHTML = `
-          <div><div class="text-[11px] text-slate-400">Weekly Volume</div><div class="text-base font-extrabold">$${vol.toLocaleString()}</div></div>
-          <div><div class="text-[11px] text-slate-400">Est. Fees (0.05%)</div><div class="text-base font-extrabold text-amber-600">$${fee.toFixed(2)}</div></div>
-          <div><div class="text-[11px] text-slate-400">Est. Points</div><div class="text-base font-extrabold text-emerald-600">${pts.toLocaleString()} pts</div></div>
+          <div class="p-3.5 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800/70 border border-slate-200/60 dark:border-zinc-700"><div class="text-[11px] text-slate-400">Total Volume</div><div class="text-base font-extrabold">$${totalVol.toLocaleString()}</div></div>
+          <div class="p-3.5 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800/70 border border-slate-200/60 dark:border-zinc-700"><div class="text-[11px] text-slate-400">Est. Fees (${pr.feeBps} bps)</div><div class="text-base font-extrabold text-amber-600">$${estFee.toFixed(2)}</div></div>
+          <div class="p-3.5 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800/70 border border-slate-200/60 dark:border-zinc-700"><div class="text-[11px] text-slate-400">Est. Points</div><div class="text-base font-extrabold text-blue-600">${estPts.toLocaleString()}</div></div>
+          <div class="p-3.5 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800/70 border border-slate-200/60 dark:border-zinc-700"><div class="text-[11px] text-slate-400">Est. Value</div><div class="text-base font-extrabold text-emerald-600">$${estVal.toFixed(0)}</div></div>
         `;
+      }
+      const tbody = document.getElementById('pcCompareBody');
+      if (tbody) {
+        tbody.innerHTML = PERP_PROTOCOLS.map(x => {
+          const f = totalVol * (x.feeBps / 10000);
+          const pts = Math.round((totalVol / 1000) * x.ptsPer1k);
+          const val = pts * x.ptVal;
+          return `<tr class="${x.id===pid?'bg-blue-50/50 dark:bg-blue-500/10 font-semibold':''}"><td class="p-3 font-bold">${x.name}</td><td class="p-3">${x.feeBps} bps</td><td class="p-3 text-blue-600 font-bold">${pts.toLocaleString()}</td><td class="p-3 text-amber-600">$${f.toFixed(2)}</td><td class="p-3 text-right text-emerald-600 font-extrabold">$${val.toFixed(0)}</td></tr>`;
+        }).join('');
       }
     }
 
@@ -1719,6 +1776,10 @@
               <div class="flex items-center justify-between mb-2"><h3 class="text-sm font-bold">Crypto Raises (${state.raises.length})</h3><button onclick="openRaiseEditor(null)" class="px-3 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-bold">+ Add Raise</button></div>
               <div class="space-y-2">${state.raises.map(r => `<div class="flex items-center justify-between p-3 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800/60 text-xs"><span><strong>${escapeHtml(r.project)}</strong> — ${escapeHtml(r.funding)} (${escapeHtml(r.round)}) • ${escapeHtml(r.investors)}</span><div class="space-x-2"><button onclick="openRaiseEditor('${r.id}')" class="text-blue-600 font-bold">Edit</button><button onclick="deleteRaise('${r.id}')" class="text-rose-500 font-bold">Delete</button></div></div>`).join('')}</div>
             </div>
+            <div>
+              <div class="flex items-center justify-between mb-2"><h3 class="text-sm font-bold">Checkers & Tools (${state.checkers.length})</h3><button onclick="openCheckerEditor(null)" class="px-3 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-bold">+ Add Checker</button></div>
+              <div class="space-y-2">${state.checkers.map(c => `<div class="flex items-center justify-between p-3 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800/60 text-xs"><span><strong>${escapeHtml(c.title)}</strong> — ${escapeHtml(c.desc)}</span><div class="space-x-2"><button onclick="openCheckerEditor('${c.id}')" class="text-blue-600 font-bold">Edit</button><button onclick="deleteChecker('${c.id}')" class="text-rose-500 font-bold">Delete</button></div></div>`).join('')}</div>
+            </div>
           </div>
         `;
       }
@@ -1775,6 +1836,26 @@
                       </div>
                     </div>
                     <textarea rows="2" onchange="state.ads.sidebarAds[${i}].htmlCode=this.value; saveState(); renderMain();" placeholder="Optional Custom HTML Ad Code (for animated/custom sidebar ad)" class="w-full px-2.5 py-2 rounded-lg bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-700 font-mono text-[11px]">${escapeHtml(ad.htmlCode || '')}</textarea>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-sm font-bold">Sidebar Promo Link Cards (Below Sidebar Ad, Rounded Icon + Title + Link)</h3>
+                <button onclick="addSidebarPromoCard()" class="px-3 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-bold">+ Add Promo Card</button>
+              </div>
+              <div class="space-y-2.5">
+                ${(state.ads.sidebarPromoCards || []).map((c, i) => `
+                  <div class="p-3 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800/60 border border-slate-200 dark:border-zinc-700 grid grid-cols-1 sm:grid-cols-4 gap-2 text-xs items-center">
+                    <input type="text" value="${escapeAttr(c.title)}" onchange="state.ads.sidebarPromoCards[${i}].title=this.value; saveState(); renderMain();" placeholder="Title" class="px-2.5 py-2 rounded-lg bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-700 font-bold" />
+                    <input type="text" value="${escapeAttr(c.desc)}" onchange="state.ads.sidebarPromoCards[${i}].desc=this.value; saveState(); renderMain();" placeholder="Short description" class="px-2.5 py-2 rounded-lg bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-700" />
+                    <input type="text" value="${escapeAttr(c.url)}" onchange="state.ads.sidebarPromoCards[${i}].url=this.value; saveState(); renderMain();" placeholder="Target URL" class="px-2.5 py-2 rounded-lg bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-700" />
+                    <div class="flex items-center justify-between gap-2">
+                      <label class="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg bg-blue-600 text-white cursor-pointer font-bold">${SVG.upload} Icon<input type="file" accept="image/*" class="hidden" onchange="uploadImageToPromoCard(${i}, this)" /></label>
+                      <button onclick="deleteSidebarPromoCard(${i})" class="text-rose-500 font-bold">Del</button>
+                    </div>
                   </div>
                 `).join('')}
               </div>
@@ -2068,6 +2149,41 @@
       else state.raises.unshift(obj);
       saveState(); renderMain(); adminUnlocked = true; openAdminModal(); showToast('Raise saved!');
     }
+
+    function openCheckerEditor(id) {
+      const c = id ? state.checkers.find(x => x.id === id) : { id: 'chk-' + Date.now(), title: '', desc: '', tags: ['Checker'], url: 'https://alphadrops.net/checker', interactive: null };
+      openModal(`
+        <div class="w-full max-w-md rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 p-6 shadow-2xl space-y-3 text-xs">
+          <div class="flex items-center justify-between"><h3 class="text-base font-extrabold">${id ? 'Edit Checker' : 'Add Checker'}</h3><button onclick="adminUnlocked=true; openAdminModal();" class="text-blue-600 font-bold">← Back</button></div>
+          <input id="ckTitle" value="${escapeAttr(c.title)}" placeholder="Checker Title" class="w-full px-3 py-2 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 font-semibold" />
+          <input id="ckDesc" value="${escapeAttr(c.desc)}" placeholder="Short Description" class="w-full px-3 py-2 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700" />
+          <input id="ckTags" value="${escapeAttr((c.tags||[]).join(', '))}" placeholder="Tags (comma separated)" class="w-full px-3 py-2 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700" />
+          <input id="ckUrl" value="${escapeAttr(c.url)}" placeholder="Target URL" class="w-full px-3 py-2 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700" />
+          <button onclick="saveCheckerEditor('${c.id}', ${!!id})" class="w-full py-2.5 rounded-xl bg-blue-600 text-white font-bold">Save Checker</button>
+        </div>
+      `);
+    }
+    function saveCheckerEditor(id, isEdit) {
+      const obj = {
+        id,
+        title: document.getElementById('ckTitle').value.trim() || 'New Checker',
+        desc: document.getElementById('ckDesc').value.trim() || 'Eligibility checker tool',
+        tags: document.getElementById('ckTags').value.split(',').map(x=>x.trim()).filter(Boolean),
+        url: document.getElementById('ckUrl').value.trim() || 'https://alphadrops.net/checker',
+        interactive: isEdit ? (state.checkers.find(x=>x.id===id)?.interactive || null) : null
+      };
+      if (isEdit) state.checkers = state.checkers.map(x => x.id === id ? obj : x);
+      else state.checkers.push(obj);
+      saveState(); renderMain(); adminUnlocked = true; openAdminModal(); showToast('Checker saved!');
+    }
+    function deleteChecker(id) { state.checkers = state.checkers.filter(c => c.id !== id); saveState(); renderMain(); adminUnlocked = true; openAdminModal(); }
+    function addSidebarPromoCard() {
+      if (!state.ads.sidebarPromoCards) state.ads.sidebarPromoCards = [];
+      state.ads.sidebarPromoCards.push({ id: 'spc-' + Date.now(), title: 'New Tool', desc: 'Check eligibility & rewards...', imageUrl: '', bg: '#2563eb', initials: 'NT', url: 'https://alphadrops.net', active: true });
+      saveState(); renderMain(); adminUnlocked = true; openAdminModal();
+    }
+    function deleteSidebarPromoCard(i) { state.ads.sidebarPromoCards.splice(i, 1); saveState(); renderMain(); adminUnlocked = true; openAdminModal(); }
+    function uploadImageToPromoCard(i, input) { readImageFile(input, dataUrl => { state.ads.sidebarPromoCards[i].imageUrl = dataUrl; saveState(); renderMain(); showToast('Icon uploaded!'); }); }
 
     function addClaimAdmin() { state.claims.unshift({ id: 'cl-' + Date.now(), project: 'New Claim', token: 'TKN', amount: 'Season 1', chain: 'Base', deadline: 'Open', status: 'Open', url: 'https://alphadrops.net/claim' }); saveState(); renderMain(); openAdminModal(); }
     function deleteClaim(id) { state.claims = state.claims.filter(c => c.id !== id); saveState(); renderMain(); openAdminModal(); }
