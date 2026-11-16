@@ -11,14 +11,7 @@
             darkMode: 'class',
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                    },
-                    colors: {
-                        darkBg: '#0b0f17',
-                        darkCard: '#131c2e',
-                        darkBorder: '#1e293b',
-                    }
+                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
                 }
             }
         }
@@ -26,9 +19,7 @@
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(100, 116, 139, 0.3); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(100, 116, 139, 0.5); }
     </style>
 </head>
 <body class="bg-[#f8fafc] text-slate-900 dark:bg-[#0b0f17] dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200">
@@ -40,7 +31,7 @@
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
             </button>
             <div class="flex items-center gap-2.5">
-                <div id="headerLogoContainer" class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center text-white font-black text-lg shadow-md shadow-emerald-500/20 overflow-hidden">
+                <div id="headerLogoContainer" class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center text-white font-black text-lg shadow-md shadow-emerald-500/20">
                     BK
                 </div>
                 <span class="font-extrabold text-xl tracking-tight bg-gradient-to-r from-emerald-500 to-teal-400 bg-clip-text text-transparent">Bullkarry</span>
@@ -53,21 +44,18 @@
                 <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 </span>
-                <input type="text" id="globalSearchInput" oninput="handleSearch(this.value)" placeholder="Search airdrops, chains, tags..." class="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:outline-none focus:border-emerald-500 transition-colors">
+                <input type="text" id="globalSearchInput" oninput="handleSearch(this.value)" placeholder="Search airdrops, protocols, chains..." class="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:outline-none focus:border-emerald-500 transition-colors">
             </div>
         </div>
 
-        <!-- Header Actions -->
+        <!-- Actions -->
         <div class="flex items-center gap-3">
-            <!-- Theme Toggle -->
             <button onclick="toggleDarkMode()" class="p-2.5 rounded-xl bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" title="Toggle Light/Dark Theme">
                 <svg id="themeIconSun" class="w-5 h-5 hidden dark:block text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                 <svg id="themeIconMoon" class="w-5 h-5 block dark:hidden text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
             </button>
-
-            <!-- Admin Button -->
             <button onclick="openAdminModal()" class="flex items-center gap-2 px-3.5 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-sm rounded-xl shadow-md shadow-emerald-500/20 transition-all">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path></svg>
                 <span class="hidden sm:inline">Admin CMS</span>
             </button>
         </div>
@@ -83,787 +71,312 @@
                 </button>
             </div>
             
-            <div id="sidebarMenuList" class="flex-1 overflow-y-auto p-4 space-y-1.5">
+            <div class="flex-1 overflow-y-auto p-4 space-y-1.5">
                 <a href="#home" onclick="filterCategory('all'); toggleSidebar();" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                    Dashboard
-                </a>
-                <a href="#airdrops" onclick="filterCategory('Airdrops'); toggleSidebar();" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
                     Airdrops
                 </a>
-                <a href="#perpdex" onclick="filterCategory('Perp DEX'); toggleSidebar();" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
+                <a href="#perps" onclick="filterCategory('Perp DEX'); toggleSidebar();" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                    Perp DEX
+                    Perps
                 </a>
                 <a href="#tracker" onclick="filterCategory('Tracker'); toggleSidebar();" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
-                    My Tracker
+                    Tracker
                 </a>
                 <a href="#claims" onclick="filterCategory('Claim'); toggleSidebar();" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    Claim Portal
+                    Claims
                 </a>
-                <a href="#checker" onclick="filterCategory('Checker'); toggleSidebar();" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
+                <a href="#checkers" onclick="filterCategory('Checker'); toggleSidebar();" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                    Eligibility Checker
+                    Checkers
                 </a>
-                <a href="#raise" onclick="filterCategory('Raise'); toggleSidebar();" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
+                <a href="#raises" onclick="filterCategory('Raise'); toggleSidebar();" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                    Fundraise & VCs
+                    Raises
                 </a>
             </div>
 
-            <!-- Telegram Widget in Sidebar -->
+            <!-- Telegram Community Box -->
             <div class="p-4 m-3 rounded-2xl bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-500/20">
                 <div class="flex items-center gap-3 mb-2">
-                    <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm">
-                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.02-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.25.38-.51 1.08-.78 4.23-1.84 7.05-3.05 8.46-3.63 4.03-1.68 4.86-1.97 5.4-1.98.12 0 .39.03.56.17.15.12.19.28.21.4-.01.06.01.24-.01.38z"/></svg>
-                    </div>
+                    <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm">TG</div>
                     <div>
                         <h4 class="font-bold text-xs">Bullkarry Airdrops</h4>
-                        <p class="text-[11px] text-slate-500 dark:text-slate-400">Join our Alpha TG</p>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400">Join Community</p>
                     </div>
                 </div>
-                <a href="https://t.me/ajeetjhurawat1" target="_blank" class="block w-full py-2 text-center bg-blue-500 hover:bg-blue-600 text-white font-bold text-xs rounded-xl shadow-md shadow-blue-500/20 transition-all">Join Telegram Group</a>
+                <a href="https://t.me/ajeetjhurawat1" target="_blank" class="block w-full py-2 text-center bg-blue-500 hover:bg-blue-600 text-white font-bold text-xs rounded-xl shadow-md shadow-blue-500/20 transition-all">Join Telegram</a>
             </div>
         </aside>
 
-        <!-- Main Content Area -->
+        <!-- Main Content -->
         <main class="flex-1 p-4 lg:p-8 max-w-7xl mx-auto w-full">
             
-            <!-- Hero Title & Counters Section (Alphadrops Style) -->
+            <!-- Hero Title (Alphadrops Style) -->
             <div class="mb-8">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                     <div>
-                        <h1 class="text-3xl lg:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-emerald-500 to-teal-400 bg-clip-text text-transparent">CRYPTO AIRDROPS</h1>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Discover, track, and farm verified high-yield Web3 crypto airdrops & alpha protocols.</p>
+                        <h1 class="text-3xl lg:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-emerald-500 to-teal-400 bg-clip-text text-transparent">Crypto Airdrops</h1>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Find credible projects and track what matters.</p>
                     </div>
-                    <!-- Quick Stats Counters -->
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <!-- Quick Stats -->
+                    <div class="grid grid-cols-3 gap-3">
                         <div class="bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-center shadow-sm">
-                            <span id="statActive" class="block text-xl font-extrabold text-emerald-500">14</span>
-                            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Active Drops</span>
+                            <span id="statActive" class="block text-xl font-extrabold text-emerald-500">12</span>
+                            <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Active</span>
                         </div>
                         <div class="bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-center shadow-sm">
-                            <span id="statClaimable" class="block text-xl font-extrabold text-blue-500">6</span>
-                            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Claimable</span>
+                            <span id="statClaimable" class="block text-xl font-extrabold text-purple-500">5</span>
+                            <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Claimable</span>
                         </div>
                         <div class="bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-center shadow-sm">
-                            <span id="statEnded" class="block text-xl font-extrabold text-slate-400">8</span>
-                            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Ended</span>
-                        </div>
-                        <div class="bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl p-3 text-center shadow-sm">
-                            <span class="block text-xl font-extrabold text-purple-500">45K+</span>
-                            <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Community</span>
+                            <span id="statCommunity" class="block text-xl font-extrabold text-blue-500">45K</span>
+                            <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Community</span>
                         </div>
                     </div>
                 </div>
-
-                <!-- Auto-sliding Live Project Tracker Carousel -->
-                <div class="bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-sm mb-6 overflow-hidden">
-                    <div class="flex items-center justify-between mb-3">
-                        <div class="flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                            <h3 class="font-bold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400">Live Trending Alpha Tracker</h3>
-                        </div>
-                        <span class="text-xs text-slate-400">Click any card to view complete guide</span>
-                    </div>
-                    <div id="trackerCarousel" class="flex gap-4 overflow-x-auto pb-2 scrollbar-none">
-                        <!-- Dynamically populated carousel cards -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Quick Action Filter Buttons (Airdrops, Perp DEX, Claim, Checker, Raise) -->
-            <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-8">
-                <button onclick="filterCategory('Airdrops')" class="flex items-center gap-3 p-4 rounded-2xl bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 hover:border-emerald-500/50 transition-all text-left shadow-sm group">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-sm">Airdrops</h4>
-                        <p class="text-[11px] text-slate-400">Active campaigns</p>
-                    </div>
-                </button>
-
-                <button onclick="filterCategory('Perp DEX')" class="flex items-center gap-3 p-4 rounded-2xl bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 hover:border-blue-500/50 transition-all text-left shadow-sm group">
-                    <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-sm">Perp DEX</h4>
-                        <p class="text-[11px] text-slate-400">Trading volume</p>
-                    </div>
-                </button>
-
-                <button onclick="filterCategory('Claim')" class="flex items-center gap-3 p-4 rounded-2xl bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 hover:border-purple-500/50 transition-all text-left shadow-sm group">
-                    <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-sm">Claim Live</h4>
-                        <p class="text-[11px] text-slate-400">Tokens ready</p>
-                    </div>
-                </button>
-
-                <button onclick="filterCategory('Checker')" class="flex items-center gap-3 p-4 rounded-2xl bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all text-left shadow-sm group">
-                    <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-sm">Checker</h4>
-                        <p class="text-[11px] text-slate-400">Eligibility check</p>
-                    </div>
-                </button>
-
-                <button onclick="filterCategory('Raise')" class="flex items-center gap-3 p-4 rounded-2xl bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 hover:border-rose-500/50 transition-all text-left shadow-sm group col-span-2 sm:col-span-1">
-                    <div class="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-sm">Fundraise</h4>
-                        <p class="text-[11px] text-slate-400">VC funding data</p>
-                    </div>
-                </button>
-            </div>
-
-            <!-- Sponsor Banner Slot 1 -->
-            <div id="desktopSponsorBanner" class="mb-8 p-4 rounded-2xl bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between">
-                <!-- Populated dynamically -->
             </div>
 
             <!-- Project Cards Grid -->
             <div class="flex items-center justify-between mb-4">
-                <h2 id="currentCategoryTitle" class="text-xl font-bold">All Verified Airdrops & Alpha</h2>
+                <h2 id="currentCategoryTitle" class="text-xl font-bold">Featured Airdrop Projects</h2>
                 <span id="projectCountBadge" class="text-xs font-semibold px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Showing all</span>
             </div>
 
             <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
-                <!-- Populated dynamically via JS -->
+                <!-- Populated by JS -->
             </div>
-
-            <!-- FAQ Section -->
-            <section class="mb-12 bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
-                <h3 class="text-xl font-bold mb-4">Frequently Asked Questions (FAQ)</h3>
-                <div id="faqContainer" class="space-y-4">
-                    <!-- Populated dynamically -->
-                </div>
-            </section>
         </main>
     </div>
 
-    <!-- Project Detail Post View Modal / Page Overlay -->
-    <div id="projectPostModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
-        <div class="bg-white dark:bg-[#0b0f17] border border-slate-200 dark:border-slate-800 rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 sm:p-8 relative">
-            <button onclick="closeProjectModal()" class="absolute top-6 right-6 p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-            </button>
-            <div id="modalContentBody">
-                <!-- Dynamically populated post content -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Master Admin CMS Modal -->
-    <div id="adminModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-white dark:bg-[#0b0f17] border border-slate-200 dark:border-slate-800 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 sm:p-8 relative">
-            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-200 dark:border-slate-800">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center text-white font-bold">CMS</div>
-                    <div>
-                        <h3 class="text-xl font-bold">Master Owner Admin Panel</h3>
-                        <p class="text-xs text-slate-400">Complete control over airdrops, branding, ads, and menus</p>
-                    </div>
-                </div>
-                <button onclick="closeAdminModal()" class="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-            </div>
-
-            <!-- Admin Login or Dashboard -->
-            <div id="adminLoginSection">
-                <div class="max-w-md mx-auto py-8 text-center">
-                    <h4 class="text-lg font-bold mb-2">Enter Admin Password</h4>
-                    <p class="text-xs text-slate-400 mb-6">Default password is <code class="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded text-emerald-500">admin123</code></p>
-                    <input type="password" id="adminPasswordInput" placeholder="Enter password..." class="w-full px-4 py-3 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl mb-4 text-sm focus:outline-none focus:border-emerald-500">
-                    <button onclick="verifyAdminLogin()" class="w-full py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl shadow-lg shadow-emerald-500/20 transition-all">Access Admin Panel</button>
-                </div>
-            </div>
-
-            <div id="adminDashboardSection" class="hidden">
-                <!-- Admin Tabs -->
-                <div class="flex flex-wrap gap-2 mb-6 border-b border-slate-200 dark:border-slate-800 pb-4">
-                    <button onclick="switchAdminTab('projects')" id="adminTabBtn-projects" class="px-4 py-2 rounded-xl text-sm font-bold bg-emerald-500 text-white">Manage Airdrops</button>
-                    <button onclick="switchAdminTab('branding')" id="adminTabBtn-branding" class="px-4 py-2 rounded-xl text-sm font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Branding & Logo</button>
-                    <button onclick="switchAdminTab('ads')" id="adminTabBtn-ads" class="px-4 py-2 rounded-xl text-sm font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Ads & Sponsors</button>
-                    <button onclick="switchAdminTab('menus')" id="adminTabBtn-menus" class="px-4 py-2 rounded-xl text-sm font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Custom Menus & FAQs</button>
-                </div>
-
-                <!-- Tab 1: Manage Airdrops -->
-                <div id="adminTab-projects" class="space-y-6">
-                    <div class="flex items-center justify-between">
-                        <h4 class="font-bold text-lg">All Projects & Airdrops</h4>
-                        <button onclick="openAddProjectModal()" class="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded-xl shadow-md">+ Add New Project</button>
-                    </div>
-                    <div id="adminProjectsList" class="space-y-3 max-h-[50vh] overflow-y-auto pr-2">
-                        <!-- Populated dynamically -->
-                    </div>
-                </div>
-
-                <!-- Tab 2: Branding -->
-                <div id="adminTab-branding" class="space-y-6 hidden">
-                    <h4 class="font-bold text-lg">Website Branding & BK Logo</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-2">Upload or Enter BK Logo Image URL</label>
-                            <input type="text" id="adminLogoUrlInput" placeholder="https://example.com/logo.png" class="w-full px-4 py-2.5 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm mb-3">
-                            <input type="file" id="adminLogoFileInput" accept="image/*" onchange="handleLogoUpload(event)" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-emerald-500 file:text-white hover:file:bg-emerald-600">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-2">Change Admin Password & Recovery Email</label>
-                            <input type="text" id="adminNewPassInput" placeholder="New Password" class="w-full px-4 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm mb-3">
-                            <input type="email" id="adminRecoveryEmailInput" placeholder="Recovery Email" class="w-full px-4 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm mb-3">
-                        </div>
-                    </div>
-                    <button onclick="saveBrandingSettings()" class="px-5 py-2.5 bg-emerald-500 text-white text-sm font-bold rounded-xl shadow-md">Save Branding Changes</button>
-                </div>
-
-                <!-- Tab 3: Ads & Sponsors -->
-                <div id="adminTab-ads" class="space-y-6 hidden">
-                    <h4 class="font-bold text-lg">Sponsored Ad Slots Control</h4>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-2">Desktop Top Banner HTML / Image Link</label>
-                            <textarea id="adminAdHtmlInput" rows="3" class="w-full p-3 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm font-mono"></textarea>
-                        </div>
-                    </div>
-                    <button onclick="saveAdSettings()" class="px-5 py-2.5 bg-emerald-500 text-white text-sm font-bold rounded-xl shadow-md">Save Ad Slots</button>
-                </div>
-
-                <!-- Tab 4: Menus & FAQs -->
-                <div id="adminTab-menus" class="space-y-6 hidden">
-                    <h4 class="font-bold text-lg">Manage Custom Menus & FAQs</h4>
-                    <p class="text-xs text-slate-400">Add custom navigation links and edit FAQ questions directly from here.</p>
-                    <div id="adminFaqList" class="space-y-3">
-                        <!-- Populated dynamically -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Add/Edit Project Modal (Admin) -->
-    <div id="editProjectModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+    <!-- Project Guide Modal -->
+    <div id="projectModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
         <div class="bg-white dark:bg-[#0b0f17] border border-slate-200 dark:border-slate-800 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 sm:p-8 relative">
-            <h3 id="editProjectModalTitle" class="text-xl font-bold mb-4">Add / Edit Project</h3>
-            <input type="hidden" id="editProjectId">
-            <div class="space-y-4">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-400 mb-1">Project Name</label>
-                        <input type="text" id="epName" class="w-full px-3.5 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-400 mb-1">Category</label>
-                        <select id="epCategory" class="w-full px-3.5 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm">
-                            <option value="Airdrops">Airdrops</option>
-                            <option value="Perp DEX">Perp DEX</option>
-                            <option value="Tracker">Tracker</option>
-                            <option value="Claim">Claim</option>
-                            <option value="Checker">Checker</option>
-                            <option value="Raise">Raise</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-400 mb-1">Logo Image URL or Upload</label>
-                        <input type="text" id="epLogo" placeholder="https://..." class="w-full px-3.5 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm mb-2">
-                        <input type="file" accept="image/*" onchange="handleProjectLogoUpload(event)" class="w-full text-xs text-slate-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-400 mb-1">Status Tag</label>
-                        <select id="epTag" class="w-full px-3.5 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm">
-                            <option value="NEW">NEW</option>
-                            <option value="CLAIM LIVE">CLAIM LIVE</option>
-                            <option value="HOT">HOT</option>
-                            <option value="COMPLETED">COMPLETED</option>
-                        </select>
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-400 mb-1">Short Description</label>
-                    <input type="text" id="epDesc" class="w-full px-3.5 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm">
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-400 mb-1">Fund Raised / Metrics</label>
-                        <input type="text" id="epRaise" placeholder="$225M Raised" class="w-full px-3.5 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-400 mb-1">App Link / Redirect URL</label>
-                        <input type="text" id="epLink" placeholder="https://..." class="w-full px-3.5 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm">
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-400 mb-1">Step-by-Step Farming Guide (Line by line)</label>
-                    <textarea id="epSteps" rows="4" placeholder="1. Connect Wallet\n2. Bridge funds\n3. Swap weekly" class="w-full p-3 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm font-mono"></textarea>
-                </div>
+            <button onclick="closeModal()" class="absolute top-6 right-6 p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-white">✕</button>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Master Admin Modal -->
+    <div id="adminModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white dark:bg-[#0b0f17] border border-slate-200 dark:border-slate-800 rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 sm:p-8 relative">
+            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-200 dark:border-slate-800">
+                <h3 class="text-xl font-bold">Master Owner Admin Panel</h3>
+                <button onclick="closeAdminModal()" class="text-slate-400 hover:text-white">✕</button>
             </div>
-            <div class="flex items-center justify-end gap-3 mt-6">
-                <button onclick="closeEditProjectModal()" class="px-4 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-sm font-bold">Cancel</button>
-                <button onclick="saveProjectFromModal()" class="px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-bold shadow-md">Save Project</button>
+            <div id="adminLogin" class="max-w-sm mx-auto text-center py-6">
+                <p class="text-xs text-slate-400 mb-4">Default password: <code class="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded text-emerald-500">admin123</code></p>
+                <input type="password" id="adminPass" placeholder="Enter password..." class="w-full px-4 py-2.5 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl mb-3 text-sm">
+                <button onclick="loginAdmin()" class="w-full py-2.5 bg-emerald-500 text-white font-bold rounded-xl text-sm shadow-md">Login</button>
+            </div>
+            <div id="adminDashboard" class="hidden space-y-4">
+                <div class="flex justify-between items-center">
+                    <h4 class="font-bold">Manage Projects</h4>
+                    <button onclick="openAddModal()" class="px-3 py-1.5 bg-emerald-500 text-white text-xs font-bold rounded-xl">+ Add Project</button>
+                </div>
+                <div id="adminProjectsList" class="space-y-2 max-h-[50vh] overflow-y-auto pr-1"></div>
             </div>
         </div>
     </div>
 
-    <!-- Application Script -->
+    <!-- Add/Edit Project Modal -->
+    <div id="editModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-[#0b0f17] border border-slate-200 dark:border-slate-800 rounded-3xl max-w-lg w-full p-6">
+            <h3 class="font-bold text-lg mb-4">Add / Edit Project</h3>
+            <input type="hidden" id="pId">
+            <div class="space-y-3">
+                <input type="text" id="pName" placeholder="Project Name (e.g. Monad)" class="w-full px-3 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm">
+                <select id="pCat" class="w-full px-3 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm">
+                    <option value="Airdrops">Airdrops</option>
+                    <option value="Perp DEX">Perp DEX</option>
+                    <option value="Tracker">Tracker</option>
+                    <option value="Claim">Claim</option>
+                    <option value="Checker">Checker</option>
+                    <option value="Raise">Raise</option>
+                </select>
+                <input type="text" id="pLogo" placeholder="Logo Image URL" class="w-full px-3 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm">
+                <input type="text" id="pTag" placeholder="Tag (Active, Upcoming, Claim Live)" class="w-full px-3 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm">
+                <input type="text" id="pDesc" placeholder="Description" class="w-full px-3 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm">
+                <input type="text" id="pLink" placeholder="Official App Link" class="w-full px-3 py-2 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm">
+                <textarea id="pSteps" placeholder="Farming steps (one per line)" rows="3" class="w-full p-3 bg-slate-100 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-xl text-sm"></textarea>
+            </div>
+            <div class="flex justify-end gap-2 mt-4">
+                <button onclick="closeEditModal()" class="px-4 py-2 bg-slate-200 dark:bg-slate-800 text-xs font-bold rounded-xl">Cancel</button>
+                <button onclick="saveProject()" class="px-4 py-2 bg-emerald-500 text-white text-xs font-bold rounded-xl">Save</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Initial Database Store
         let appData = {
-            logo: "BK",
-            logoImg: "",
-            adminPass: "admin123",
-            recoveryEmail: "ajeet@bullkarry.com",
-            adHtml: '<div class="flex items-center justify-between w-full p-4 rounded-xl bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-500/20"><div><span class="text-xs font-bold text-emerald-500 uppercase">Featured Sponsor</span><h4 class="font-bold text-sm">Trade Monad Perpetuals with 0% Slippage on Bullkarry DEX</h4></div><a href="https://monad.xyz" target="_blank" class="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs rounded-xl shadow-md">Explore Now</a></div>',
-            faqs: [
-                { q: "What is Bullkarry Airdrop Hub?", a: "Bullkarry is your ultimate multi-chain crypto airdrop aggregator and alpha tracking web platform, built to help you discover and farm verified high-yield crypto airdrops." },
-                { q: "How do I claim my airdrop tokens?", a: "Click on any project card to view the step-by-step guide and click the official claim or check eligibility button." },
-                { q: "Is Bullkarry free to use?", a: "Yes! 100% free community alpha platform created by Ajeet Jhurawat." }
-            ],
             projects: [
-                {
-                    id: 1,
-                    name: "Monad Testnet",
-                    category: "Airdrops",
-                    logo: "https://assets.coingecko.com/coins/images/325/large/Tether.png",
-                    tag: "NEW",
-                    desc: "High-performance EVM parallel execution L1 blockchain with massive ecosystem backing.",
-                    raise: "$225M Raised",
-                    link: "https://monad.xyz",
-                    steps: "1. Add Monad Testnet to MetaMask\n2. Request testnet MON from official faucet\n3. Interact with testnet DEXs and lending protocols\n4. Complete weekly transaction streaks"
-                },
-                {
-                    id: 2,
-                    name: "Hyperliquid S2",
-                    category: "Perp DEX",
-                    logo: "https://assets.coingecko.com/coins/images/279/large/ethereum.png",
-                    tag: "CLAIM LIVE",
-                    desc: "Leading decentralized perpetual exchange with native L1 and Season 2 point rewards.",
-                    raise: "$180M Vol/Day",
-                    link: "https://hyperliquid.xyz",
-                    steps: "1. Deposit USDC on Arbitrum or Native\n2. Open perpetual positions on Hyperliquid DEX\n3. Maintain trading volume to accumulate S2 points\n4. Check eligibility on official claim portal"
-                },
-                {
-                    id: 3,
-                    name: "Abstract Chain",
-                    category: "Airdrops",
-                    logo: "https://assets.coingecko.com/coins/images/325/large/Tether.png",
-                    tag: "NEW",
-                    desc: "Consumer-focused ZK rollup built on Ethereum by Igloo Inc (Pudgy Penguins).",
-                    raise: "$110M Raised",
-                    link: "https://abstract.xyz",
-                    steps: "1. Bridge ETH to Abstract Testnet\n2. Mint official Pudgy Test badges\n3. Provide liquidity on native AMM pools"
-                },
-                {
-                    id: 4,
-                    name: "Berachain Artio",
-                    category: "Claim",
-                    logo: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png",
-                    tag: "CLAIM LIVE",
-                    desc: "EVM-equivalent L1 built on Proof-of-Liquidity consensus framework.",
-                    raise: "$142M Raised",
-                    link: "https://berachain.com",
-                    steps: "1. Claim BERA faucet tokens\n2. Stake BERA in validators to earn BGT\n3. Provide liquidity on Honey DEX"
-                },
-                {
-                    id: 5,
-                    name: "EigenLayer Restaking",
-                    category: "Tracker",
-                    logo: "https://assets.coingecko.com/coins/images/279/large/ethereum.png",
-                    tag: "HOT",
-                    desc: "Ethereum restaking protocol enabling pooled security for decentralized services.",
-                    raise: "$164M Raised",
-                    link: "https://eigenlayer.xyz",
-                    steps: "1. Restake LSTs (stETH, rETH) on EigenLayer\n2. Delegate to active operators\n3. Earn restaking points and ecosystem drops"
-                },
-                {
-                    id: 6,
-                    name: "Sahara AI",
-                    category: "Checker",
-                    logo: "https://assets.coingecko.com/coins/images/325/large/Tether.png",
-                    tag: "NEW",
-                    desc: "Decentralized AI network for sovereign data and knowledge contribution.",
-                    raise: "$43M Raised",
-                    link: "https://saharacloud.ai",
-                    steps: "1. Create Sahara account & connect wallet\n2. Complete daily AI data labeling tasks\n3. Check airdrop allocation score"
-                }
+                { id: 1, name: "1K", category: "Airdrops", logo: "https://assets.coingecko.com/coins/images/325/large/Tether.png", tag: "Active", desc: "DeFi • Robinhood backed high performance platform.", link: "https://alphadrops.net", steps: "1. Connect Wallet\n2. Complete social tasks\n3. Bridge funds" },
+                { id: 2, name: "Metric", category: "Perp DEX", logo: "https://assets.coingecko.com/coins/images/279/large/ethereum.png", tag: "Active", desc: "DEX • Ethereum based high speed margin trading.", link: "https://alphadrops.net", steps: "1. Deposit USDC\n2. Open long/short position" },
+                { id: 3, name: "Catalyst", category: "Tracker", logo: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png", tag: "Upcoming", desc: "AI • Multichain interoperability protocol.", link: "https://alphadrops.net", steps: "1. Join testnet\n2. Faucet claim" },
+                { id: 4, name: "TxFlow", category: "Claim", logo: "https://assets.coingecko.com/coins/images/325/large/Tether.png", tag: "Claim Live", desc: "Perps • Arbitrum high frequency settlement.", link: "https://alphadrops.net", steps: "1. Check allocation\n2. Claim tokens" },
+                { id: 5, name: "PopDEX", category: "Checker", logo: "https://assets.coingecko.com/coins/images/279/large/ethereum.png", tag: "Active", desc: "L1 • Morph Tachyon ecosystem token distribution.", link: "https://alphadrops.net", steps: "1. Connect address\n2. Verify eligibility" },
+                { id: 6, name: "Monad", category: "Raise", logo: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png", tag: "Active", desc: "Parallel EVM layer 1 with $225M raised.", link: "https://monad.xyz", steps: "1. Interact with ecosystem\n2. Testnet activity" }
             ]
         };
 
-        // Load saved local data if available
-        if (localStorage.getItem('bullkarry_db')) {
-            try {
-                appData = JSON.parse(localStorage.getItem('bullkarry_db'));
-            } catch(e) {}
+        if(localStorage.getItem('bullkarry_db')) {
+            try { appData = JSON.parse(localStorage.getItem('bullkarry_db')); } catch(e){}
         }
 
         let currentFilter = 'all';
 
-        // Initialize App UI
-        function initApp() {
-            renderHeaderLogo();
-            renderStats();
-            renderCarousel();
-            renderSponsors();
+        function init() {
             renderProjects();
-            renderFaqs();
-        }
-
-        function renderHeaderLogo() {
-            const container = document.getElementById('headerLogoContainer');
-            if (appData.logoImg) {
-                container.innerHTML = `<img src="${appData.logoImg}" class="w-full h-full object-cover rounded-xl">`;
-            } else {
-                container.innerText = appData.logo || "BK";
-            }
+            renderStats();
         }
 
         function renderStats() {
-            const active = appData.projects.filter(p => p.tag === 'NEW' || p.tag === 'HOT').length;
-            const claimable = appData.projects.filter(p => p.tag === 'CLAIM LIVE').length;
-            const ended = appData.projects.filter(p => p.tag === 'COMPLETED').length;
-            
-            document.getElementById('statActive').innerText = active;
-            document.getElementById('statClaimable').innerText = claimable;
-            document.getElementById('statEnded').innerText = ended;
-        }
-
-        function renderCarousel() {
-            const container = document.getElementById('trackerCarousel');
-            container.innerHTML = appData.projects.map(p => `
-                <div onclick="openProjectModal(${p.id})" class="min-w-[220px] max-w-[220px] p-3 rounded-xl bg-slate-50 dark:bg-[#0b0f17] border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-emerald-500/50 transition-all flex items-center gap-3">
-                    <img src="${p.logo}" class="w-10 h-10 rounded-full object-cover bg-slate-200 dark:bg-slate-700" onerror="this.src='https://via.placeholder.com/40'">
-                    <div class="overflow-hidden">
-                        <h4 class="font-bold text-xs truncate">${p.name}</h4>
-                        <span class="text-[10px] text-emerald-500 font-semibold">${p.raise || 'Active'}</span>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function renderSponsors() {
-            document.getElementById('desktopSponsorBanner').innerHTML = appData.adHtml;
+            document.getElementById('statActive').innerText = appData.projects.filter(p => p.tag === 'Active').length;
+            document.getElementById('statClaimable').innerText = appData.projects.filter(p => p.tag.includes('Claim') || p.category === 'Claim').length;
         }
 
         function filterCategory(cat) {
             currentFilter = cat;
-            document.getElementById('currentCategoryTitle').innerText = cat === 'all' ? 'All Verified Airdrops & Alpha' : `${cat} Projects`;
+            document.getElementById('currentCategoryTitle').innerText = cat === 'all' ? 'Featured Airdrop Projects' : `${cat} Projects`;
             renderProjects();
         }
 
-        function handleSearch(query) {
-            renderProjects(query);
+        function handleSearch(q) {
+            renderProjects(q);
         }
 
-        function renderProjects(searchQuery = '') {
+        function renderProjects(query = '') {
             const grid = document.getElementById('projectsGrid');
-            let filtered = appData.projects;
-
-            if (currentFilter !== 'all') {
-                filtered = filtered.filter(p => p.category.toLowerCase() === currentFilter.toLowerCase());
+            let list = appData.projects;
+            if(currentFilter !== 'all') {
+                list = list.filter(p => p.category.toLowerCase() === currentFilter.toLowerCase());
+            }
+            if(query.trim() !== '') {
+                const q = query.toLowerCase();
+                list = list.filter(p => p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
             }
 
-            if (searchQuery.trim() !== '') {
-                const q = searchQuery.toLowerCase();
-                filtered = filtered.filter(p => p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q) || p.category.toLowerCase().includes(q));
-            }
+            document.getElementById('projectCountBadge').innerText = `Showing ${list.length} projects`;
 
-            document.getElementById('projectCountBadge').innerText = `Showing ${filtered.length} projects`;
-
-            if (filtered.length === 0) {
-                grid.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400">No projects found matching your criteria.</div>`;
+            if(list.length === 0) {
+                grid.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400">No projects found.</div>`;
                 return;
             }
 
-            grid.innerHTML = filtered.map(p => `
-                <div onclick="openProjectModal(${p.id})" class="bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 hover:border-emerald-500/50 transition-all cursor-pointer shadow-sm flex flex-col justify-between group">
+            grid.innerHTML = list.map(p => `
+                <div onclick="openModal(${p.id})" class="bg-white dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 hover:border-emerald-500/50 transition-all cursor-pointer shadow-sm flex flex-col justify-between group">
                     <div>
                         <div class="flex items-center justify-between mb-3">
                             <div class="flex items-center gap-3">
-                                <img src="${p.logo}" class="w-12 h-12 rounded-full object-cover bg-slate-200 dark:bg-slate-700 shadow-sm" onerror="this.src='https://via.placeholder.com/48'">
+                                <img src="${p.logo}" class="w-12 h-12 rounded-full object-cover bg-slate-100 dark:bg-slate-800" onerror="this.src='https://via.placeholder.com/48'">
                                 <div>
                                     <h3 class="font-extrabold text-base group-hover:text-emerald-500 transition-colors">${p.name}</h3>
                                     <span class="text-xs text-slate-400">${p.category}</span>
                                 </div>
                             </div>
-                            <span class="text-[10px] font-extrabold px-2.5 py-1 rounded-full ${p.tag === 'NEW' ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' : p.tag === 'CLAIM LIVE' ? 'bg-purple-500/10 text-purple-500 border border-purple-500/20' : 'bg-slate-500/10 text-slate-400'}">${p.tag}</span>
+                            <span class="text-[10px] font-extrabold px-2.5 py-1 rounded-full ${p.tag === 'Active' ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' : 'bg-purple-500/10 text-purple-500 border border-purple-500/20'}">${p.tag}</span>
                         </div>
                         <p class="text-xs text-slate-600 dark:text-slate-300 line-clamp-2 mb-4">${p.desc}</p>
                     </div>
-                    <div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800 text-xs">
-                        <span class="font-semibold text-emerald-500">${p.raise || 'Verified Alpha'}</span>
-                        <span class="font-bold text-slate-400 group-hover:text-emerald-500 flex items-center gap-1">View Guide →</span>
+                    <div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800 text-xs font-bold text-emerald-500">
+                        <span>View Tasks</span>
+                        <span>→</span>
                     </div>
                 </div>
             `).join('');
         }
 
-        function renderFaqs() {
-            document.getElementById('faqContainer').innerHTML = appData.faqs.map(f => `
-                <div class="p-4 rounded-xl bg-slate-50 dark:bg-[#0b0f17] border border-slate-200 dark:border-slate-800">
-                    <h4 class="font-bold text-sm mb-1">${f.q}</h4>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">${f.a}</p>
-                </div>
-            `).join('');
-        }
-
-        // Project Post Modal View
-        function openProjectModal(id) {
-            const p = appData.projects.find(item => item.id === id);
-            if (!p) return;
-
-            const stepsHtml = p.steps ? p.steps.split('\n').map(s => `<li class="flex items-start gap-2 text-sm"><span class="w-5 h-5 rounded-full bg-emerald-500/10 text-emerald-500 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">✓</span> <span>${s}</span></li>`).join('') : '<p class="text-sm text-slate-400">No steps provided.</p>';
-
-            document.getElementById('modalContentBody').innerHTML = `
-                <div class="flex items-center gap-4 mb-6">
-                    <img src="${p.logo}" class="w-16 h-16 rounded-full object-cover shadow-md bg-slate-200 dark:bg-slate-700" onerror="this.src='https://via.placeholder.com/64'">
+        function openModal(id) {
+            const p = appData.projects.find(x => x.id === id);
+            if(!p) return;
+            const steps = p.steps ? p.steps.split('\n').map(s => `<li class="flex items-start gap-2 text-sm"><span class="text-emerald-500 font-bold">✓</span> <span>${s}</span></li>`).join('') : 'No steps';
+            document.getElementById('modalBody').innerHTML = `
+                <div class="flex items-center gap-4 mb-4">
+                    <img src="${p.logo}" class="w-14 h-14 rounded-full object-cover">
                     <div>
-                        <div class="flex items-center gap-2 mb-1">
-                            <h2 class="text-2xl font-extrabold">${p.name}</h2>
-                            <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500">${p.tag}</span>
-                        </div>
-                        <p class="text-xs text-slate-400">Category: <span class="text-emerald-500 font-semibold">${p.category}</span> | Fundraise: <span class="font-semibold">${p.raise || 'N/A'}</span></p>
+                        <h2 class="text-2xl font-extrabold">${p.name}</h2>
+                        <span class="text-xs text-slate-400">${p.category} • <span class="text-emerald-500">${p.tag}</span></span>
                     </div>
                 </div>
-
-                <div class="mb-6 p-4 rounded-2xl bg-slate-50 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800">
-                    <h4 class="font-bold text-sm mb-2">About Protocol</h4>
-                    <p class="text-sm text-slate-600 dark:text-slate-300">${p.desc}</p>
-                </div>
-
-                <div class="mb-6">
-                    <h4 class="font-bold text-sm mb-3">Step-by-Step Farming Guide</h4>
-                    <ul class="space-y-2.5">${stepsHtml}</ul>
-                </div>
-
-                <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
-                    <button onclick="closeProjectModal()" class="px-5 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-800 text-sm font-bold">Close</button>
-                    <a href="${p.link}" target="_blank" class="px-6 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-bold shadow-lg shadow-emerald-500/20">Open Official App →</a>
-                </div>
+                <p class="text-sm text-slate-600 dark:text-slate-300 mb-4">${p.desc}</p>
+                <h4 class="font-bold text-sm mb-2">Farming Guide:</h4>
+                <ul class="space-y-2 mb-6">${steps}</ul>
+                <a href="${p.link}" target="_blank" class="block w-full py-3 text-center bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm rounded-xl shadow-lg shadow-emerald-500/20">Open Official App</a>
             `;
-            document.getElementById('projectPostModal').classList.remove('hidden');
+            document.getElementById('projectModal').classList.remove('hidden');
         }
 
-        function closeProjectModal() {
-            document.getElementById('projectPostModal').classList.add('hidden');
+        function closeModal() { document.getElementById('projectModal').classList.add('hidden'); }
+
+        function openAdminModal() { document.getElementById('adminModal').classList.remove('hidden'); }
+        function closeAdminModal() { document.getElementById('adminModal').classList.add('hidden'); }
+
+        function loginAdmin() {
+            if(document.getElementById('adminPass').value === 'admin123') {
+                document.getElementById('adminLogin').classList.add('hidden');
+                document.getElementById('adminDashboard').classList.remove('hidden');
+                renderAdminList();
+            } else { alert('Incorrect password'); }
         }
 
-        // Admin CMS Functions
-        function openAdminModal() {
-            document.getElementById('adminModal').classList.remove('hidden');
-        }
-
-        function closeAdminModal() {
-            document.getElementById('adminModal').classList.add('hidden');
-        }
-
-        function verifyAdminLogin() {
-            const pass = document.getElementById('adminPasswordInput').value;
-            if (pass === appData.adminPass) {
-                document.getElementById('adminLoginSection').classList.add('hidden');
-                document.getElementById('adminDashboardSection').classList.remove('hidden');
-                renderAdminProjectsList();
-                renderAdminFaqList();
-                document.getElementById('adminLogoUrlInput').value = appData.logoImg || '';
-                document.getElementById('adminNewPassInput').value = appData.adminPass;
-                document.getElementById('adminRecoveryEmailInput').value = appData.recoveryEmail;
-                document.getElementById('adminAdHtmlInput').value = appData.adHtml;
-            } else {
-                alert('Incorrect password! Default is admin123');
-            }
-        }
-
-        function switchAdminTab(tab) {
-            ['projects', 'branding', 'ads', 'menus'].forEach(t => {
-                document.getElementById(`adminTab-${t}`).classList.add('hidden');
-                document.getElementById(`adminTabBtn-${t}`).className = 'px-4 py-2 rounded-xl text-sm font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300';
-            });
-            document.getElementById(`adminTab-${tab}`).classList.remove('hidden');
-            document.getElementById(`adminTabBtn-${tab}`).className = 'px-4 py-2 rounded-xl text-sm font-bold bg-emerald-500 text-white';
-        }
-
-        function renderAdminProjectsList() {
-            const list = document.getElementById('adminProjectsList');
-            list.innerHTML = appData.projects.map(p => `
-                <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800">
-                    <div class="flex items-center gap-3">
-                        <img src="${p.logo}" class="w-10 h-10 rounded-full object-cover">
-                        <div>
-                            <h4 class="font-bold text-sm">${p.name}</h4>
-                            <span class="text-[11px] text-slate-400">${p.category} | ${p.tag}</span>
-                        </div>
-                    </div>
+        function renderAdminList() {
+            document.getElementById('adminProjectsList').innerHTML = appData.projects.map(p => `
+                <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800 text-xs">
                     <div class="flex items-center gap-2">
-                        <button onclick="openEditProjectModal(${p.id})" class="px-3 py-1.5 bg-slate-200 dark:bg-slate-700 rounded-lg text-xs font-bold">Edit</button>
-                        <button onclick="deleteProject(${p.id})" class="px-3 py-1.5 bg-rose-500/10 text-rose-500 rounded-lg text-xs font-bold">Delete</button>
+                        <img src="${p.logo}" class="w-8 h-8 rounded-full">
+                        <div><b>${p.name}</b> (${p.category})</div>
                     </div>
+                    <button onclick="deleteProj(${p.id})" class="text-rose-500 font-bold px-2 py-1 bg-rose-500/10 rounded">Delete</button>
                 </div>
             `).join('');
         }
 
-        function openAddProjectModal() {
-            document.getElementById('editProjectModalTitle').innerText = 'Add New Project';
-            document.getElementById('editProjectId').value = '';
-            document.getElementById('epName').value = '';
-            document.getElementById('epCategory').value = 'Airdrops';
-            document.getElementById('epLogo').value = '';
-            document.getElementById('epTag').value = 'NEW';
-            document.getElementById('epDesc').value = '';
-            document.getElementById('epRaise').value = '';
-            document.getElementById('epLink').value = '';
-            document.getElementById('epSteps').value = '';
-            document.getElementById('editProjectModal').classList.remove('hidden');
+        function openAddModal() {
+            document.getElementById('pId').value = '';
+            document.getElementById('pName').value = '';
+            document.getElementById('pDesc').value = '';
+            document.getElementById('pLink').value = '';
+            document.getElementById('pLogo').value = '';
+            document.getElementById('pSteps').value = '';
+            document.getElementById('editModal').classList.remove('hidden');
         }
 
-        function openEditProjectModal(id) {
-            const p = appData.projects.find(item => item.id === id);
-            if (!p) return;
-            document.getElementById('editProjectModalTitle').innerText = 'Edit Project';
-            document.getElementById('editProjectId').value = p.id;
-            document.getElementById('epName').value = p.name;
-            document.getElementById('epCategory').value = p.category;
-            document.getElementById('epLogo').value = p.logo;
-            document.getElementById('epTag').value = p.tag;
-            document.getElementById('epDesc').value = p.desc;
-            document.getElementById('epRaise').value = p.raise;
-            document.getElementById('epLink').value = p.link;
-            document.getElementById('epSteps').value = p.steps || '';
-            document.getElementById('editProjectModal').classList.remove('hidden');
-        }
+        function closeEditModal() { document.getElementById('editModal').classList.add('hidden'); }
 
-        function closeEditProjectModal() {
-            document.getElementById('editProjectModal').classList.add('hidden');
-        }
-
-        function saveProjectFromModal() {
-            const id = document.getElementById('editProjectId').value;
-            const projData = {
-                id: id ? parseInt(id) : Date.now(),
-                name: document.getElementById('epName').value,
-                category: document.getElementById('epCategory').value,
-                logo: document.getElementById('epLogo').value || 'https://assets.coingecko.com/coins/images/325/large/Tether.png',
-                tag: document.getElementById('epTag').value,
-                desc: document.getElementById('epDesc').value,
-                raise: document.getElementById('epRaise').value,
-                link: document.getElementById('epLink').value,
-                steps: document.getElementById('epSteps').value
+        function saveProject() {
+            const p = {
+                id: Date.now(),
+                name: document.getElementById('pName').value,
+                category: document.getElementById('pCat').value,
+                logo: document.getElementById('pLogo').value || 'https://assets.coingecko.com/coins/images/325/large/Tether.png',
+                tag: document.getElementById('pTag').value || 'Active',
+                desc: document.getElementById('pDesc').value,
+                link: document.getElementById('pLink').value,
+                steps: document.getElementById('pSteps').value
             };
-
-            if (id) {
-                const idx = appData.projects.findIndex(p => p.id == id);
-                if (idx !== -1) appData.projects[idx] = projData;
-            } else {
-                appData.projects.push(projData);
-            }
-
-            saveDb();
-            closeEditProjectModal();
-            renderAdminProjectsList();
-            initApp();
-        }
-
-        function deleteProject(id) {
-            if (confirm('Are you sure you want to delete this project?')) {
-                appData.projects = appData.projects.filter(p => p.id !== id);
-                saveDb();
-                renderAdminProjectsList();
-                initApp();
-            }
-        }
-
-        function handleLogoUpload(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    appData.logoImg = e.target.result;
-                    document.getElementById('adminLogoUrlInput').value = e.target.result;
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function handleProjectLogoUpload(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('epLogo').value = e.target.result;
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function saveBrandingSettings() {
-            appData.logoImg = document.getElementById('adminLogoUrlInput').value;
-            appData.adminPass = document.getElementById('adminNewPassInput').value || appData.adminPass;
-            appData.recoveryEmail = document.getElementById('adminRecoveryEmailInput').value || appData.recoveryEmail;
-            saveDb();
-            initApp();
-            alert('Branding settings saved successfully!');
-        }
-
-        function saveAdSettings() {
-            appData.adHtml = document.getElementById('adminAdHtmlInput').value;
-            saveDb();
-            initApp();
-            alert('Ad slots updated successfully!');
-        }
-
-        function renderAdminFaqList() {
-            const list = document.getElementById('adminFaqList');
-            list.innerHTML = appData.faqs.map((f, i) => `
-                <div class="p-3 rounded-xl bg-slate-50 dark:bg-[#131c2e] border border-slate-200 dark:border-slate-800">
-                    <input type="text" value="${f.q}" id="faqQ_${i}" class="w-full px-3 py-1.5 bg-white dark:bg-[#0b0f17] border border-slate-200 dark:border-slate-800 rounded-lg text-xs font-bold mb-2">
-                    <textarea id="faqA_${i}" rows="2" class="w-full px-3 py-1.5 bg-white dark:bg-[#0b0f17] border border-slate-200 dark:border-slate-800 rounded-lg text-xs">${f.a}</textarea>
-                </div>
-            `).join('') + `<button onclick="saveFaqs()" class="px-4 py-2 bg-emerald-500 text-white font-bold text-xs rounded-xl mt-2">Save FAQs</button>`;
-        }
-
-        function saveFaqs() {
-            appData.faqs = appData.faqs.map((f, i) => ({
-                q: document.getElementById(`faqQ_${i}`).value,
-                a: document.getElementById(`faqA_${i}`).value
-            }));
-            saveDb();
-            renderFaqs();
-            alert('FAQs updated!');
-        }
-
-        function saveDb() {
+            appData.projects.push(p);
             localStorage.setItem('bullkarry_db', JSON.stringify(appData));
+            closeEditModal();
+            renderAdminList();
+            init();
         }
 
-        // Toggle Sidebar for Mobile
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('-translate-x-full');
+        function deleteProj(id) {
+            appData.projects = appData.projects.filter(x => x.id !== id);
+            localStorage.setItem('bullkarry_db', JSON.stringify(appData));
+            renderAdminList();
+            init();
         }
 
-        // Light / Dark Mode Toggle
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('-translate-x-full'); }
+        
         function toggleDarkMode() {
             document.documentElement.classList.toggle('dark');
-            localStorage.setItem('theme', document.documentElement.classList.2026 ? 'dark' : 'light');
         }
 
-        // Check saved theme
-        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        }
-
-        window.onload = initApp;
+        window.onload = init;
     </script>
 </body>
 </html>
