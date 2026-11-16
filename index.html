@@ -101,7 +101,7 @@
           <button onclick="toggleMobileSidebar(true)" class="lg:hidden p-2 -ml-1 rounded-xl border border-slate-200 dark:border-zinc-700 text-slate-600 dark:text-zinc-300 hover:bg-slate-100 dark:hover:bg-zinc-800" aria-label="Open menu">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
           </button>
-          <button onclick="navigateTo('home')" class="flex items-center gap-2.5 min-w-0 text-left group">
+          <button onclick="navigateTo('home')" class="lg:hidden flex items-center gap-2.5 min-w-0 text-left group">
             <div id="headerBrandLogo" class="w-8 h-8 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center font-extrabold text-xs tracking-tight shrink-0 overflow-hidden">BK</div>
             <span id="headerBrandName" class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white truncate">Bullkarry</span>
           </button>
@@ -410,9 +410,61 @@
         }
       ],
       claims: [
-        { id: 'cl-1', project: 'Ondo Perps', token: 'ONDO', amount: 'Season 1 Rewards', chain: 'Ethereum', deadline: 'Dec 31, 2026', status: 'Open', url: 'https://alphadrops.net/claim' },
-        { id: 'cl-2', project: 'RateX DEX', token: 'RTX', amount: 'Genesis Airdrop', chain: 'Solana', deadline: 'Dec 15, 2026', status: 'Open', url: 'https://alphadrops.net/claim' },
-        { id: 'cl-3', project: 'TxFlow Pioneer', token: 'TXF', amount: 'Early Tester NFT + Points', chain: 'Arbitrum', deadline: 'Ended Oct 30, 2026', status: 'History', url: 'https://alphadrops.net/claim' }
+        { id: 'cl-1', project: 'dappOS', token: 'DOP', desc: 'DappOS is the first Web3 operating protocol designed to make dApps as user-friendly as mobile Apps.', amount: 'Airdrop Live', chain: 'Arbitrum', deadline: '', status: 'Open', logoBg: '#10b981', logoText: 'dO', url: 'https://alphadrops.net/claim', detailId: 'ondoperps' },
+        { id: 'cl-2', project: 'Axis Robotics', token: 'AXIS', desc: 'Distributed infrastructure and data engine for training physical AI and robotics in...', amount: 'Season 1', chain: 'Ethereum', deadline: 'Deadline Jan 25, 2027', status: 'Open', logoBg: '#09090b', logoText: 'AX', url: 'https://alphadrops.net/claim', detailId: 'catalyst' },
+        { id: 'cl-3', project: 'RateX', token: 'RTX', desc: 'Claim RateX airdrop', amount: 'Genesis', chain: 'Solana', deadline: '', status: 'Open', logoBg: '#18181b', logoText: 'RX', url: 'https://alphadrops.net/claim', detailId: '1k' },
+        { id: 'cl-4', project: 'ETHGAS', token: 'EGAS', desc: 'ETHGas is a marketplace and infrastructure layer built for the Ethereum...', amount: 'Genesis', chain: 'Ethereum', deadline: '', status: 'Open', logoBg: '#0f172a', logoText: 'EG', url: 'https://alphadrops.net/claim', detailId: 'metric' },
+        { id: 'cl-5', project: 'Lighter', token: 'LTR', desc: 'Trade perpetuals with low cost and low latency on Ethereum L2 with custom ZK...', amount: 'Season 1', chain: 'Ethereum', deadline: '', status: 'Open', logoBg: '#111827', logoText: 'LT', url: 'https://alphadrops.net/claim', detailId: 'txflow' },
+        { id: 'cl-6', project: 'Based', token: 'BSD', desc: 'Based is a comprehensive cryptocurrency platform, powered by Hyperliquid, that...', amount: 'Airdrop Live', chain: 'Hyperliquid', deadline: '', status: 'Open', logoBg: '#ea580c', logoText: 'BS', url: 'https://alphadrops.net/claim', detailId: 'entr' }
+      ],
+      claimHistory: [
+        { year: '2026', countLabel: '13 projects', months: [
+          { month: 'July', projects: ['edgeX', 'Rails', 'Zest Protocol'] },
+          { month: 'Jun', projects: ['Arcium', 'Re'] },
+          { month: 'May', projects: ['Genius', 'Nexus', 'Zest'] },
+          { month: 'Apr', projects: ['Mezo', 'Pharos', 'USD AI'] },
+          { month: 'Mar', projects: ['Backpack'] },
+          { month: 'Jan', projects: ['Test'] }
+        ]},
+        { year: '2025', countLabel: '97 projects', months: [
+          { month: 'Dec', projects: ['Hyperliquid S2', 'Abstract', 'Berachain'] },
+          { month: 'Oct', projects: ['Monad Testnet', 'Scroll', 'Puffer'] }
+        ]},
+        { year: '2024', countLabel: '65 projects', months: [
+          { month: 'Nov', projects: ['Magic Eden', 'Movement', 'Pudgy Penguins'] },
+          { month: 'Jun', projects: ['LayerZero', 'ZKsync', 'Blast'] }
+        ]},
+        { year: '2023', countLabel: '21 projects', months: [
+          { month: 'Mar', projects: ['Arbitrum', 'Blur', 'Space ID'] }
+        ]},
+        { year: '2022', countLabel: '1 project', months: [
+          { month: 'Oct', projects: ['Aptos'] }
+        ]}
+      ],
+      faqs: [
+        { q: 'What is an airdrop?', a: 'A crypto airdrop is a free distribution of tokens by a blockchain project to early users, testers, or community members who interact with its protocol.' },
+        { q: 'How do I qualify for airdrops?', a: 'Complete on-chain tasks such as bridging, swapping, providing liquidity, or trading perpetuals on featured protocols, and stay active consistently.' },
+        { q: 'When will I receive my airdrop tokens?', a: 'Projects announce Token Generation Events (TGE) and claim windows after snapshot dates. You can track live claims in the Claims section.' },
+        { q: 'Are airdrops taxable?', a: 'Tax treatment varies by country. In many jurisdictions, claimed tokens are treated as income at fair market value upon receipt.' },
+        { q: 'Are airdrops safe?', a: 'Always verify official links, use a dedicated burner/farming wallet for new protocols, and never share your seed phrase.' },
+        { q: 'Can I lose money participating in airdrops?', a: 'Yes—trading fees, gas costs, impermanent loss, or smart-contract risks can apply. Only interact with amounts you are comfortable risking.' },
+        { q: 'Are airdrops listed on Bullkarry Drops guaranteed?', a: 'No. Listed campaigns represent potential or announced reward programs. Eligibility, tiers, and final distributions are determined by each project.' }
+      ],
+      perpProtocols: [
+        { id: 'arcus', name: 'Arcus', logoBg: '#166534', logoText: 'ARC', logoUrl: '', feeBps: 4.5, makerBps: 1.5, fdvM: 100, airdropPct: 10, latestPts: '13m', joinUrl: 'https://alphadrops.net/checker/perps-calculator' },
+        { id: 'n1', name: 'N1', logoBg: '#4f46e5', logoText: 'N1', logoUrl: '', feeBps: 4.0, makerBps: 1.5, fdvM: 200, airdropPct: 10, latestPts: '40m', joinUrl: 'https://alphadrops.net/airdrops' },
+        { id: 'bulk', name: 'Bulk', logoBg: '#18181b', logoText: 'BLK', logoUrl: '', feeBps: 3.5, makerBps: 1.0, fdvM: 350, airdropPct: 10, latestPts: '45m', joinUrl: 'https://alphadrops.net/airdrops' },
+        { id: 'perpl', name: 'Perpl', logoBg: '#6366f1', logoText: 'PPL', logoUrl: '', feeBps: 4.5, makerBps: 1.5, fdvM: 150, airdropPct: 10, latestPts: '25m', joinUrl: 'https://alphadrops.net/airdrops' },
+        { id: 'risex', name: 'RISEx', logoBg: '#10b981', logoText: 'RX', logoUrl: '', feeBps: 4.0, makerBps: 1.2, fdvM: 180, airdropPct: 12, latestPts: '30m', joinUrl: 'https://alphadrops.net/airdrops' },
+        { id: 'ondoperps', name: 'Ondo Perps', logoBg: '#0284c7', logoText: 'OND', logoUrl: '', feeBps: 4.5, makerBps: 1.5, fdvM: 500, airdropPct: 8, latestPts: '60m', joinUrl: 'https://alphadrops.net/airdrops/ondoperps' },
+        { id: 'pacifica', name: 'Pacifica', logoBg: '#0ea5e9', logoText: 'PAC', logoUrl: '', feeBps: 4.5, makerBps: 1.5, fdvM: 120, airdropPct: 10, latestPts: '20m', joinUrl: 'https://alphadrops.net/airdrops' },
+        { id: 'nado', name: 'Nado', logoBg: '#334155', logoText: 'NAD', logoUrl: '', feeBps: 5.0, makerBps: 2.0, fdvM: 150, airdropPct: 10, latestPts: '22m', joinUrl: 'https://alphadrops.net/airdrops' },
+        { id: 'meridian', name: 'Meridian', logoBg: '#475569', logoText: 'MRD', logoUrl: '', feeBps: 4.5, makerBps: 1.5, fdvM: 140, airdropPct: 10, latestPts: '18m', joinUrl: 'https://alphadrops.net/airdrops' },
+        { id: 'variational', name: 'Variational', logoBg: '#1e293b', logoText: 'VAR', logoUrl: '', feeBps: 4.0, makerBps: 1.0, fdvM: 250, airdropPct: 10, latestPts: '35m', joinUrl: 'https://alphadrops.net/airdrops' },
+        { id: 'extended', name: 'Extended', logoBg: '#0f766e', logoText: 'EXT', logoUrl: '', feeBps: 4.5, makerBps: 1.5, fdvM: 220, airdropPct: 10, latestPts: '28m', joinUrl: 'https://alphadrops.net/airdrops' },
+        { id: 'ostium', name: 'Ostium', logoBg: '#ea580c', logoText: 'OST', logoUrl: '', feeBps: 5.0, makerBps: 2.0, fdvM: 300, airdropPct: 10, latestPts: '50m', joinUrl: 'https://alphadrops.net/airdrops' },
+        { id: 'hibachi', name: 'Hibachi', logoBg: '#e11d48', logoText: 'HIB', logoUrl: '', feeBps: 4.5, makerBps: 1.5, fdvM: 160, airdropPct: 10, latestPts: '16m', joinUrl: 'https://alphadrops.net/airdrops' },
+        { id: 'txflow', name: 'TxFlow', logoBg: '#16a34a', logoText: 'TX', logoUrl: '', feeBps: 5.0, makerBps: 2.0, fdvM: 250, airdropPct: 12, latestPts: '80m', joinUrl: 'https://alphadrops.net/airdrops/txflow' }
       ],
       checkers: [
         { id: 'chk-1', title: 'Airdrop History', desc: 'Check claimed & unclaimed historical distributions for any wallet.', tags: ['Claimed / Unclaimed'], url: 'https://alphadrops.net/checker', interactive: null },
@@ -889,6 +941,25 @@
               </a>
             </div>
           </section>
+
+          <!-- 7. Common Questions FAQ Accordion -->
+          <section class="max-w-3xl mx-auto pt-4">
+            <div class="text-center mb-6">
+              <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">Common questions</h2>
+              <p class="text-xs sm:text-sm text-slate-500 dark:text-zinc-400 mt-1">Everything you need to know about ${escapeHtml(state.settings.brandName || 'Bullkarry')}.</p>
+            </div>
+            <div class="rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/70 dark:border-zinc-800 shadow-bk divide-y divide-slate-100 dark:divide-zinc-800">
+              ${(state.faqs || []).map((f, i) => `
+                <div class="p-4 sm:px-6">
+                  <button type="button" onclick="toggleFaq(${i})" class="w-full flex items-center justify-between gap-4 text-left font-bold text-sm text-slate-900 dark:text-white">
+                    <span>${escapeHtml(f.q)}</span>
+                    <span id="faqIcon-${i}" class="text-slate-400 transition-transform duration-200">▾</span>
+                  </button>
+                  <div id="faqAns-${i}" class="hidden pt-2.5 text-xs sm:text-sm text-slate-500 dark:text-zinc-400 leading-relaxed">${escapeHtml(f.a)}</div>
+                </div>
+              `).join('')}
+            </div>
+          </section>
         </div>
       `;
     }
@@ -924,6 +995,14 @@
       `;
     }
 
+    function toggleFaq(i) {
+      const ans = document.getElementById('faqAns-' + i);
+      const ic = document.getElementById('faqIcon-' + i);
+      if (!ans) return;
+      const open = ans.classList.contains('hidden');
+      ans.classList.toggle('hidden');
+      if (ic) ic.style.transform = open ? 'rotate(180deg)' : 'rotate(0deg)';
+    }
     function animateHomeStats() {
       const row = document.getElementById('homeStatsRow');
       if (!row) return;
@@ -1231,7 +1310,24 @@
       if (!item) return renderAirdropsPage(false);
       const isSaved = state.tracker.savedIds.includes(item.id);
 
-      const sentimentWidget = `
+      const claimUrl = item.claimUrl || (item.status === 'Claimable' ? item.joinUrl : '');
+      const claimBox = claimUrl ? `
+        <div class="rounded-2xl bg-amber-50/90 dark:bg-amber-500/10 border border-amber-200/80 dark:border-amber-500/30 p-4 shadow-bk space-y-3">
+          <div class="flex items-center gap-3">
+            <span class="w-9 h-9 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0">⚡</span>
+            <div>
+              <div class="text-sm font-extrabold text-slate-900 dark:text-white">Claim available</div>
+              <div class="text-[11px] font-bold text-amber-600 dark:text-amber-400">Airdrop live</div>
+            </div>
+          </div>
+          <p class="text-xs text-slate-600 dark:text-zinc-300 leading-relaxed">Don't leave your tokens behind. The claim phase is active for this project.</p>
+          <a href="${escapeAttr(claimUrl)}" target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold shadow-xs transition-colors">
+            <span>Claim tokens</span> ${SVG.arrowUpRight}
+          </a>
+        </div>
+      ` : '';
+
+      const sentimentWidget = `${claimBox}
         <div class="rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/70 dark:border-zinc-800 p-4 shadow-bk">
           <div class="flex items-center justify-between mb-2">
             <span class="text-xs font-bold text-slate-900 dark:text-white">Community sentiment</span>
@@ -1374,58 +1470,119 @@
       `;
     }
 
+    function toggleClaimYear(yr) {
+      const el = document.getElementById('claimYr-' + yr);
+      const ic = document.getElementById('claimYrIc-' + yr);
+      if (!el) return;
+      const hidden = el.classList.contains('hidden');
+      el.classList.toggle('hidden');
+      if (ic) ic.style.transform = hidden ? 'rotate(180deg)' : 'rotate(0deg)';
+    }
+
     function renderClaimsPage() {
       const openClaims = state.claims.filter(c => c.status === 'Open');
-      const histClaims = state.claims.filter(c => c.status !== 'Open');
-      const list = filters.claimsTab === 'open' ? openClaims : histClaims;
+      const totalHist = (state.claimHistory || []).reduce((acc, y) => {
+        const m = parseInt(y.countLabel, 10);
+        return acc + (isNaN(m) ? 0 : m);
+      }, 0) || 197;
+
       return `
         ${renderTopBanners()}
         <div class="space-y-5 animate-fade-up">
-          <div class="space-y-5">
-            <div class="rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/70 dark:border-zinc-800 p-5 sm:p-6 shadow-bk">
-              <h1 class="text-2xl sm:text-3xl font-extrabold mb-1">Claims</h1>
-              <p class="text-sm text-slate-500 dark:text-zinc-400 mb-4">Find live claim links, review past distributions, or scan a wallet.</p>
-              <div class="flex flex-wrap gap-2 mb-4">
-                <button onclick="filters.claimsTab='open'; renderMain();" class="px-3.5 py-2 rounded-xl text-xs font-bold ${filters.claimsTab==='open'?'bg-slate-900 text-white dark:bg-white dark:text-slate-900':'bg-slate-100 dark:bg-zinc-800 text-slate-600 dark:text-zinc-300'}">Open claims (${openClaims.length})</button>
-                <button onclick="filters.claimsTab='history'; renderMain();" class="px-3.5 py-2 rounded-xl text-xs font-bold ${filters.claimsTab==='history'?'bg-slate-900 text-white dark:bg-white dark:text-slate-900':'bg-slate-100 dark:bg-zinc-800 text-slate-600 dark:text-zinc-300'}">History (${histClaims.length})</button>
-                <button onclick="filters.claimsTab='wallet'; renderMain();" class="px-3.5 py-2 rounded-xl text-xs font-bold ${filters.claimsTab==='wallet'?'bg-slate-900 text-white dark:bg-white dark:text-slate-900':'bg-slate-100 dark:bg-zinc-800 text-slate-600 dark:text-zinc-300'}">Check wallet</button>
-              </div>
-              <div class="p-3 rounded-xl bg-amber-50/80 dark:bg-amber-500/10 border border-amber-200/70 dark:border-amber-500/30 text-xs text-amber-800 dark:text-amber-300 font-medium flex items-center gap-2">
-                ${SVG.shield} <span>Use official claim portals only. ${escapeHtml(state.settings.brandName)} will never ask for your seed phrase.</span>
-              </div>
+          <div class="rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/70 dark:border-zinc-800 p-5 sm:p-6 shadow-bk">
+            <h1 class="text-2xl sm:text-3xl font-extrabold mb-1">Claims</h1>
+            <p class="text-sm text-slate-500 dark:text-zinc-400 mb-4">Find live claim links, review past distributions, or scan a wallet.</p>
+            <div class="flex flex-wrap gap-4 border-b border-slate-100 dark:border-zinc-800 pb-2 mb-4">
+              <button onclick="filters.claimsTab='open'; renderMain();" class="pb-1.5 text-xs font-bold border-b-2 transition-colors ${filters.claimsTab==='open'?'border-amber-500 text-slate-900 dark:text-white':'border-transparent text-slate-400 hover:text-slate-700'}">Open claims <span class="ml-1 text-slate-400">${openClaims.length}</span></button>
+              <button onclick="filters.claimsTab='history'; renderMain();" class="pb-1.5 text-xs font-bold border-b-2 transition-colors ${filters.claimsTab==='history'?'border-amber-500 text-slate-900 dark:text-white':'border-transparent text-slate-400 hover:text-slate-700'}">History <span class="ml-1 text-slate-400">${totalHist}</span></button>
+              <button onclick="filters.claimsTab='wallet'; renderMain();" class="pb-1.5 text-xs font-bold border-b-2 transition-colors ${filters.claimsTab==='wallet'?'border-amber-500 text-slate-900 dark:text-white':'border-transparent text-slate-400 hover:text-slate-700'}">Check wallet</button>
             </div>
-            ${filters.claimsTab === 'wallet' ? `
-              <div class="rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/70 dark:border-zinc-800 p-6 shadow-bk">
-                <h3 class="text-sm font-bold mb-2">Scan Wallet for Eligible Claims</h3>
-                <div class="flex flex-col sm:flex-row gap-2">
-                  <input id="walletScanInput" type="text" placeholder="Enter EVM or Solana address (0x...)" class="flex-1 px-4 py-2.5 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 text-xs" />
-                  <button onclick="scanWalletDemo()" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold">Scan Wallet</button>
-                </div>
-                <div id="walletScanResult" class="mt-4 text-xs text-slate-500"></div>
+            <div class="p-3 rounded-xl bg-amber-50/80 dark:bg-amber-500/10 border border-amber-200/70 dark:border-amber-500/30 text-xs text-amber-800 dark:text-amber-300 font-medium flex items-center gap-2">
+              ${SVG.shield} <span>Use official claim portals only. ${escapeHtml(state.settings.brandName)} will never ask for your seed phrase.</span>
+            </div>
+          </div>
+
+          ${filters.claimsTab === 'wallet' ? `
+            <div class="rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/70 dark:border-zinc-800 p-6 shadow-bk">
+              <h3 class="text-sm font-bold mb-2">Scan Wallet for Eligible Claims</h3>
+              <div class="flex flex-col sm:flex-row gap-2">
+                <input id="walletScanInput" type="text" placeholder="Enter EVM or Solana address (0x...)" class="flex-1 px-4 py-2.5 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 text-xs" />
+                <button onclick="scanWalletDemo()" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold">Scan Wallet</button>
               </div>
-            ` : `
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                ${list.map(c => `
-                  <div class="rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/70 dark:border-zinc-800 p-5 shadow-bk flex flex-col justify-between">
-                    <div>
-                      <div class="flex items-center justify-between mb-2">
-                        <span class="font-extrabold text-base">${escapeHtml(c.project)}</span>
-                        <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-blue-50 text-blue-600 dark:bg-blue-500/15 dark:text-blue-400">${escapeHtml(c.token)}</span>
+              <div id="walletScanResult" class="mt-4 text-xs text-slate-500"></div>
+            </div>
+          ` : filters.claimsTab === 'history' ? `
+            <div class="rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/70 dark:border-zinc-800 p-5 sm:p-6 shadow-bk space-y-4">
+              <div>
+                <h2 class="text-base font-extrabold text-slate-900 dark:text-white">Past distributions</h2>
+                <p class="text-xs text-slate-400">Airdrops tracked by ${escapeHtml(state.settings.brandName || 'Bullkarry')} since 2022.</p>
+              </div>
+              <div class="divide-y divide-slate-100 dark:divide-zinc-800">
+                ${(state.claimHistory || []).map((y, idx) => `
+                  <div class="py-3">
+                    <button type="button" onclick="toggleClaimYear('${y.year}')" class="w-full flex items-center justify-between text-left py-1">
+                      <div class="flex items-baseline gap-3">
+                        <span class="text-lg font-extrabold text-slate-900 dark:text-white">${escapeHtml(y.year)}</span>
+                        <span class="text-xs text-slate-400 font-medium">${escapeHtml(y.countLabel)}</span>
                       </div>
-                      <div class="text-xs text-slate-500 dark:text-zinc-400 mb-3">${escapeHtml(c.amount)} • ${escapeHtml(c.chain)}</div>
-                    </div>
-                    <div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-zinc-800">
-                      <span class="text-[11px] text-slate-400">${escapeHtml(c.deadline)}</span>
-                      <a href="${escapeAttr(c.url)}" target="_blank" rel="noopener" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold">Claim ${SVG.arrowUpRight}</a>
+                      <span id="claimYrIc-${y.year}" class="text-slate-400 transition-transform" style="${idx===0?'transform:rotate(180deg)':''}">▾</span>
+                    </button>
+                    <div id="claimYr-${y.year}" class="${idx===0?'':'hidden'} mt-2 space-y-2.5 pl-1">
+                      ${(y.months || []).map(m => `
+                        <div class="grid grid-cols-[60px_1fr] gap-3 text-xs py-1.5 border-t border-slate-100/80 dark:border-zinc-800/80">
+                          <span class="text-slate-400 font-semibold">${escapeHtml(m.month)}</span>
+                          <div class="flex flex-wrap gap-x-4 gap-y-1 font-bold text-slate-800 dark:text-zinc-200">
+                            ${m.projects.map(pn => `<span>${escapeHtml(pn)}</span>`).join('')}
+                          </div>
+                        </div>
+                      `).join('')}
                     </div>
                   </div>
                 `).join('')}
               </div>
-            `}
-          </div>
-          
+            </div>
+          ` : `
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              ${openClaims.map(c => `
+                <div class="rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/70 dark:border-zinc-800 p-5 shadow-bk hover:shadow-bk-hover transition-all flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-start justify-between gap-3 mb-2.5">
+                      <div class="flex items-center gap-3 min-w-0">
+                        ${c.logoUrl
+                          ? `<img src="${escapeAttr(c.logoUrl)}" class="w-10 h-10 rounded-xl object-cover shrink-0" />`
+                          : `<div class="w-10 h-10 rounded-xl flex items-center justify-center text-white font-extrabold text-xs shrink-0" style="background:${escapeAttr(c.logoBg || '#0f172a')}">${escapeHtml(c.logoText || c.project.slice(0,2).toUpperCase())}</div>`}
+                        <div class="min-w-0">
+                          <div class="font-extrabold text-base text-slate-900 dark:text-white truncate">${escapeHtml(c.project)}</div>
+                          <div class="text-[11px] text-slate-400">${escapeHtml(c.chain)}</div>
+                        </div>
+                      </div>
+                      <span class="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-600 dark:text-emerald-400 shrink-0"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Open</span>
+                    </div>
+                    <p class="text-xs text-slate-500 dark:text-zinc-400 line-clamp-2 mb-3">${escapeHtml(c.desc || c.amount)}</p>
+                    ${c.deadline ? `<div class="text-[11px] text-slate-400 mb-3">${escapeHtml(c.deadline)}</div>` : ''}
+                  </div>
+                  <div class="grid grid-cols-2 gap-2 pt-3 border-t border-slate-100 dark:border-zinc-800">
+                    <a href="${escapeAttr(c.url)}" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold transition-colors">Claim ${SVG.arrowUpRight}</a>
+                    <button onclick="openClaimDetail('${c.id}')" class="py-2 rounded-xl bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 hover:bg-slate-50 dark:hover:bg-zinc-700 text-xs font-bold text-slate-700 dark:text-zinc-200 transition-colors">Details</button>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          `}
         </div>
       `;
+    }
+
+    function openClaimDetail(claimId) {
+      const c = state.claims.find(x => x.id === claimId);
+      if (!c) return;
+      if (c.detailId && state.airdrops.find(a => a.id === c.detailId)) {
+        const target = state.airdrops.find(a => a.id === c.detailId);
+        target.claimUrl = c.url;
+        navigateTo('detail', target.id);
+      } else {
+        navigateTo('detail', state.airdrops[0]?.id);
+      }
     }
 
     function renderCheckersPage() {
@@ -1456,7 +1613,7 @@
       `;
     }
 
-    const PERP_PROTOCOLS = [
+    const DEFAULT_PERP_PROTOCOLS_UNUSED = [
       { id: 'arcus', name: 'Arcus', logoBg: '#166534', logoText: 'ARC', feeBps: 4.5, makerBps: 1.5, fdvM: 100, airdropPct: 10, latestPts: '13m', joinUrl: 'https://alphadrops.net/checker/perps-calculator' },
       { id: 'n1', name: 'N1', logoBg: '#4f46e5', logoText: 'N1', feeBps: 4.0, makerBps: 1.5, fdvM: 200, airdropPct: 10, latestPts: '40m', joinUrl: 'https://alphadrops.net/airdrops' },
       { id: 'bulk', name: 'Bulk', logoBg: '#18181b', logoText: 'BLK', feeBps: 3.5, makerBps: 1.0, fdvM: 350, airdropPct: 10, latestPts: '45m', joinUrl: 'https://alphadrops.net/airdrops' },
@@ -1488,7 +1645,7 @@
 
     function selectCalcProto(id) {
       calcProtoId = id;
-      const pr = PERP_PROTOCOLS.find(x => x.id === id) || PERP_PROTOCOLS[0];
+      const pr = (state.perpProtocols || []).find(x => x.id === id) || (state.perpProtocols || [])[0];
       calcFdvUnit = 'M';
       calcState.fdv = String(pr.fdvM);
       calcState.alloc = String(pr.airdropPct);
@@ -1512,7 +1669,7 @@
     }
 
     function useLatestTotalPts() {
-      const pr = PERP_PROTOCOLS.find(x => x.id === calcProtoId) || PERP_PROTOCOLS[0];
+      const pr = (state.perpProtocols || []).find(x => x.id === calcProtoId) || (state.perpProtocols || [])[0];
       calcState.totalPts = pr.latestPts;
       const el = document.getElementById('pvTotalPts');
       if (el) el.value = pr.latestPts;
@@ -1539,17 +1696,18 @@
     }
 
     function renderPerpCalculatorInner() {
-      const pr = PERP_PROTOCOLS.find(x => x.id === calcProtoId) || PERP_PROTOCOLS[0];
+      const pr = (state.perpProtocols || []).find(x => x.id === calcProtoId) || (state.perpProtocols || [])[0];
       return `
         <div class="rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/70 dark:border-zinc-800 p-5 sm:p-6 shadow-bk space-y-5">
           <div>
             <div class="text-xs font-bold text-slate-500 dark:text-zinc-400 mb-2.5">Protocol</div>
             <div class="flex flex-wrap gap-2">
-              ${PERP_PROTOCOLS.map(p => {
+              ${(state.perpProtocols || []).map(p => {
                 const active = p.id === calcProtoId;
                 const matched = state.airdrops.find(a => a.id === p.id);
-                const iconHtml = matched && matched.logoUrl
-                  ? `<img src="${escapeAttr(matched.logoUrl)}" alt="${escapeAttr(p.name)}" class="w-6 h-6 rounded-md object-cover shrink-0" />`
+                const imgSrc = p.logoUrl || (matched && matched.logoUrl);
+                const iconHtml = imgSrc
+                  ? `<img src="${escapeAttr(imgSrc)}" alt="${escapeAttr(p.name)}" class="w-6 h-6 rounded-md object-cover shrink-0" />`
                   : `<span class="w-6 h-6 rounded-md text-white font-extrabold text-[9px] flex items-center justify-center shrink-0" style="background:${p.logoBg}">${p.logoText}</span>`;
                 return `
                   <button type="button" onclick="selectCalcProto('${p.id}')" class="inline-flex items-center gap-2 px-3 py-2 rounded-xl border text-xs font-bold transition-all ${active ? 'bg-amber-50 border-amber-500 text-amber-700 dark:bg-amber-500/15 dark:border-amber-500 dark:text-amber-300 shadow-xs' : 'bg-[#f7f9fc] dark:bg-zinc-800/60 border-slate-200/70 dark:border-zinc-700 hover:border-slate-300 text-slate-700 dark:text-zinc-200'}">
@@ -1636,7 +1794,7 @@
     }
 
     function calcPerp() {
-      const pr = PERP_PROTOCOLS.find(x => x.id === calcProtoId) || PERP_PROTOCOLS[0];
+      const pr = (state.perpProtocols || []).find(x => x.id === calcProtoId) || (state.perpProtocols || [])[0];
       const out = document.getElementById('pcOutput');
       if (!out) return;
 
@@ -1705,7 +1863,7 @@
     }
 
     function openShareCalcModal() {
-      const pr = PERP_PROTOCOLS.find(x => x.id === calcProtoId) || PERP_PROTOCOLS[0];
+      const pr = (state.perpProtocols || []).find(x => x.id === calcProtoId) || (state.perpProtocols || [])[0];
       const r = lastCalcResult;
       const valStr = r.yourPts > 0 ? '$' + r.estVal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '$' + r.ptVal.toFixed(4);
       openModal(`
@@ -1745,7 +1903,7 @@
     }
 
     function downloadCalcCardPng() {
-      const pr = PERP_PROTOCOLS.find(x => x.id === calcProtoId) || PERP_PROTOCOLS[0];
+      const pr = (state.perpProtocols || []).find(x => x.id === calcProtoId) || (state.perpProtocols || [])[0];
       const r = lastCalcResult;
       const canvas = document.createElement('canvas');
       canvas.width = 800; canvas.height = 440;
@@ -2013,6 +2171,21 @@
               <div class="flex items-center justify-between mb-2"><h3 class="text-sm font-bold">Checkers & Tools (${state.checkers.length})</h3><button onclick="openCheckerEditor(null)" class="px-3 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-bold">+ Add Checker</button></div>
               <div class="space-y-2">${state.checkers.map(c => `<div class="flex items-center justify-between p-3 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800/60 text-xs"><span><strong>${escapeHtml(c.title)}</strong> — ${escapeHtml(c.desc)}</span><div class="space-x-2"><button onclick="openCheckerEditor('${c.id}')" class="text-blue-600 font-bold">Edit</button><button onclick="deleteChecker('${c.id}')" class="text-rose-500 font-bold">Delete</button></div></div>`).join('')}</div>
             </div>
+            <div>
+              <h3 class="text-sm font-bold mb-2">Perp Calculator Protocols (Upload Logo & Affiliate Join Link)</h3>
+              <div class="space-y-2">
+                ${(state.perpProtocols || []).map((pr, pi) => `
+                  <div class="p-3 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800/60 border border-slate-200/70 dark:border-zinc-700 grid grid-cols-1 sm:grid-cols-4 gap-2 text-xs items-center">
+                    <div class="flex items-center gap-2 font-bold">
+                      ${pr.logoUrl ? `<img src="${escapeAttr(pr.logoUrl)}" class="w-7 h-7 rounded-lg object-cover shrink-0" />` : `<span class="w-7 h-7 rounded-lg text-white text-[9px] flex items-center justify-center shrink-0" style="background:${pr.logoBg}">${pr.logoText}</span>`}
+                      <span>${escapeHtml(pr.name)}</span>
+                    </div>
+                    <input type="text" value="${escapeAttr(pr.joinUrl)}" onchange="state.perpProtocols[${pi}].joinUrl=this.value; saveState(); renderMain();" placeholder="Affiliate / Join URL" class="sm:col-span-2 px-2.5 py-2 rounded-lg bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-700" />
+                    <label class="inline-flex items-center justify-center gap-1 px-2.5 py-2 rounded-lg bg-blue-600 text-white cursor-pointer font-bold">${SVG.upload} Upload Logo<input type="file" accept="image/*" class="hidden" onchange="uploadPerpProtoLogo(${pi}, this)" /></label>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
           </div>
         `;
       }
@@ -2198,6 +2371,7 @@
             <div><label class="font-semibold">Funding</label><input id="edFunding" value="${escapeAttr(d.funding)}" oninput="editorDraft.funding=this.value" class="w-full mt-1 px-3 py-2 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700" /></div>
             <div><label class="font-semibold">Fallback Initials (if no logo)</label><input id="edLogoTxt" value="${escapeAttr(d.logoText)}" oninput="editorDraft.logoText=this.value" class="w-full mt-1 px-3 py-2 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700" /></div>
             <div><label class="font-semibold">Join Airdrop URL</label><input id="edJoinUrl" value="${escapeAttr(d.joinUrl)}" oninput="editorDraft.joinUrl=this.value" class="w-full mt-1 px-3 py-2 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700" /></div>
+            <div><label class="font-semibold">Claim Tokens URL (shows Claim Available card)</label><input id="edClaimUrl" value="${escapeAttr(d.claimUrl || '')}" oninput="editorDraft.claimUrl=this.value" placeholder="https://claim..." class="w-full mt-1 px-3 py-2 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700" /></div>
           </div>
 
           <div class="text-xs"><label class="font-semibold">Short Description</label><input id="edShort" value="${escapeAttr(d.shortDesc)}" oninput="editorDraft.shortDesc=this.value" class="w-full mt-1 px-3 py-2 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700" /></div>
@@ -2416,6 +2590,7 @@
       saveState(); renderMain(); adminUnlocked = true; openAdminModal();
     }
     function deleteSidebarPromoCard(i) { state.ads.sidebarPromoCards.splice(i, 1); saveState(); renderMain(); adminUnlocked = true; openAdminModal(); }
+    function uploadPerpProtoLogo(pi, input) { readImageFile(input, dataUrl => { state.perpProtocols[pi].logoUrl = dataUrl; saveState(); renderMain(); adminUnlocked = true; openAdminModal(); showToast('Protocol logo uploaded!'); }); }
     function uploadImageToPromoCard(i, input) { readImageFile(input, dataUrl => { state.ads.sidebarPromoCards[i].imageUrl = dataUrl; saveState(); renderMain(); showToast('Icon uploaded!'); }); }
 
     function addClaimAdmin() { state.claims.unshift({ id: 'cl-' + Date.now(), project: 'New Claim', token: 'TKN', amount: 'Season 1', chain: 'Base', deadline: 'Open', status: 'Open', url: 'https://alphadrops.net/claim' }); saveState(); renderMain(); openAdminModal(); }
