@@ -745,7 +745,7 @@
     // =========================================================================
     // RIGHT SIDEBAR (Manual Sidebar Ads + Quick Checkers + Sentiment + Community)
     // =========================================================================
-    function renderRightSidebar(extraDetailWidgets = '') {
+    function renderRightSidebar(topWidget = '', bottomWidget = '') {
       const adsHtml = (state.ads.sidebarAds || []).filter(ad => ad.active).map(ad => {
         if (ad.htmlCode && ad.htmlCode.trim()) {
           return `<a href="${escapeAttr(ad.url || '#')}" target="_blank" rel="noopener" class="block rounded-2xl overflow-hidden border border-slate-200/70 dark:border-zinc-800 shadow-bk hover:shadow-bk-hover transition-all">${ad.htmlCode}</a>`;
@@ -794,9 +794,10 @@
       const comm = state.settings.communityCard;
       return `
         <aside class="space-y-4 lg:sticky lg:top-20 lg:self-start">
+          ${topWidget}
           ${adsHtml}
           <div class="space-y-2.5">${promoCardsHtml}</div>
-          ${extraDetailWidgets}
+          ${bottomWidget}
           <div class="rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/70 dark:border-zinc-800 p-4 shadow-bk">
             <div class="text-sm font-bold text-slate-900 dark:text-white mb-1">${escapeHtml(comm.title)}</div>
             <p class="text-xs text-slate-500 dark:text-zinc-400 mb-3">${escapeHtml(comm.subtitle)}</p>
@@ -931,15 +932,15 @@
             </div>
           </section>
 
-          <!-- 3. Continuous Smooth Marquee Strip (NOW TRACKING) -->
+          <!-- 3. Borderless Compact Marquee Strip (NOW TRACKING) -->
           ${state.settings.marqueeActive !== false ? `
-          <section class="rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/70 dark:border-zinc-800 py-3.5 px-4 shadow-bk overflow-hidden">
-            <div class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">${escapeHtml(state.settings.marqueeTitle || 'NOW TRACKING')}</div>
-            <div class="overflow-hidden">
-              <div class="animate-marquee gap-2.5">
+          <section class="py-1 overflow-hidden flex items-center gap-3">
+            <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400 shrink-0">${escapeHtml(state.settings.marqueeTitle || 'NOW TRACKING')}</span>
+            <div class="overflow-hidden flex-1">
+              <div class="animate-marquee gap-2">
                 ${[...state.airdrops.filter(a => a.marquee !== false), ...state.airdrops.filter(a => a.marquee !== false)].map(m => `
-                  <button onclick="navigateTo('detail','${m.id}')" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800/80 border border-slate-200/70 dark:border-zinc-700 hover:border-blue-300 text-xs font-bold text-slate-800 dark:text-zinc-200 shrink-0 transition-colors">
-                    ${renderLogo(m, 'w-5 h-5 text-[9px]')}
+                  <button onclick="navigateTo('detail','${m.id}')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/80 dark:bg-zinc-900/80 hover:bg-white dark:hover:bg-zinc-800 text-xs font-semibold text-slate-700 dark:text-zinc-200 shrink-0 transition-colors">
+                    ${renderLogo(m, 'w-4 h-4 text-[8px]')}
                     <span>${escapeHtml(m.name)}</span>
                   </button>
                 `).join('')}
@@ -1357,7 +1358,7 @@
         </div>
       ` : '';
 
-      const sentimentWidget = `${claimBox}
+      const sentimentWidget = `
         <div class="rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/70 dark:border-zinc-800 p-4 shadow-bk">
           <div class="flex items-center justify-between mb-2">
             <span class="text-xs font-bold text-slate-900 dark:text-white">Community sentiment</span>
@@ -1440,7 +1441,7 @@
               </button>
             </div>
           </div>
-          ${renderRightSidebar(sentimentWidget)}
+          ${renderRightSidebar(claimBox, sentimentWidget)}
         </div>
       `;
     }
@@ -2079,7 +2080,7 @@
       if (otp !== pendingOtp) return showToast('Invalid verification code');
       if (!np || np.length < 4) return showToast('Password must be at least 4 characters');
       state.settings.adminPassword = np;
-      saveState(); adminUnlocked = true; openAdminModal();
+      saveState(); adminUnlocked = true; closeModal(); navigateTo('admin');
       showToast('Password reset successfully!');
     }
     function toggleDraftTag(tg) {
@@ -2090,46 +2091,103 @@
     }
     function verifyAdminPass() {
       const val = document.getElementById('adminPassInput')?.value || '';
-      if (val === state.settings.adminPassword) { adminUnlocked = true; openAdminModal(); }
+      if (val === state.settings.adminPassword) { closeModal(); adminUnlocked = true; navigateTo('admin'); }
       else { document.getElementById('adminPassErr')?.classList.remove('hidden'); }
     }
 
     function openAdminModal() {
+      closeModal();
+      adminUnlocked = true;
+      if (currentRoute !== 'admin') navigateTo('admin');
+      else renderMain();
+    }
+
+    function renderFullAdminPage() {
       const tabs = [
+        ['overview', 'Overview'],
         ['airdrops', 'Airdrops & Posts'],
-        ['menus', 'Sidebar & Buttons'],
-        ['sections', 'Claims & Raises'],
-        ['ads', 'Ads & Banners'],
+        ['sections', 'Claims, Checkers & Raises'],
+        ['menus', 'Sidebar & Menus'],
+        ['ads', 'Ads & Marquee'],
+        ['faqs', 'FAQs & Questions'],
         ['settings', 'Site, Logo & Backup']
       ];
-      openModal(`
-        <div class="w-full max-w-5xl max-h-[90vh] rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 shadow-2xl flex flex-col overflow-hidden">
-          <div class="px-5 py-4 border-b border-slate-200/80 dark:border-zinc-800 flex items-center justify-between gap-3">
-            <div class="flex items-center gap-2.5">
-              <span class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-500/15 text-blue-600 dark:text-blue-400 flex items-center justify-center">${SVG.settings}</span>
+      return `
+        <div class="space-y-5 animate-fade-up">
+          <div class="rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/70 dark:border-zinc-800 p-5 shadow-bk flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <span class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-500/15 text-blue-600 dark:text-blue-400 flex items-center justify-center">${SVG.settings}</span>
               <div>
-                <h2 class="text-base font-extrabold">Bullkarry Admin Control Center</h2>
-                <p class="text-[11px] text-slate-400">Full live control over posts, logos, tasks, menus, ads & branding</p>
+                <h1 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">Bullkarry Admin Workspace</h1>
+                <p class="text-xs text-slate-400">Full-page control over every section, post, claim, ad, menu, FAQ & protocol</p>
               </div>
             </div>
             <div class="flex items-center gap-2">
-              <button onclick="adminUnlocked=false; closeModal(); showToast('Admin locked');" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-zinc-800 text-xs font-semibold">Lock</button>
-              <button onclick="closeModal()" class="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-zinc-800 text-slate-500">${SVG.close}</button>
+              <button onclick="navigateTo('home')" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-zinc-800 text-xs font-bold">${SVG.arrowLeft} Back to Live Site</button>
+              <button onclick="adminUnlocked=false; navigateTo('home'); showToast('Admin locked');" class="px-4 py-2 rounded-xl bg-rose-50 text-rose-600 dark:bg-rose-500/15 dark:text-rose-400 text-xs font-bold">Lock & Exit</button>
             </div>
           </div>
 
-          <div class="px-5 py-2.5 border-b border-slate-100 dark:border-zinc-800 flex flex-wrap gap-1.5 bg-[#f7f9fc] dark:bg-zinc-950/40">
-            ${tabs.map(([id, label]) => `
-              <button onclick="adminUnlocked=true; adminTab='${id}'; openAdminModal();" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-colors ${adminTab===id ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900' : 'text-slate-600 dark:text-zinc-400 hover:bg-slate-200/60 dark:hover:bg-zinc-800'}">${label}</button>
-            `).join('')}
-          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-5 items-start">
+            <!-- Admin Left Navigation -->
+            <div class="rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/70 dark:border-zinc-800 p-2.5 shadow-bk flex lg:flex-col gap-1 overflow-x-auto no-scrollbar">
+              ${tabs.map(([id, label]) => `
+                <button onclick="adminTab='${id}'; renderMain();" class="px-3.5 py-2.5 rounded-xl text-xs font-bold text-left whitespace-nowrap transition-colors ${adminTab===id ? 'bg-[#eef4ff] text-[#2563eb] dark:bg-blue-500/15 dark:text-blue-400' : 'text-slate-600 dark:text-zinc-400 hover:bg-slate-50 dark:hover:bg-zinc-800'}">${label}</button>
+              `).join('')}
+            </div>
 
-          <div class="p-5 overflow-y-auto flex-1 space-y-5">${renderAdminTabBody()}</div>
+            <!-- Admin Main Section Panel -->
+            <div class="rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/70 dark:border-zinc-800 p-5 sm:p-6 shadow-bk space-y-5 min-w-0">
+              ${renderAdminTabBody()}
+            </div>
+          </div>
         </div>
-      `);
+      `;
     }
 
     function renderAdminTabBody() {
+      if (adminTab === 'overview') {
+        return `
+          <div class="space-y-5">
+            <h3 class="text-base font-extrabold">Site Overview & Quick Actions</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div class="p-4 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800/60 border border-slate-200/60 dark:border-zinc-700"><div class="text-2xl font-extrabold">${state.airdrops.length}</div><div class="text-xs text-slate-400">Total Airdrops</div></div>
+              <div class="p-4 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800/60 border border-slate-200/60 dark:border-zinc-700"><div class="text-2xl font-extrabold">${state.claims.length}</div><div class="text-xs text-slate-400">Open Claims</div></div>
+              <div class="p-4 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800/60 border border-slate-200/60 dark:border-zinc-700"><div class="text-2xl font-extrabold">${state.raises.length}</div><div class="text-xs text-slate-400">Crypto Raises</div></div>
+              <div class="p-4 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800/60 border border-slate-200/60 dark:border-zinc-700"><div class="text-2xl font-extrabold">${(state.perpProtocols||[]).length}</div><div class="text-xs text-slate-400">Perp Protocols</div></div>
+            </div>
+            <div class="flex flex-wrap gap-2.5">
+              <button onclick="openAirdropEditor(null)" class="px-4 py-2.5 rounded-xl bg-blue-600 text-white text-xs font-bold">+ New Airdrop Post</button>
+              <button onclick="openClaimEditor(null)" class="px-4 py-2.5 rounded-xl bg-amber-500 text-white text-xs font-bold">+ New Open Claim</button>
+              <button onclick="openRaiseEditor(null)" class="px-4 py-2.5 rounded-xl bg-emerald-600 text-white text-xs font-bold">+ New Raise</button>
+              <button onclick="adminTab='ads'; renderMain();" class="px-4 py-2.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold">Manage Ads & Marquee</button>
+            </div>
+          </div>
+        `;
+      }
+
+      if (adminTab === 'faqs') {
+        return `
+          <div class="space-y-4 text-xs">
+            <div class="flex items-center justify-between">
+              <h3 class="text-sm font-bold">Common Questions (Home Page FAQ)</h3>
+              <button onclick="state.faqs.push({q:'New Question?',a:'Answer here...'}); saveState(); renderMain();" class="px-3 py-1.5 rounded-lg bg-blue-600 text-white font-bold">+ Add Question</button>
+            </div>
+            <div class="space-y-3">
+              ${(state.faqs || []).map((f, fi) => `
+                <div class="p-3.5 rounded-xl bg-[#f7f9fc] dark:bg-zinc-800/60 border border-slate-200 dark:border-zinc-700 space-y-2">
+                  <div class="flex gap-2">
+                    <input value="${escapeAttr(f.q)}" onchange="state.faqs[${fi}].q=this.value; saveState();" placeholder="Question" class="flex-1 px-3 py-2 rounded-lg bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-700 font-bold" />
+                    <button onclick="state.faqs.splice(${fi},1); saveState(); renderMain();" class="px-3 text-rose-500 font-bold">Delete</button>
+                  </div>
+                  <textarea rows="2" onchange="state.faqs[${fi}].a=this.value; saveState();" placeholder="Answer" class="w-full px-3 py-2 rounded-lg bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-700">${escapeHtml(f.a)}</textarea>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
       if (adminTab === 'airdrops') {
         return `
           <div class="flex items-center justify-between">
@@ -2788,7 +2846,7 @@
       const root = document.getElementById('modalRoot');
       root.innerHTML = html; root.classList.remove('hidden'); root.classList.add('flex');
     }
-    function closeModal() { adminUnlocked = false;
+    function closeModal() { if (currentRoute !== 'admin') adminUnlocked = false;
       const root = document.getElementById('modalRoot');
       root.classList.add('hidden'); root.classList.remove('flex'); root.innerHTML = '';
     }
@@ -2802,7 +2860,8 @@
     function renderMainListOnly() { renderMain(); }
     function renderMain() {
       const main = document.getElementById('mainContent');
-      if (currentRoute === 'detail') main.innerHTML = renderDetailPage();
+      if (currentRoute === 'admin') { if (!adminUnlocked) { navigateTo('home'); openAdminGate(); return; } main.innerHTML = renderFullAdminPage(); }
+      else if (currentRoute === 'detail') main.innerHTML = renderDetailPage();
       else if (currentRoute === 'airdrops') main.innerHTML = renderAirdropsPage(false);
       else if (currentRoute === 'perps') { main.innerHTML = renderAirdropsPage(true); if (filters.perpsTab === 'calculator') calcPerp(); }
       else if (currentRoute === 'tracker') main.innerHTML = renderTrackerPage();
