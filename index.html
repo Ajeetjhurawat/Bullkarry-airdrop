@@ -1267,7 +1267,7 @@
       }
 
       const listContent = filters.viewMode === 'cards' ? `
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           ${list.length ? list.map(item => `
             <div onclick="navigateTo('detail', '${item.id}')" class="group cursor-pointer rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/70 dark:border-zinc-800 p-4 shadow-bk hover:shadow-bk-hover hover:border-blue-300/80 dark:hover:border-blue-500/40 transition-all flex flex-col justify-between">
               <div>
@@ -1410,9 +1410,8 @@
       `;
 
       return `
-        ${renderTopBanners()}
-        <div class="space-y-5 animate-fade-up">
-          <div class="space-y-5">
+        <div class="grid grid-cols-1 md:grid-cols-[1fr_270px] lg:grid-cols-[1fr_300px] gap-6 animate-fade-up items-start">
+          <div class="space-y-5 min-w-0">
             <button onclick="navigateTo('airdrops')" class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white">
               ${SVG.arrowLeft} <span>latest crypto airdrops</span>
             </button>
@@ -2945,7 +2944,19 @@
       else if (currentRoute === 'raises') main.innerHTML = renderRaisesPage();
       else { main.innerHTML = renderHomePage(); animateHomeStats(); }
     }
-    function renderAll() { renderChrome(); renderMain(); }
+    function syncAdsenseHead() {
+      const pub = (state.ads.adsensePubId || '').trim();
+      const existing = document.getElementById('bkAdsenseScript');
+      if (pub && !existing) {
+        const sc = document.createElement('script');
+        sc.id = 'bkAdsenseScript';
+        sc.async = true;
+        sc.crossOrigin = 'anonymous';
+        sc.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + encodeURIComponent(pub);
+        document.head.appendChild(sc);
+      }
+    }
+    function renderAll() { syncAdsenseHead(); renderChrome(); renderMain(); }
 
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
     let lastScrollY = 0;
