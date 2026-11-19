@@ -1,0 +1,94 @@
+{
+  "site": {
+    "name": "Bullkarry Drops",
+    "domain": "https://bullkarry.netlify.app",
+    "description": "Independent Web3 airdrop directory, perps tracker, verified claims, and DeFi research guides."
+  },
+  "airdrops": [
+    {
+      "id": "txflow",
+      "name": "TxFlow",
+      "category": "Perps",
+      "chain": "Arbitrum",
+      "status": "Active",
+      "verifiedBadge": "Verified",
+      "lastVerified": "2026-11-18",
+      "funding": "$18M (Reported)",
+      "officialUrl": "https://arbitrum.io",
+      "shortDesc": "Layer-1 orderbook & parallel execution ecosystem built around shared liquidity channels.",
+      "analysis": "TxFlow is an on-chain trading and Layer-1 execution environment focused on shared liquidity across perpetuals, spot markets, and prediction channels. Participants typically earn points by bridging USDC, maintaining consistent weekly perpetuals volume, and testing spot pairs. Key risks include smart-contract risk on a newer execution layer, trading fees exceeding potential token rewards if over-leveraged, and dilution if total points supply expands sharply before TGE. Always use a dedicated farming wallet and verify official contract addresses before signing transactions.",
+      "tasks": [
+        { "title": "Bridge & Deposit USDC", "desc": "Connect a dedicated wallet and deposit a small amount of USDC on Arbitrum." },
+        { "title": "Test Perpetuals & Spot", "desc": "Execute organic low-leverage trades rather than wash-trading high fees." }
+      ]
+    },
+    {
+      "id": "popdex",
+      "name": "PopDEX",
+      "category": "Perps",
+      "chain": "Morph",
+      "status": "Active",
+      "verifiedBadge": "Verified",
+      "lastVerified": "2026-11-18",
+      "funding": "$30M (Reported)",
+      "officialUrl": "https://morphl2.io",
+      "shortDesc": "Perpetual DEX focused on capital efficiency and contributor fee rebates.",
+      "analysis": "PopDEX is a decentralized perpetuals exchange built for low-slippage execution and unified liquidity pools. Users accumulate points through active limit orders, liquidity provision, and weekly trading epochs. Before participating, calculate your expected taker/maker fees against conservative FDV assumptions using the Perp Points Calculator. Avoid excessive leverage, as liquidation losses outweigh any potential airdrop allocation.",
+      "tasks": [
+        { "title": "Trade Perpetuals", "desc": "Place limit orders on major pairs to minimize fee drag." },
+        { "title": "Provide LP", "desc": "Review vault lockups and impermanent loss risks before depositing." }
+      ]
+    },
+    {
+      "id": "ondoperps",
+      "name": "Ondo Perps",
+      "category": "RWA",
+      "chain": "Ethereum",
+      "status": "Claimable",
+      "verifiedBadge": "Verified",
+      "lastVerified": "2026-11-18",
+      "funding": "$24M (Reported)",
+      "officialUrl": "https://ondo.finance",
+      "claimUrl": "https://ondo.finance",
+      "deadline": "2026-12-31",
+      "shortDesc": "Tokenized equities and commodities perpetuals protocol on Ethereum.",
+      "analysis": "Ondo Perps brings synthetic exposure to U.S. equities, indices, and commodities on-chain. Season 1 contributors can verify eligibility through official portals. Always double-check domain spelling before connecting a wallet, and never sign blind permit approvals or share a seed phrase.",
+      "tasks": [
+        { "title": "Verify Claim Eligibility", "desc": "Check official portal with your participating address." }
+      ]
+    }
+  ],
+  "claims": [
+    { "id": "dappos", "project": "dappOS", "chain": "Arbitrum", "status": "Open", "deadline": "Check Official Portal", "url": "https://dappos.com", "desc": "Intent-centric Web3 operating protocol claim portal." },
+    { "id": "ondoperps", "project": "Ondo Perps", "chain": "Ethereum", "status": "Open", "deadline": "2026-12-31", "url": "https://ondo.finance", "desc": "Season 1 tokenized RWA perpetuals distribution." }
+  ],
+  "raises": [
+    { "project": "Index Industries", "category": "Real Estate", "funding": "$50M", "round": "Seed", "investors": "Lightspeed Venture Partners", "date": "2026-11-10" },
+    { "project": "Alta", "category": "Blockchain", "funding": "$47.5M", "round": "Series A", "investors": "Index Ventures", "date": "2026-11-10" },
+    { "project": "Marble", "category": "DeFi", "funding": "$11M", "round": "Seed Round", "investors": "Polychain Capital", "date": "2026-11-10" }
+  ],
+  "events": [
+    { "id": "ev-1", "title": "Ondo Perps Season 1 Claim Deadline", "date": "2026-12-31", "type": "Claim Deadline", "project": "Ondo Perps" },
+    { "id": "ev-2", "title": "TxFlow Epoch 4 Snapshot", "date": "2026-12-15", "type": "Snapshot", "project": "TxFlow" }
+  ],
+  "guides": [
+    {
+      "slug": "wallet-security-for-airdrops",
+      "title": "Wallet Security Rules for Airdrop Farming",
+      "summary": "How to isolate farming wallets, revoke risky token approvals, and avoid phishing claims.",
+      "body": "Never use your primary hardware vault for unverified testnets or new airdrop protocols. Create a dedicated browser profile and fresh EVM/Solana addresses funded only with the gas and capital you intend to test. Bookmark official domains directly rather than clicking sponsored search ads or unverified social replies. Regularly audit and revoke unlimited ERC-20 token approvals, and remember that no legitimate claim portal will ever ask for your 12-word or 24-word recovery phrase."
+    },
+    {
+      "slug": "how-points-convert-to-tokens",
+      "title": "How Crypto Points Convert Into Token Airdrops",
+      "summary": "Understanding FDV, airdrop pool percentages, linear vs. tiered distributions, and dilution.",
+      "body": "Most modern protocols use off-chain points programs to measure user activity before Token Generation Event (TGE). Your potential share depends on four variables: expected Fully Diluted Valuation (FDV) at launch, the percentage of total token supply allocated to the community pool, total points emitted before the snapshot, and whether the project applies linear distribution or anti-sybil minimum thresholds. Always model conservative FDV scenarios so trading fees never exceed realistic rewards."
+    },
+    {
+      "slug": "perps-farming-risks",
+      "title": "Risks of Perpetual DEX Airdrop Farming",
+      "summary": "Why fee drag, funding rates, and liquidation risk matter more than raw volume.",
+      "body": "Chasing leaderboard volume on perpetual DEXs can quickly result in net losses if taker fees and negative funding rates exceed token value. Prefer maker limit orders where fee rebates apply, keep leverage conservative (1x-5x) to avoid liquidation wicks, and track your cumulative fees paid against estimated points earned."
+    }
+  ]
+}

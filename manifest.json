@@ -1,0 +1,9 @@
+{
+  "name": "Bullkarry Drops",
+  "short_name": "Bullkarry",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f9fc",
+  "theme_color": "#2563eb",
+  "description": "Verified Web3 airdrops, claims, checkers, raises, and DeFi guides."
+}
